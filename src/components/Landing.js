@@ -32,7 +32,7 @@ function Landing(props){
 			</div>
 			<div style={panel}>
 				<p>These forces affect where plants can grow</p>
-				<p>But they occur to gradually to observe...</p>
+				<p>But they occur too gradually to observe...</p>
 			</div>
 			<div style={panel}>
 				<p>Until now...</p>
