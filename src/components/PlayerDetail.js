@@ -2,11 +2,11 @@ import React from 'react';
 import Summary from './Summary'
 
 
-function PlayerMenu(props){
+function PlayerDetail(props){
 	return (
 		<div>
 		</div>
 	)
 }
 
-export default PlayerMenu
+export default PlayerDetail
