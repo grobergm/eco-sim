@@ -66,6 +66,10 @@
 8.	Sass and CSS
 9.	Figma (to draw graphics)
 
+
+### Basic Component Tree
+<img src='src/img/sketches/component-tree.jpg'/>
+
 ##Stretch Goals
 ###Features
 1. Option to select Animal Species in Menu
@@ -94,3 +98,5 @@ Increase fighting abilities
 6.	Redux and Local Storage
 7.	Possibly SVG or Canvas for continuous habitats
 8.	Online multiplayer would require firebase or other database/server.
+
+
