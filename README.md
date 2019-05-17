@@ -70,8 +70,8 @@
 ### Basic Component Tree
 <img src='src/img/sketches/component-tree.jpg'/>
 
-##Stretch Goals
-###Features
+## Stretch Goals
+### Features
 1. Option to select Animal Species in Menu
 * Animals eat plants and drink water to get energy.
 * Use energy to move to different part of map, fight with other animals, and reproduce.
