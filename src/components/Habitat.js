@@ -16,9 +16,13 @@ function Habitat(props){
 		backgroundColor: bkgColor(),
 		width:'100%',
 		height:'10vw',
+		position:'relative'
 	}
 	return (
 		<div style={background}>
+			{
+				props.habitat.plant?<Plant plant={props.habitat.plant} />:null
+			}
 		</div>
 	)
 }
