@@ -6,7 +6,9 @@ function Environment(props){
 		const habitatArray=[];
 		const substrates=['water','soil','rocks'];
 		for(let i=0;i<size;i++){
-			habitatArray.push({substrate:substrates[Math.floor(Math.random()*substrates.length)]})
+			const habitat={};
+			habitat.substrate=substrates[Math.floor(Math.random()*substrates.length)];
+			habitatArray.push(habitat)
 		}
 		return habitatArray;
 	}
