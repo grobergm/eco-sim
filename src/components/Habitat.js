@@ -21,7 +21,7 @@ function Habitat(props){
 	return (
 		<div style={background}>
 			{
-				props.habitat.plant?<Plant plant={props.habitat.plant} />:null
+				props.habitat.plant?<Plant plant={props.habitat.plant} turn={props.turn} />:null
 			}
 		</div>
 	)

@@ -1,4 +1,5 @@
 import React from 'react';
+import Player from './Player';
 
 function Players(props){
 	const mockPlayers=[
@@ -11,21 +12,27 @@ function Players(props){
 			name:'Jen',
 			id:'sdsadasdsadasdj',
 			species:'shrub'
+		},
+		{
+			name:'Jill',
+			id:'alskdasljdlkajl',
+			species:'forb'
 		}
 	]
 	const layout={
 		display:'flex',
 		justifyContent:'space-around'
 	}
+
 	return (
 		<div style={layout}>
 			{
 				mockPlayers.map((player,index)=>{
 					return (
-						<div key={index}>
-							<p>Player{index+1}: {player.name}</p>
-							<p>{player.species}</p>
-						</div>
+						<Player 
+							key={index} 
+							player={player}
+							turn={props.turn} />
 						)
 				})
 			}

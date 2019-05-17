@@ -19,25 +19,30 @@ function Plant(props){
 		}
 	}
 	let image=returnImage();
+	const highlight={
+		backgroundColor:props.turn===props.plant.player?'yellow':'transparent',
+		width:'100%',
+		height:'100%'
+	}
 	const leaves={
 		position:'absolute',
 		top:'30%',
 		left:'50%',
-		transform:'translate(-50%,-50%)'
+		transform:'translate(-50%,-50%)',
+		zIndex:'1'
 	}
 	const roots={
 		position:'absolute',
 		top:'50%',
 		left:'50%',
 		transform:'translate(-50%,-50%)',
-
 		backgroundColor:'rgba(0,0,0,0.5)',
 		borderRadius:'50%',
 		width:`${props.plant.roots*2}vw`,
 		height:`${props.plant.roots*2}vw`
 	}
 	return (
-		<div>
+		<div style={highlight}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>

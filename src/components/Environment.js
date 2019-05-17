@@ -5,7 +5,10 @@ function Environment(props){
 	function makeHabitatArray(size){
 		const habitatArray=[];
 		const substrates=['water','soil','soil','rocks'];
-		const plants=[{type:'forb',leaves:1,roots:1},{type:'forb',leaves:1,roots:1},{type:'shrub',leaves:1,roots:1},null]
+		const plants=[{type:'forb',leaves:1,roots:1,player:'Mark'},
+									{type:'forb',leaves:1,roots:1,player:'Jill'},
+									{type:'shrub',leaves:1,roots:1,player:'Jen'},
+									null]
 		for(let i=0;i<size;i++){
 			const habitat={};
 			habitat.substrate=substrates[Math.floor(Math.random()*substrates.length)];
@@ -29,7 +32,8 @@ function Environment(props){
 				habitatArray.map((habitat,index)=>{
 					return <Habitat 
 										key={index}
-										habitat={habitat} />
+										habitat={habitat}
+										turn={props.turn} />
 				})
 			}
 		</div>

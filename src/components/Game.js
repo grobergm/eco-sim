@@ -5,11 +5,12 @@ import Players from './Players';
 import PlayerDetail from './PlayerDetail';
 
 function Game(props){
+
 	return (
 		<div>
 			<AddPlayers />
-			<Players />
-			<Environment />
+			<Players turn='Mark' />
+			<Environment turn='Mark' />
 			<PlayerDetail />
 		</div>
 	)
