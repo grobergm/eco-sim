@@ -27,27 +27,13 @@
 	* Takes longer to grow, but captures more resources
 	* Can reproduce multiple times (only dying when out of resources).
 <img src='src/img/sketches/pre-game.jpg'/>
+
 3. Randomly Generated Environment Component
-* State includes: {
-	Day:'',
-	Turn:1,
-	Habitats: [
-	{
-	X:1,
-	Y:1,
-	WaterTile:false
-	Plant: 
-	{
-		Type:'',
-		playerId:'',
-		shoot:1,
-		root:1,
-		flowers:0,
-		hydration:0.5,
-		sugar:2,
-	}
+
 4.	Each player places several starting plants in environment. 
-* Creates a plant component with props based on state of Environmental Grid 
+
+Creates a plant component with props based on state of Environmental Grid 
+
 5.	Grow, Compete, and Reproduce
 <img src='src/img/sketches/game.jpg'/>
 
@@ -100,3 +86,5 @@ Increase fighting abilities
 8.	Online multiplayer would require firebase or other database/server.
 
 
+### Legal
+MIT Liscence Matt Grobers (copyright 2019)
