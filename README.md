@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Ecosystem Simulator
 
-## Available Scripts
+## By Matt Groberg
 
-In the project directory, you can run:
+## Planning
 
-### `npm start`
+### Purpose: An interactive educational game about how biological communities are formed based on: 
+1. Environmental Conditions 
+2. Species Interactions
+3. Adaptations and Evolution
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Goal: When the game ends points are awarded for:
+•	Each individual in your population (more points for larger plants)
+•	The number of seeds and flowers on existing plants
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Minimum Viable Product
+### Features
+1.	Landing Page that Describes Goal of Game
+<img src='src/img/sketches/landing.jpg'/>
+2.	Select Plant Species you will play as Menu:
+* Forb 
+	* Short life cycle (reaches maximum size sooner).
+	* Grows and reproduces quickly, using less resources
+	* After reproducing, will die and spread seeds.
+* Shrub 
+	* Long life cycle (can grow larger)
+	* Takes longer to grow, but captures more resources
+	* Can reproduce multiple times (only dying when out of resources).
+<img src='src/img/sketches/pre-game.jpg'/>
+3. Randomly Generated Environment Component
+* State includes: {
+	Day:'',
+	Turn:1,
+	Habitats: [
+	{
+	X:1,
+	Y:1,
+	WaterTile:false
+	Plant: 
+	{
+		Type:'',
+		playerId:'',
+		shoot:1,
+		root:1,
+		flowers:0,
+		hydration:0.5,
+		sugar:2,
+	}
+4.	Each player places several starting plants in environment. 
+* Creates a plant component with props based on state of Environmental Grid 
+5.	Grow, Compete, and Reproduce
+<img src='src/img/sketches/game.jpg'/>
 
-### `npm test`
+* Each day these methods are triggered:
+* Water uptake: Removes water from Soil based on root size (up to total plant size). If other plants in habitat, they divide water based on root size.
+* Photosynthesis:Uses plant water level based on shoot size. Creates sugar based on shoot size. If plants are next to each other, the smaller plant produces less sugar (shading).
+* Flowers have chance of turning into seed: Randomly adds new plant nearby in grid.
+*	Players take turn sugar to increase the size/number of their: Shoots, Roots, or Flowers
+* Details about plants can be viewed when they are selected
+* Day Increments once each player is done with their turn.
+* Images for plants will change based on lifestage.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Technologies used
+6.	React, JavaScript, Redux and Jest
+7.	WebPack, Babel, and ESLint (through create-react-app)
+8.	Sass and CSS
+9.	Figma (to draw graphics)
 
-### `npm run build`
+##Stretch Goals
+###Features
+1. Option to select Animal Species in Menu
+* Animals eat plants and drink water to get energy.
+* Use energy to move to different part of map, fight with other animals, and reproduce.
+* Small Herbivore: Short lifecycle, Many offspring, Gets more sugars out of plants,
+*	Large Omnivore: Long lifecycle, Fewer offspring,	Can eat smaller animals, but gets less energy from plants, Can store sugars in fat tissue
+2.	User can select Map Size, Resource Levels, and Game Length.
+3.	Environment is more Complex:
+* Seasonal Events (Rain, Ice, Fire)
+* Habitats are more continuous, less patchy
+4.	Populations Evolve:
+* Choose adaptations when new offspring are born: Added to new organism object, and can accumulate if selected later.
+* Future offspring inherit adaptations
+*	Plants:
+Herbivore defenses (bitter compounds that make it harder to digest).
+Reduce cost of roots, shoots, or flowers.
+Attach seed to animal objects.
+* Animals:
+Movement speed increases
+Can eat more leaves per turn
+Increase fighting abilities
+5.	Online Multiplayer Games (If still time)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Technologies
+6.	Redux and Local Storage
+7.	Possibly SVG or Canvas for continuous habitats
+8.	Online multiplayer would require firebase or other database/server.
