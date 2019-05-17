@@ -15,7 +15,7 @@ function Habitat(props){
 		const background={
 		backgroundColor: bkgColor(),
 		width:'100%',
-		height:'100px',
+		height:'10vw',
 	}
 	return (
 		<div style={background}>
