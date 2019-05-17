@@ -1,4 +1,5 @@
 import React from 'react';
+import Plant from './Plant';
 
 function Habitat(props){
 	return (
