@@ -13,7 +13,8 @@ function Environment(props){
 	const habitatArray=makeHabitatArray(100);
 	const grid={
 		display:'grid',
-		gridTemplateColumns:'repeat(10,1fr)'
+		gridTemplateColumns:'repeat(10,1fr)',
+		gridTemplateRows:'repeat(10,1fr)'
 	}
 	return (
 		<div style={grid}>
