@@ -1,12 +1,12 @@
 import React from 'react';
-import AddPlayer from './AddPlayer';
+import AddPlayers from './AddPlayers';
 import Environment from './Environment';
 import PlayerMenu from './PlayerMenu';
 
 function Game(props){
 	return (
 		<div>
-			<AddPlayer />
+			<AddPlayers />
 			<Environment />
 			<PlayerMenu />
 		</div>

@@ -22,7 +22,7 @@ function Landing(props){
 				<p>Why they grow where they do?</p>
 			</div>
 			<div style={panel}>
-				<h2>Environent</h2>
+				<h2>Environment</h2>
 			</div>
 			<div style={panel}>
 				<h2>Competition</h2>
