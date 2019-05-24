@@ -1,8 +1,8 @@
 import React from 'react';
-import AddPlayers from './AddPlayers';
+import AddPlayers from './Players/AddPlayers';
 import Environment from './Environment';
-import Players from './Players';
-import PlayerDetail from './PlayerDetail';
+import Players from './Players/Players';
+import PlayerDetail from './Players/PlayerDetail';
 
 function Game(props){
 

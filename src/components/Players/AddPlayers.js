@@ -1,6 +1,6 @@
 import React from 'react';
-import collonization from '../img/backgrounds/collonization-600.jpg';
-import competition from '../img/backgrounds/competition-600.jpg';
+import collonization from '../../img/plants/forb/forb2.png';
+import competition from '../../img/plants/shrub/shrub4.png';
 
 
 function AddPlayers(props){
@@ -12,14 +12,19 @@ function AddPlayers(props){
 	const fullRow={
 		gridColumn:'span 2',
 	}
-	const flexCenter={
+	const choices={
+		display:'flex',
+		justifyContent:'space-around'
+	}
+
+	const newPlayer={
 		display:'flex',
 		justifyContent:'center'
 	}
 	return (
 		<div>
 			<div>
-				<div style={flexCenter}>
+				<div style={choices}>
 					<div style={choiceGrid}>
 						<h1 style={fullRow}>Collonization Strategy</h1>
 						<div>
@@ -42,7 +47,7 @@ function AddPlayers(props){
 					</div>
 				</div>
 			</div>
-			<div style={flexCenter}>
+			<div style={newPlayer}>
 				<input
 				type="text"
 				id="playerName"
