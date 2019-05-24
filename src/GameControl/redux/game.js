@@ -1,16 +1,25 @@
 import initialState from './initialState';
 
-const game=(state=initialState,action)=>{
+export const viewControl=(state=initialState,action)=>{
 	switch(action.type){
-		case 'PRE_GAME':
-			return Object.assign({},state,{gameStatus:'pre-game'});
-		case 'START_GAME':
-			return Object.assign({},state,{gameStatus:'playing'});
-		case 'GAME_OVER':
-			return Object.assign({},state,{gameStatus:'game-over'});
+		case 'GAME_SETUP':
+			return Object.assign({},state,{gameStatus:'game-setup'});
+		case 'GAME_START':
+			return Object.assign({},state,{gameControl:{gameStatus:'game-start',gameLength:action.gameLength,players:action.players}});
+		case 'GAME_END':
+			return Object.assign({},state,{gameStatus:'game-end'});
 		default:
 			return state;
 	}
 }
 
-export default game;
+export const turnControl=(state,action)=>{
+	switch(action.type){
+		case 'CHANGE_TURN':
+			return Object.assign({},state,{turn:state.turn+1})
+		case 'CHANGE_DAY':
+			return Object.assign({},state,{day:state.day+1})
+		case 'RESET_TURN':
+			return Object.assign({},state,{turn:0})
+	}
+}
