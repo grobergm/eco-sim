@@ -1,4 +1,4 @@
-import initialGameState from './initialGameState';
+import initialState from './initialState';
 
 export const phaseControl=(state=initialState,action)=>{
 	switch(action.type){
