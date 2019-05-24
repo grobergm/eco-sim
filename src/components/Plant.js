@@ -1,21 +1,24 @@
 import React from 'react';
-import shrubSeedling from '../img/plants/shrub-seedling.png';
-import forbSeedling from '../img/plants/forb-seedling.png';
 
+import shrub0 from '../img/plants/shrub/shrub0.png';
+import shrub1 from '../img/plants/shrub/shrub1.png';
+import shrub2 from '../img/plants/shrub/shrub2.png';
+import shrub3 from '../img/plants/shrub/shrub3.png';
+import shrub4 from '../img/plants/shrub/shrub4.png';
+import forb0 from '../img/plants/forb/forb0.png';
+import forb1 from '../img/plants/forb/forb1.png';
+import forb2 from '../img/plants/forb/forb2.png';
+
+const shrubLeaves=[shrub0,shrub1,shrub2,shrub3,shrub4];
+const forbLeaves=[forb0,forb1,forb2];
 
 function Plant(props){
 	function returnImage(){
-		if (props.plant.type==='forb'){
-			switch(props.plant.leaves){
-				case 1:
-					return forbSeedling;
-			}
-		} 
-		if (props.plant.type==='shrub') {
-			switch(props.plant.leaves){
-				case 1:
-					return shrubSeedling;
-			}
+		switch(props.plant.type){
+			case 'forb':
+				return forbLeaves[props.plant.leaves] 
+			case 'shrub':
+				return shrubLeaves[props.plant.leaves] 
 		}
 	}
 	let image=returnImage();
