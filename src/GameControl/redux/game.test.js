@@ -1,14 +1,14 @@
 import { viewControl } from './game';
 import initialState from './initialState';
-import { gameSetup, gameStart, gameEnd } from './actionCreator';
+import { gameSetup, gameStart, gameEnd, changeTurn } from './actionCreator';
 
-describe('game reducer',()=>{
+describe('game controller',()=>{
 	test('returns initial state if unknown action type',()=>{
 		expect(viewControl(initialState,{type:null})).toEqual(initialState)
 	});
 
 	test('change game status to game-setup',()=>{
-		expect(viewControl(initialState,gameSetup())).toEqual(Object.assign({},initialState,{gameStatus:'game-setup'}))
+		expect(viewControl(initialState,gameSetup())).toEqual(Object.assign({},initialState,{gameControl:{gameStatus:'game-setup'}}))
 	})
 
 	test('start game with initial setup',()=>{
@@ -19,6 +19,7 @@ describe('game reducer',()=>{
 	})
 
 	test('change game status to game-end',()=>{
-		expect(viewControl(initialState,gameEnd())).toEqual(Object.assign({},initialState,{gameStatus:'game-end'}))
+		expect(viewControl(initialState,gameEnd())).toEqual(Object.assign({},initialState,{gameControl:{gameStatus:'game-end'}}))
 	})
+
 })
