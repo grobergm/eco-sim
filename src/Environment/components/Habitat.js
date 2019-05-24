@@ -1,5 +1,5 @@
 import React from 'react';
-import Plant from './Plant';
+import Plant from '../../Populations/components/Plant';
 
 function Habitat(props){
 	function bkgColor(){

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Landing(props){
+function Intro(props){
 
 	const panel={
 		display:'flex',
@@ -42,4 +42,4 @@ function Landing(props){
 	)
 }
 
-export default Landing
+export default Intro

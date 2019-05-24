@@ -1,13 +1,13 @@
 import React from 'react';
 
-import shrub0 from '../img/plants/shrub/shrub0.png';
-import shrub1 from '../img/plants/shrub/shrub1.png';
-import shrub2 from '../img/plants/shrub/shrub2.png';
-import shrub3 from '../img/plants/shrub/shrub3.png';
-import shrub4 from '../img/plants/shrub/shrub4.png';
-import forb0 from '../img/plants/forb/forb0.png';
-import forb1 from '../img/plants/forb/forb1.png';
-import forb2 from '../img/plants/forb/forb2.png';
+import shrub0 from '../img/shrub/shrub0.png';
+import shrub1 from '../img/shrub/shrub1.png';
+import shrub2 from '../img/shrub/shrub2.png';
+import shrub3 from '../img/shrub/shrub3.png';
+import shrub4 from '../img/shrub/shrub4.png';
+import forb0 from '../img/forb/forb0.png';
+import forb1 from '../img/forb/forb1.png';
+import forb2 from '../img/forb/forb2.png';
 
 const shrubLeaves=[shrub0,shrub1,shrub2,shrub3,shrub4];
 const forbLeaves=[forb0,forb1,forb2];

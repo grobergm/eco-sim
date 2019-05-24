@@ -1,13 +1,17 @@
 import React from 'react';
-import Game from './components/Game';
-import Landing from './components/Landing';
+import Intro from './GameControl/components/Intro';
+import GameSetup from './GameControl/components/GameSetup';
+import GamePlaying from './GameControl/components/GamePlaying';
+import GameEnd from './GameControl/components/GameEnd';
 
 
 function App() {
   return (
     <div>
-      <Landing />
-      <Game />
+      <Intro />
+      <GameSetup />
+      <GamePlaying />
+      <GameEnd />
     </div>
   );
 }
