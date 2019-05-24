@@ -1,13 +1,13 @@
 import initialState from './initialState';
 
-export const viewControl=(state=initialState,action)=>{
+export const phaseControl=(state=initialState,action)=>{
 	switch(action.type){
 		case 'GAME_SETUP':
-			return Object.assign({},state,{gameControl:{gameStatus:'game-setup'}});
+			return Object.assign({},state,{gameControl:{view:'game-setup'}});
 		case 'GAME_START':
-			return Object.assign({},state,{gameControl:{gameStatus:'game-start',gameLength:action.gameLength,players:action.players}});
+			return Object.assign({},state,{gameControl:{view:'game-start',gameLength:action.gameLength,players:action.players}});
 		case 'GAME_END':
-			return Object.assign({},state,{gameControl:{gameStatus:'game-end'}});
+			return Object.assign({},state,{gameControl:{view:'game-end'}});
 		default:
 			return state;
 	}
