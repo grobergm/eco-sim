@@ -1,6 +1,6 @@
 import initialState from './initialState';
 
-export const phaseControl=(state=initialState,action)=>{
+const phaseControl=(state=initialState,action)=>{
 	switch(action.type){
 		case 'GAME_SETUP':
 			return Object.assign({},state,{view:'game-setup'});
@@ -13,11 +13,4 @@ export const phaseControl=(state=initialState,action)=>{
 	}
 }
 
-export const turnControl=(state,action)=>{
-	switch(action.type){
-		case 'CHANGE_TURN':
-			return Object.assign({},state,{turn:state.turn+1})
-		case 'CHANGE_DAY':
-			return Object.assign({},state,{day:state.day+1,turn:0})
-	}
-}
+export default phaseControl

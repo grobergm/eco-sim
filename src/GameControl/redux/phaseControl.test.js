@@ -1,4 +1,4 @@
-import { phaseControl, turnControl } from './reducers';
+import phaseControl from './phaseControl';
 import initialState from './initialState';
 import { gameSetup, gameStart, gameEnd, changeTurn } from './actionCreator';
 
@@ -23,9 +23,3 @@ describe('phase control',()=>{
 	})
 
 })
-
-// describe('turn control',()=>{
-// 	test('changes the turn if it is not the last players turn',()=>{
-// 		expect(turnControl(initialState,changeTurn(initialState.gameControl))).toEqual()
-// 	})
-// })

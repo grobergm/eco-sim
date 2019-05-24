@@ -1,6 +1,6 @@
 import React from 'react';
-import collonization from '../../Populations/img/forb/forb2.png';
-import competition from '../../Populations/img/shrub/shrub4.png';
+import collonization from '../../../Populations/img/forb/forb2.png';
+import competition from '../../../Populations/img/shrub/shrub4.png';
 
 
 function GameSetup(props){
