@@ -2,8 +2,9 @@ import React from 'react';
 import collonization from '../../../Populations/img/forb/forb2.png';
 import competition from '../../../Populations/img/shrub/shrub4.png';
 
-
-function GameSetup(props){
+import { connect } from 'react-redux';
+import { gameStart } from '../../redux/actionCreator.js';
+function GameSetup({dispatch}){
 	const choiceGrid={
 		display:'grid',
 		gridTemplateColumns:'50% 50%',
@@ -55,8 +56,11 @@ function GameSetup(props){
 				/>
 				<button>Add Player</button>
 			</div>
+			<button onClick={()=>{
+				dispatch(gameStart())
+			}}> Start Game </button>
 		</div>
 	)
 }
 
-export default GameSetup
+export default connect()(GameSetup);
