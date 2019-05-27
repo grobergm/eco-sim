@@ -1,6 +1,6 @@
 import gameControl from './gameControl';
 import initialState from './initialState';
-import { gameSetup, gameStart, gameEnd, changeTurn } from './actionCreator';
+import { changeView, addPlayer, setGameLength, changeTurn } from './actionCreator';
 
 describe('Game Controller',()=>{
 	test('returns initial state if unknown action type',()=>{
@@ -8,18 +8,18 @@ describe('Game Controller',()=>{
 	});
 
 	test('change game status to game-setup',()=>{
-		expect(gameControl(initialState,gameSetup())).toEqual(Object.assign({},initialState,{view:'game-setup'}))
+		expect(gameControl(initialState,changeView('setup')))
+		.toEqual(Object.assign({},initialState,{view:'game-setup'}))
 	})
 
-	test('start game with initial setup',()=>{
-		const gameLength=10;
-		const players=[{name:'Mark',species:'forb',population:{}},{name:'Jen',species:'forb',population:{}},{name:'Henry',species:'shrub',population:{}}];
-
-		expect(gameControl(initialState,gameStart(gameLength,players))).toEqual(Object.assign({},initialState,{view:'game-start',gameLength:gameLength,players:players}))
+	test('start game',()=>{
+		expect(gameControl(initialState,changeView('start')))
+		.toEqual(Object.assign({},initialState,{view:'game-start'}))
 	})
 
 	test('change game status to game-end',()=>{
-		expect(gameControl(initialState,gameEnd())).toEqual(Object.assign({},initialState,{view:'game-end'}))
+		expect(gameControl(initialState,changeView('end')))
+		.toEqual(Object.assign({},initialState,{view:'game-end'}))
 	})
 
 })

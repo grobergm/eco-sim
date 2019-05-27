@@ -7,7 +7,7 @@ const gameControl=(state=initialState,action)=>{
 		case 'GAME_SETUP':
 			return Object.assign({},state,{view:'game-setup'});
 		case 'GAME_START':
-			return Object.assign({},state,{view:'game-start',gameLength:action.gameLength,players:action.players});
+			return Object.assign({},state,{view:'game-start'});
 		case 'CHANGE_TURN':
 			return Object.assign({},state,{turn:state.turn+1})
 		case 'CHANGE_DAY':
