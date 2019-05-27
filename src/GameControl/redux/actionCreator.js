@@ -19,6 +19,10 @@ export const setGameLength=days=>{
 	return {type:'SET_GAME_LENGTH',days:days}
 }
 
+export const setMapSize=mapSize=>{
+	return {type:'SET_MAP_SIZE',mapSize:mapSize}
+}
+
 export const changeTurn=turnCondition=>{
 	switch(turnCondition){
 		case 'lastPlayer':

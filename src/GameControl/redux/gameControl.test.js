@@ -1,9 +1,10 @@
 import gameControl from './gameControl';
-import {addPlayer, setGameLength, changeTurn } from './actionCreator';
+import {addPlayer, setGameLength, setMapSize, changeTurn } from './actionCreator';
 
 describe("Setting up initial game stats",()=>{
 	const initialState={
 		length:null,
+		mapSize:null,
 		day:0,
 		turn:0,
 		players:[],
@@ -19,6 +20,7 @@ describe("Setting up initial game stats",()=>{
 		const action=addPlayer(newPlayer)
 		const nextState={
 			length:null,
+			mapSize:null,
 			day:0,
 			turn:0,
 			players:[{name:'Matt',species:'forb',population:[]}],
@@ -30,6 +32,19 @@ describe("Setting up initial game stats",()=>{
 		const action=setGameLength(10);
 		const nextState={
 			length:10,
+			mapSize:null,
+			day:0,
+			turn:0,
+			players:[],
+		};
+		expect(gameControl(initialState,action)).toEqual(nextState)
+	});
+
+	test('sets map size',()=>{
+		const action=setMapSize(10);
+		const nextState={
+			length:null,
+			mapSize:10,
 			day:0,
 			turn:0,
 			players:[],
@@ -43,6 +58,7 @@ describe('Turn Changing',()=>{
 	test('increments turn if not last players turn',()=>{
 		const initialState={
 			length:10,
+			mapSize:null,
 			day:0,
 			turn:1,
 			players:[{name:'Matt'},{name:'Bob'},{name:'Jill'}],
@@ -50,6 +66,7 @@ describe('Turn Changing',()=>{
 		const action=changeTurn('change');
 		const nextState={
 			length:10,
+			mapSize:null,
 			day:0,
 			turn:2,
 			players:[{name:'Matt'},{name:'Bob'},{name:'Jill'}],
@@ -60,6 +77,7 @@ describe('Turn Changing',()=>{
 	test('increments day and rests turn when round over',()=>{
 		const initialState={
 			length:10,
+			mapSize:null,
 			day:0,
 			turn:2,
 			players:[{name:'Matt'},{name:'Bob'},{name:'Jill'}],
@@ -67,6 +85,7 @@ describe('Turn Changing',()=>{
 		const action=changeTurn('lastPlayer');
 		const nextState={
 			length:10,
+			mapSize:null,
 			day:1,
 			turn:0,
 			players:[{name:'Matt'},{name:'Bob'},{name:'Jill'}],

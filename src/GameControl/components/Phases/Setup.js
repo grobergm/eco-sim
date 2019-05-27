@@ -3,7 +3,7 @@ import collonization from '../../../Populations/img/forb/forb2.png';
 import competition from '../../../Populations/img/shrub/shrub4.png';
 
 import { connect } from 'react-redux';
-import { changeView, addPlayer, setGameLength } from '../../redux/actionCreator.js';
+import { changeView, addPlayer, setGameLength, setMapSize } from '../../redux/actionCreator.js';
 
 
 function Setup({dispatch}){
@@ -86,6 +86,7 @@ function Setup({dispatch}){
 			</div>
 
 			<button onClick={()=>{
+				dispatch(setMapSize(10));
 				dispatch(setGameLength(10));
 				dispatch(changeView('start'))
 			}}> Start Game </button>
