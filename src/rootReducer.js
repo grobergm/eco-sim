@@ -1,9 +1,8 @@
 import { combineReducers } from 'redux';
-import phaseControl from './GameControl/redux/phaseControl'
-import turnControl from './GameControl/redux/turnControl'
+import gameControl from './GameControl/redux/gameControl'
 import envControl from './Environment/redux/envControl'
 import popControl from './Populations/redux/popControl'
 
-const rootReducer=combineReducers({phaseControl,turnControl,envControl,popControl})
+const rootReducer=combineReducers({gameControl,envControl,popControl})
 
 export default rootReducer;
