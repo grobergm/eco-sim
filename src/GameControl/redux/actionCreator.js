@@ -19,12 +19,13 @@ export const setGameLength=days=>{
 	return {type:'SET_GAME_LENGTH',days:days}
 }
 
-export const changeTurn=({turn, gameLength, day, players})=>{
-	if (turn < players.length) {
-		return { type:'CHANGE_TURN' }
-	} else if ( day < gameLength){
-		return { type:'CHANGE_DAY' }
-	} else {
-		return { type: 'GAME_END'}
+export const changeTurn=turnCondition=>{
+	switch(turnCondition){
+		case 'lastPlayer':
+			return {type:'CHANGE_DAY'}
+		case 'lastTurn':
+			return {type:'GAME_END'}
+		default:
+			return {type:'CHANGE_TURN'}
 	}
 }

@@ -7,12 +7,9 @@ import {changeView} from './GameControl/redux/actionCreator';
 
 import { connect } from 'react-redux';
 
-function App({gameControl, dispatch}) {
-	console.log({gameControl})
+function App({view, dispatch}) {
 	const showGamePhase=()=>{
-		switch(gameControl.view){
-			case 'game-intro':
-				return <Intro setup={()=>dispatch(changeView('setup'))}  />
+		switch(view){
 			case 'game-setup':
 				return <Setup />
 			case 'game-start':
@@ -20,7 +17,7 @@ function App({gameControl, dispatch}) {
 			case 'game-end':
 				return <End />
 			default: 
-				return <Intro />
+				return <Intro setup={()=>dispatch(changeView('setup'))} />
 		}
 	}
 
@@ -35,7 +32,7 @@ function App({gameControl, dispatch}) {
 
 const mapStateToProps=state=>{
 	return{
-		gameControl:state.gameControl
+		view:state.view
 	}
 }
 
