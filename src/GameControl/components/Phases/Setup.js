@@ -86,6 +86,7 @@ function Setup({dispatch}){
 			</div>
 
 			<button onClick={()=>{
+				dispatch(setGameLength(10));
 				dispatch(changeView('start'))
 			}}> Start Game </button>
 		</div>
