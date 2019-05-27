@@ -1,24 +1,11 @@
 import React from 'react';
 import Player from './Player';
 
-function Players(props){
-	const mockPlayers=[
-		{
-			name:'Mark',
-			id:'asdasdsadlkkjdlkajsdlj',
-			species:'forb'
-		},
-		{
-			name:'Jen',
-			id:'sdsadasdsadasdj',
-			species:'shrub'
-		},
-		{
-			name:'Jill',
-			id:'alskdasljdlkajl',
-			species:'forb'
-		}
-	]
+import { connect } from 'react-redux';
+
+
+function Players({allPlayers , currentTurn}){
+	
 	const layout={
 		display:'flex',
 		justifyContent:'space-around'
@@ -27,12 +14,12 @@ function Players(props){
 	return (
 		<div style={layout}>
 			{
-				mockPlayers.map((player,index)=>{
+				allPlayers.map((player,index)=>{
 					return (
 						<Player 
 							key={index} 
 							player={player}
-							turn={props.turn} />
+							turn={currentTurn} />
 						)
 				})
 			}
@@ -40,4 +27,11 @@ function Players(props){
 	)
 }
 
-export default Players;
+const mapStateToProps=state=>{
+	return{
+		allPlayers:state.game.players,
+		currentTurn:state.game.turn
+	}
+}
+
+export default connect(mapStateToProps)(Players);

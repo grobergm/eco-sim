@@ -1,6 +1,7 @@
 import React from 'react';
 import collonization from '../../../Populations/img/forb/forb2.png';
 import competition from '../../../Populations/img/shrub/shrub4.png';
+import Players from '../Players/Players';
 
 import { connect } from 'react-redux';
 import { changeView, addPlayer, setGameLength, setMapSize } from '../../redux/actionCreator.js';
@@ -90,8 +91,10 @@ function Setup({dispatch}){
 				dispatch(setGameLength(10));
 				dispatch(changeView('start'))
 			}}> Start Game </button>
+			<Players />
 		</div>
 	)
 }
+
 
 export default connect()(Setup);

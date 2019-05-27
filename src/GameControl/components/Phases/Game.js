@@ -7,8 +7,8 @@ function Game(props){
 
 	return (
 		<div>
-			<Players turn='Mark' />
-			<Environment turn='Mark' />
+			<Players />
+			<Environment />
 			<PlayerDetail />
 		</div>
 	)
