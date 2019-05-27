@@ -3,7 +3,7 @@ import collonization from '../../../Populations/img/forb/forb2.png';
 import competition from '../../../Populations/img/shrub/shrub4.png';
 
 import { connect } from 'react-redux';
-import { changeView } from '../../redux/actionCreator.js';
+import { changeView, addPlayer, setGameLength } from '../../redux/actionCreator.js';
 
 
 function Setup({dispatch}){
@@ -28,22 +28,24 @@ function Setup({dispatch}){
 	let players;
 	let gameLength;
 	let _nameInput;
-	let _speciesSelect;
+	let selectedSpecies;
 
 	const speciesSelect=(species)=>{
-		_speciesSelect=species;
+		selectedSpecies=species;
 	}
 
-	const addPlayer=()=>{
-		if(_nameInput.value&&_speciesSelect){
+	const addInputPlayer=()=>{
+		if(_nameInput.value&&selectedSpecies){
 			let newPlayer={
 				name:_nameInput.value,
-				_speciesSelect,
-				populationIds:[]
+				species:selectedSpecies,
+				population:[]
 			}
-			console.log(newPlayer)
+			dispatch(addPlayer(newPlayer));
+			selectedSpecies=null;
+			_nameInput.value='';
 		} else {
-			console.log('no',_speciesSelect)
+			console.log('no',selectedSpecies)
 		}
 		
 	}
@@ -80,7 +82,7 @@ function Setup({dispatch}){
 				placeholder="Name"
 				ref={(input)=>{_nameInput=input}}
 				/>
-				<button onClick={addPlayer}>Add Player</button>
+				<button onClick={addInputPlayer}>Add Player</button>
 			</div>
 
 			<button onClick={()=>{
