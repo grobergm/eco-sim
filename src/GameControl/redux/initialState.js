@@ -1,5 +1,5 @@
 const initialState={
-		view:'intro',
+		view:'game-intro',
 		length:10,
 		day:0,
 		turn:0,

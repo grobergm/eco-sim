@@ -3,8 +3,10 @@ import collonization from '../../../Populations/img/forb/forb2.png';
 import competition from '../../../Populations/img/shrub/shrub4.png';
 
 import { connect } from 'react-redux';
-import { gameStart } from '../../redux/actionCreator.js';
-function GameSetup({dispatch}){
+import { changeView } from '../../redux/actionCreator.js';
+
+
+function Setup({dispatch}){
 	const choiceGrid={
 		display:'grid',
 		gridTemplateColumns:'50% 50%',
@@ -22,6 +24,29 @@ function GameSetup({dispatch}){
 		display:'flex',
 		justifyContent:'center'
 	}
+
+	let players;
+	let gameLength;
+	let _nameInput;
+	let _speciesSelect;
+
+	const speciesSelect=(species)=>{
+		_speciesSelect=species;
+	}
+
+	const addPlayer=()=>{
+		if(_nameInput.value&&_speciesSelect){
+			let newPlayer={
+				name:_nameInput.value,
+				_speciesSelect,
+				populationIds:[]
+			}
+			console.log(newPlayer)
+		} else {
+			console.log('no',_speciesSelect)
+		}
+		
+	}
 	return (
 		<div>
 			<div>
@@ -34,7 +59,7 @@ function GameSetup({dispatch}){
 							<p>Something something</p>
 						</div>
 						<img style={{width:'100%'}} src={collonization} />
-						<button style={fullRow}>Select</button>
+						<button onClick={()=>{speciesSelect('forb')}} style={fullRow}>Select</button>
 					</div>
 					<div style={choiceGrid}>
 						<h1 style={fullRow}>Competition Strategy</h1>
@@ -44,7 +69,7 @@ function GameSetup({dispatch}){
 							<p>Something something</p>
 						</div>
 						<img style={{width:'100%'}} src={competition} />
-						<button style={fullRow}>Select</button>
+						<button onClick={()=>{speciesSelect('shrub')}} style={fullRow}>Select</button>
 					</div>
 				</div>
 			</div>
@@ -53,14 +78,16 @@ function GameSetup({dispatch}){
 				type="text"
 				id="playerName"
 				placeholder="Name"
+				ref={(input)=>{_nameInput=input}}
 				/>
-				<button>Add Player</button>
+				<button onClick={addPlayer}>Add Player</button>
 			</div>
+
 			<button onClick={()=>{
-				dispatch(gameStart())
+				dispatch(changeView('start'))
 			}}> Start Game </button>
 		</div>
 	)
 }
 
-export default connect()(GameSetup);
+export default connect()(Setup);

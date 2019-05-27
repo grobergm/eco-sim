@@ -1,23 +1,24 @@
 import React from 'react';
 import Intro from './GameControl/components/Phases/Intro';
-import GameSetup from './GameControl/components/Phases/GameSetup';
-import GamePlaying from './GameControl/components/Phases/GamePlaying';
-import GameEnd from './GameControl/components/Phases/GameEnd';
+import Setup from './GameControl/components/Phases/Setup';
+import Game from './GameControl/components/Phases/Game';
+import End from './GameControl/components/Phases/End';
+import {changeView} from './GameControl/redux/actionCreator';
 
 import { connect } from 'react-redux';
 
-function App({gameControl}) {
+function App({gameControl, dispatch}) {
 	console.log({gameControl})
 	const showGamePhase=()=>{
 		switch(gameControl.view){
-			case 'intro':
-				return <Intro />
+			case 'game-intro':
+				return <Intro setup={()=>dispatch(changeView('setup'))}  />
 			case 'game-setup':
-				return <GameSetup />
+				return <Setup />
 			case 'game-start':
-				return <GamePlaying />
+				return <Game />
 			case 'game-end':
-				return <GameEnd />
+				return <End />
 			default: 
 				return <Intro />
 		}

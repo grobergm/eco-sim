@@ -1,17 +1,22 @@
-export const gameSetup=()=>{
-	return {type:'GAME_SETUP'}
-}
-
-export const gameStart=(gameLength,players)=>{
-	return {
-		type:'GAME_START',
-		gameLength:gameLength,
-		players:players
+export const changeView=view=>{
+	switch(view){
+		case 'setup':
+			return {type:'GAME_SETUP'}
+		case 'start':
+			return {type:'GAME_START'}
+		case 'end':
+			return {type:'GAME_END'}
+		default:
+			return {type:'GAME_INTRO'}
 	}
 }
 
-export const gameEnd=()=>{
-	return {type:'GAME_END'}
+export const addPlayer=player=>{
+	return {type:'ADD_PLAYER',player:player}
+}
+
+export const setGameLength=days=>{
+	return {type:'SET_GAME_LENGTH',days:days}
 }
 
 export const changeTurn=({turn, gameLength, day, players})=>{

@@ -1,8 +1,6 @@
 import React from 'react';
-import {gameSetup} from '../../redux/actionCreator.js';
-import { connect } from 'react-redux';
 
-function Intro({dispatch}){
+function Intro({setup}){
 
 	const panel={
 		display:'flex',
@@ -38,10 +36,10 @@ function Intro({dispatch}){
 			</div>
 			<div style={panel}>
 				<p>Until now...</p>
-				<button onClick={()=>{dispatch(gameSetup())}}>Start Game >></button>
+				<button onClick={setup}>Start Game >></button>
 			</div>
 		</div>
 	)
 }
 
-export default connect()(Intro)
+export default Intro

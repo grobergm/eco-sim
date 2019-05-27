@@ -2,6 +2,8 @@ import initialState from './initialState';
 
 const gameControl=(state=initialState,action)=>{
 	switch(action.type){
+		case 'GAME_INTRO':
+			return Object.assign({},state,{view:'game-intro'});
 		case 'GAME_SETUP':
 			return Object.assign({},state,{view:'game-setup'});
 		case 'GAME_START':
