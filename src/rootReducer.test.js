@@ -6,7 +6,6 @@ describe('Root Reducer',()=>{
 		view:'game-intro',
 		game:{
 			day:0,
-			length:null,
 			players:[],
 			turn:0
 		},
@@ -29,7 +28,6 @@ describe('Root Reducer',()=>{
 		view:'game-end',
 		game:{
 			day:0,
-			length:null,
 			players:[],
 			turn:0
 		},
