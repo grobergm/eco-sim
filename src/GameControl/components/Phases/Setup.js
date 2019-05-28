@@ -4,7 +4,13 @@ import competition from '../../../Populations/img/shrub/shrub4.png';
 import Players from '../Players/Players';
 
 import { connect } from 'react-redux';
-import { changeView, addPlayer, setGameLength, setMapSize } from '../../redux/actionCreator.js';
+import { 
+	changeView,
+ 	addPlayer,
+ 	setGameLength,
+ 	setMapSize,
+ 	setWaterLevel,
+ 	setRockLevel } from '../../redux/actionCreator.js';
 
 
 function Setup({dispatch}){
@@ -89,6 +95,8 @@ function Setup({dispatch}){
 			<button onClick={()=>{
 				dispatch(setMapSize(10));
 				dispatch(setGameLength(10));
+				dispatch(setWaterLevel(10));
+				dispatch(setRockLevel(10));
 				dispatch(changeView('start'))
 			}}> Start Game </button>
 			<Players />

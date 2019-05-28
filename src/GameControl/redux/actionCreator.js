@@ -12,16 +12,25 @@ export const changeView=view=>{
 }
 
 export const addPlayer=player=>{
-	return {type:'ADD_PLAYER',player:player}
+	return {type:'ADD_PLAYER',player}
 }
 
 export const setGameLength=days=>{
-	return {type:'SET_GAME_LENGTH',days:days}
+	return {type:'SET_GAME_LENGTH',days}
 }
 
 export const setMapSize=mapSize=>{
-	return {type:'SET_MAP_SIZE',mapSize:mapSize}
+	return {type:'SET_MAP_SIZE',mapSize}
 }
+
+export const setWaterLevel=waterLevel=>{
+	return {type:'SET_WATER_LEVEL',waterLevel}
+}
+
+export const setRockLevel=rockLevel=>{
+	return {type:'SET_ROCK_LEVEL',rockLevel}
+}
+
 
 export const changeTurn=turnCondition=>{
 	switch(turnCondition){
