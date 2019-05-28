@@ -2,6 +2,7 @@ import gameControl from './gameControl';
 import {
 	addPlayer,
  	setGameLength,
+ 	setMapSize,
  	changeTurn } from './actionCreator';
 
 describe("Setting up initial game stats",()=>{
@@ -31,6 +32,17 @@ describe("Setting up initial game stats",()=>{
 		const action=setGameLength(10);
 		const nextState={
 			length:10,
+			day:0,
+			turn:0,
+			players:[],
+		};
+		expect(gameControl(initialState,action)).toEqual(nextState)
+	});
+
+	test('sets map size',()=>{
+		const action=setMapSize(15);
+		const nextState={
+			mapSize:15,
 			day:0,
 			turn:0,
 			players:[],

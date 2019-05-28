@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import { 
 	changeView,
  	addPlayer,
- 	setGameLength} from '../../redux/actionCreator';
+ 	setGameLength,
+ 	setMapSize
+ } from '../../redux/actionCreator';
 
  import { makeGrid } from '../../../Environment/redux/actionCreator'
 
@@ -92,6 +94,7 @@ function Setup({dispatch}){
 			</div>
 
 			<button onClick={()=>{
+				dispatch(setMapSize(10))
 				dispatch(makeGrid(10,0.3,0.3))
 				dispatch(setGameLength(10));
 				dispatch(changeView('start'))

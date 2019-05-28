@@ -12,6 +12,8 @@ const gameControl=(state=initialState,action)=>{
 			return Object.assign({},state,{players:newPlayers});
 		case 'SET_GAME_LENGTH':
 			return Object.assign({},state,{length:action.days});
+		case 'SET_MAP_SIZE':
+			return Object.assign({},state,{mapSize:action.mapSize});
 			// Should be own reducer...
 		case 'CHANGE_TURN':
 			return Object.assign({},state,{turn:state.turn+1})

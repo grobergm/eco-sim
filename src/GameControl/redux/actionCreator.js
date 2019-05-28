@@ -23,14 +23,6 @@ export const setMapSize=mapSize=>{
 	return {type:'SET_MAP_SIZE',mapSize}
 }
 
-export const setWaterLevel=waterLevel=>{
-	return {type:'SET_WATER_LEVEL',waterLevel}
-}
-
-export const setRockLevel=rockLevel=>{
-	return {type:'SET_ROCK_LEVEL',rockLevel}
-}
-
 export const makeGrid=(size,water,rock)=>{
 	return {
 		type:'MAKE_GRID',
