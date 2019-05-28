@@ -33,11 +33,13 @@ function Setup({dispatch}){
 		justifyContent:'center'
 	}
 
-	let players;
-	let gameLength;
-	let _nameInput;
 	let selectedSpecies;
-
+// refs
+	let _nameInput;
+	let _gameLength;
+	let _mapSize;
+	let _rock;
+	let _water
 	const speciesSelect=(species)=>{
 		selectedSpecies=species;
 	}
@@ -55,7 +57,13 @@ function Setup({dispatch}){
 		} else {
 			console.log('no',selectedSpecies)
 		}
-		
+	}
+
+	const setGameStats=()=>{
+		dispatch(setMapSize(_mapSize.value));
+		dispatch(makeGrid(_mapSize.value,_water.value,_rock.value))
+		dispatch(setGameLength(_gameLength.value));
+		dispatch(changeView('start'));
 	}
 	return (
 		<div>
@@ -92,13 +100,50 @@ function Setup({dispatch}){
 				/>
 				<button onClick={addInputPlayer}>Add Player</button>
 			</div>
-
-			<button onClick={()=>{
-				dispatch(setMapSize(10))
-				dispatch(makeGrid(10,0.3,0.3))
-				dispatch(setGameLength(10));
-				dispatch(changeView('start'))
-			}}> Start Game </button>
+			<div>
+			<label for='gameLength'>Game Length:</label>
+				<input
+				type="number"
+				id="gameLength"
+				defaultValue="10"
+				min="5"
+				max="25"
+				step="5"
+				ref={(input)=>{_gameLength=input}}
+				/>
+			<label for='mapSize'>Map Size</label>
+				<input
+				type="number"
+				id="mapSize"
+				defaultValue="10"
+				min="5"
+				max="25"
+				step="5"
+				ref={(input)=>{_mapSize=input}}
+				/>
+			<label for='water'>Water Level:</label>
+				<input
+				type="number"
+				id="water"
+				defaultValue="0.3"
+				min="0.1"
+				max="0.8"
+				step="0.1"
+				ref={(input)=>{_water=input}}
+				/>
+			<label for='rock'>Rock Level:</label>
+				<input
+				type="number"
+				id="rock"
+				defaultValue="0.2"
+				min="0.1"
+				max="0.5"
+				step="0.1"
+				ref={(input)=>{_rock=input}}
+				/>
+				
+			</div>
+			<button onClick={setGameStats}> Start Game </button>
 			<Players />
 		</div>
 	)
