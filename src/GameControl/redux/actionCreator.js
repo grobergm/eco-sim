@@ -31,6 +31,14 @@ export const setRockLevel=rockLevel=>{
 	return {type:'SET_ROCK_LEVEL',rockLevel}
 }
 
+export const makeGrid=(size,water,rock)=>{
+	return {
+		type:'MAKE_GRID',
+		mapSize:size,
+		waterProbability:water,
+		rockProbability:rock
+	}
+}
 
 export const changeTurn=turnCondition=>{
 	switch(turnCondition){

@@ -2,9 +2,6 @@ import gameControl from './gameControl';
 import {
 	addPlayer,
  	setGameLength,
- 	setMapSize,
- 	setWaterLevel,
-	setRockLevel,
  	changeTurn } from './actionCreator';
 
 describe("Setting up initial game stats",()=>{
@@ -34,39 +31,6 @@ describe("Setting up initial game stats",()=>{
 		const action=setGameLength(10);
 		const nextState={
 			length:10,
-			day:0,
-			turn:0,
-			players:[],
-		};
-		expect(gameControl(initialState,action)).toEqual(nextState)
-	});
-
-	test('sets map size',()=>{
-		const action=setMapSize(10);
-		const nextState={
-			mapSize:10,
-			day:0,
-			turn:0,
-			players:[],
-		};
-		expect(gameControl(initialState,action)).toEqual(nextState)
-	});
-
-	test('sets water level',()=>{
-		const action=setWaterLevel(10);
-		const nextState={
-			waterLevel:10,
-			day:0,
-			turn:0,
-			players:[],
-		};
-		expect(gameControl(initialState,action)).toEqual(nextState)
-	});
-
-	test('sets rock level',()=>{
-		const action=setRockLevel(10);
-		const nextState={
-			rockLevel:10,
 			day:0,
 			turn:0,
 			players:[],

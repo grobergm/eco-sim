@@ -7,10 +7,9 @@ import { connect } from 'react-redux';
 import { 
 	changeView,
  	addPlayer,
- 	setGameLength,
- 	setMapSize,
- 	setWaterLevel,
- 	setRockLevel } from '../../redux/actionCreator.js';
+ 	setGameLength} from '../../redux/actionCreator';
+
+ import { makeGrid } from '../../../Environment/redux/actionCreator'
 
 
 function Setup({dispatch}){
@@ -93,10 +92,8 @@ function Setup({dispatch}){
 			</div>
 
 			<button onClick={()=>{
-				dispatch(setMapSize(10));
+				dispatch(makeGrid(10,0.3,0.3))
 				dispatch(setGameLength(10));
-				dispatch(setWaterLevel(10));
-				dispatch(setRockLevel(10));
 				dispatch(changeView('start'))
 			}}> Start Game </button>
 			<Players />

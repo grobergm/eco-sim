@@ -1,10 +1,9 @@
 import React from 'react';
-import Plant from '../../Populations/components/Plant';
 
 function Habitat(props){
 	function bkgColor(){
 		switch (props.habitat.substrate){
-			case 'rocks':
+			case 'rock':
 				return 'gray';
 			case 'water':
 				return 'blue';
@@ -20,9 +19,7 @@ function Habitat(props){
 	}
 	return (
 		<div style={background}>
-			{
-				props.habitat.plant?<Plant plant={props.habitat.plant} turn={props.turn} />:null
-			}
+			
 		</div>
 	)
 }
