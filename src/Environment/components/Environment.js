@@ -16,6 +16,7 @@ function Environment(props){
 					return <Habitat 
 										key={index}
 										habitat={props.environment[id]}
+										id={id}
 										/>
 				})
 			}

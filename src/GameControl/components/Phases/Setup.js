@@ -60,9 +60,9 @@ function Setup({dispatch}){
 	}
 
 	const setGameStats=()=>{
-		dispatch(setMapSize(_mapSize.value));
-		dispatch(makeGrid(_mapSize.value,_water.value,_rock.value))
-		dispatch(setGameLength(_gameLength.value));
+		dispatch(setMapSize(parseInt(_mapSize.value)));
+		dispatch(makeGrid(parseInt(_mapSize.value),_water.value,_rock.value))
+		dispatch(setGameLength(parseInt(_gameLength.value)));
 		dispatch(changeView('start'));
 	}
 	return (
