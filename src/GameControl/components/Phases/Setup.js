@@ -45,12 +45,20 @@ function Setup({dispatch}){
 	}
 
 	const addInputPlayer=()=>{
+		function addSeed(species){
+			switch(species){
+				case 'forb':
+					return 5
+				case 'shrub':
+					return 2
+			}
+		}
 		if(_nameInput.value&&selectedSpecies){
 			let newPlayer={
 				id:v4(),
 				name:_nameInput.value,
 				species:selectedSpecies,
-				population:[]
+				seeds:addSeed(selectedSpecies)
 			}
 			dispatch(addPlayer(newPlayer));
 			selectedSpecies=null;

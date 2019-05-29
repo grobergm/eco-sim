@@ -11,16 +11,18 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 
 function Environment(props){
-	function plantSeed(location){
-		console.log('test')
-		const playerID=props.game.players[props.game.turn].id;
-		const organism={
-			id:v4(),
-			leaves:0,
-			roots:0,
-			species:props.game.players[props.game.turn].species,
+	function plantSeed(location,substrate){
+		if (substrate==='soil'&&props.game.players[props.game.turn].seeds>0){
+			const playerID=props.game.players[props.game.turn].id;
+			const organism={
+				id:v4(),
+				leaves:0,
+				roots:0,
+				species:props.game.players[props.game.turn].species,
+			}
+			props.dispatch(addOrganism(playerID,location,organism));
+			
 		}
-		props.dispatch(addOrganism(playerID,location,organism));
 	}
 	const grid={
 		display:'grid',
