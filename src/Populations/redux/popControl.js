@@ -2,8 +2,7 @@ const popControl = (state={},action)=>{
 	switch(action.type){
 		case 'ADD_ORGANISM':
 			let newState=Object.assign({},state);
-			newState[action.organism.id]={
-				location:action.location,
+			newState[action.location]={
 				player:action.player,
 				organism:action.organism,
 			}

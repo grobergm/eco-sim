@@ -14,14 +14,15 @@ const forbLeaves=[forb0,forb1,forb2];
 
 function Plant(props){
 	function returnImage(){
-		switch(props.plant.type){
-			case 'forb':
-				return forbLeaves[props.plant.leaves] 
-			case 'shrub':
-				return shrubLeaves[props.plant.leaves] 
+		switch(props.plant.organism.species){
+			case "forb":
+				return forbLeaves[props.plant.organism.leaves] 
+			case "shrub":
+				return shrubLeaves[props.plant.organism.leaves] 
 		}
 	}
 	let image=returnImage();
+
 	const highlight={
 		backgroundColor:props.turn===props.plant.player?'yellow':'transparent',
 		width:'100%',
@@ -41,11 +42,11 @@ function Plant(props){
 		transform:'translate(-50%,-50%)',
 		backgroundColor:'rgba(0,0,0,0.5)',
 		borderRadius:'50%',
-		width:`${props.plant.roots*2}vw`,
-		height:`${props.plant.roots*2}vw`
+		width:`${props.plant.organism.roots*2}vw`,
+		height:`${props.plant.organism.roots*2}vw`
 	}
 	return (
-		<div style={highlight}>
+		<div>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>

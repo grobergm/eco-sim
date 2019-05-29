@@ -15,10 +15,10 @@ function Habitat(props){
 		backgroundColor: bkgColor(),
 		width:'100%',
 		height:'10vw',
-		position:'relative'
+		
 	}
 	return (
-		<div style={background}>
+		<div onClick={()=>{props.plantSeed(props.location)}} style={background}>
 			
 		</div>
 	)
