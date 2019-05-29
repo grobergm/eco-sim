@@ -14,7 +14,6 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 function Environment(props){
 	function plantSeed(location,substrate){
-		console.log(substrate,props.game.players[props.game.turn].seed)
 		if (substrate==='soil'&&props.game.players[props.game.turn].seed>0){
 			const playerID=props.game.players[props.game.turn].id;
 			const organism={

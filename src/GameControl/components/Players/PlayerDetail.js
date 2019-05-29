@@ -16,6 +16,7 @@ function PlayerDetail(props){
 	return (
 		<div>
 			<p>{props.players[props.turn].name}</p>
+			<p>Seed:{props.players[props.turn].seed}</p>
 			<button onClick={turnChanger}>Change Turn</button>
 		</div>
 	)
