@@ -23,15 +23,6 @@ export const setMapSize=mapSize=>{
 	return {type:'SET_MAP_SIZE',mapSize}
 }
 
-export const makeGrid=(size,water,rock)=>{
-	return {
-		type:'MAKE_GRID',
-		mapSize:size,
-		waterProbability:water,
-		rockProbability:rock
-	}
-}
-
 export const changeTurn=turnCondition=>{
 	switch(turnCondition){
 		case 'lastPlayer':

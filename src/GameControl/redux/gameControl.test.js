@@ -86,5 +86,4 @@ describe('Turn Changing',()=>{
 		}
 		expect(gameControl(initialState,action)).toEqual(nextState)
 	});
-
-})	
+})

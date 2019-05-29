@@ -1,3 +1,4 @@
+
 const envControl = (state={},action)=>{
 	let newGrid={};
 	const substrateGen=()=>{
@@ -14,7 +15,7 @@ const envControl = (state={},action)=>{
 			for (var col=0;col<action.mapSize;col++){
 				for (var row=0;row<action.mapSize;row++){
 					newGrid[`X${row}Y${col}`]={
-						substrate: substrateGen()
+						substrate: substrateGen(),
 					};
 				}
 			}
