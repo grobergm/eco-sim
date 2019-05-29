@@ -11,14 +11,12 @@ describe('Population Control',()=>{
 			{id:'22s2',playerID:'12345',leaves:0,roots:0,species:'forb'})
 		const nextState={
 			['X2Y1']:{
-				organism:{
 					id:'22s2',
 					playerID:'12345',
 					leaves:0,
 					roots:0,
 					species:'forb'
 				}
-			}
 		}
 		expect(popControl({},action)).toEqual(nextState);
 	})

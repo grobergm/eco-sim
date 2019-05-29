@@ -18,7 +18,7 @@ function Habitat(props){
 		
 	}
 	return (
-		<div onClick={()=>{props.plantSeed(props.location,props.habitat.substrate)}} style={background}>
+		<div onClick={()=>{props.onPlantSeed(props.location,props.habitat.substrate)}} style={background}>
 			
 		</div>
 	)

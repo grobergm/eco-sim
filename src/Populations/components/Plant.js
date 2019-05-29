@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { selectOrganism } from '../../GameControl/redux/actionCreator';
 
 import shrub0 from '../img/shrub/shrub0.png';
 import shrub1 from '../img/shrub/shrub1.png';
@@ -16,24 +14,16 @@ const forbLeaves=[forb0,forb1,forb2];
 
 function Plant(props){
 	function returnImage(){
-		switch(props.plant.organism.species){
+		switch(props.plant.species){
 			case "forb":
-				return forbLeaves[props.plant.organism.leaves] 
+				return forbLeaves[props.plant.leaves] 
 			case "shrub":
-				return shrubLeaves[props.plant.organism.leaves] 
+				return shrubLeaves[props.plant.leaves] 
 		}
 	}
 
 	let image=returnImage();
 
-	function select(){
-		props.dispatch(selectOrganism(props.plant.organism))
-	}
-	const highlight={
-		backgroundColor:props.turn===props.plant.player?'yellow':'transparent',
-		width:'100%',
-		height:'100%'
-	}
 	const leaves={
 		position:'absolute',
 		top:'30%',
@@ -48,15 +38,15 @@ function Plant(props){
 		transform:'translate(-50%,-50%)',
 		backgroundColor:'rgba(0,0,0,0.5)',
 		borderRadius:'50%',
-		width:`${props.plant.organism.roots*2}vw`,
-		height:`${props.plant.organism.roots*2}vw`
+		width:`${props.plant.roots*2}vw`,
+		height:`${props.plant.roots*2}vw`
 	}
 	return (
-		<div onClick={select}>
+		<div onClick={()=>props.onSelect(props.plant)}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>
 	)
 }
 
-export default connect()(Plant)
+export default Plant
