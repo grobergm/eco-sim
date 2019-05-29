@@ -1,10 +1,12 @@
 import React from 'react';
 import Summary from './Summary';
 import { connect } from 'react-redux';
-import { changeTurn } from '../../redux/actionCreator';
+import { changeTurn , selectOrganism } from '../../redux/actionCreator';
 
 function PlayerDetail(props){
+
 	const turnChanger=()=>{
+		props.dispatch(selectOrganism(null))
 		if (props.day===props.gameLength){
 			props.dispatch(changeTurn('lastTurn'))
 		} else if(props.turn===props.players.length-1){
