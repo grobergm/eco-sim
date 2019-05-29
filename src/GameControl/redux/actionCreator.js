@@ -41,3 +41,10 @@ export const modifySeed=(amount,playerID)=>{
 		amount:amount
 	}
 }
+
+export const selectOrganism=organism=>{
+	return{
+		type:'SELECT_ORGANISM',
+		organism:organism
+	}
+}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { selectOrganism } from '../../GameControl/redux/actionCreator';
 
 import shrub0 from '../img/shrub/shrub0.png';
 import shrub1 from '../img/shrub/shrub1.png';
@@ -21,8 +23,12 @@ function Plant(props){
 				return shrubLeaves[props.plant.organism.leaves] 
 		}
 	}
+
 	let image=returnImage();
 
+	function select(){
+		props.dispatch(selectOrganism(props.plant.organism))
+	}
 	const highlight={
 		backgroundColor:props.turn===props.plant.player?'yellow':'transparent',
 		width:'100%',
@@ -46,11 +52,11 @@ function Plant(props){
 		height:`${props.plant.organism.roots*2}vw`
 	}
 	return (
-		<div>
+		<div onClick={select}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>
 	)
 }
 
-export default Plant
+export default connect()(Plant)

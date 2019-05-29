@@ -7,7 +7,7 @@ describe('Root Reducer',()=>{
 		game:{
 			day:0,
 			players:[],
-			turn:0
+			turn:0,
 		},
 		populations:{},
 		environment:{},
@@ -29,7 +29,7 @@ describe('Root Reducer',()=>{
 		game:{
 			day:0,
 			players:[],
-			turn:0
+			turn:0,
 		},
 		populations:{},
 		environment:{},

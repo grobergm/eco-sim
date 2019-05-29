@@ -4,13 +4,14 @@ import {
  	setGameLength,
  	setMapSize,
  	changeTurn,
- 	modifySeed } from './actionCreator';
+ 	modifySeed,
+ 	selectOrganism } from './actionCreator';
 
 describe("Setting up initial game stats",()=>{
 	const initialState={
 		day:0,
 		turn:0,
-		players:[],
+		players:[]
 	}
 
 	test('returns initial state if unknown action type',()=>{
@@ -51,6 +52,16 @@ describe("Setting up initial game stats",()=>{
 		expect(gameControl(initialState,action)).toEqual(nextState)
 	});
 
+	test('selects organism',()=>{
+		const action=selectOrganism({id:'12333'});
+		const nextState={
+			day:0,
+			turn:0,
+			players:[],
+			selectOrg:{id:'12333'},
+		};
+		expect(gameControl(initialState,action)).toEqual(nextState);
+	})
 })	
 
 describe('Turn Changing',()=>{

@@ -12,7 +12,8 @@ const gameControl=(state=initialState,action)=>{
 			return Object.assign({},state,{length:action.days});
 		case 'SET_MAP_SIZE':
 			return Object.assign({},state,{mapSize:action.mapSize});
-			// Should be own reducer...
+		case 'SELECT_ORGANISM':
+			return Object.assign({},state,{selectOrg:action.organism})
 		case 'MODIFY_SEED':
 			const newPlayersSeed=state.players.map(player=>{
 				return playerControl(player,action)
@@ -22,6 +23,7 @@ const gameControl=(state=initialState,action)=>{
 				state,
 				{players:newPlayersSeed}
 			)
+			// Turn Change Should be own reducer...
 		case 'CHANGE_TURN':
 			return Object.assign({},state,{turn:state.turn+1})
 		case 'CHANGE_DAY':
