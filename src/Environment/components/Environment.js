@@ -32,7 +32,14 @@ function Environment(props){
 	}
 
 	function handleSelect(organism){
-		props.dispatch(selectOrganism(organism))
+		if(props.game.players[props.game.turn].id
+			=== organism.playerID){
+			props.dispatch(selectOrganism(organism))
+		}
+	}
+
+	function handleHighlight(){
+
 	}
 
 	const grid={
