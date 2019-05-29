@@ -18,11 +18,12 @@ function Environment(props){
 			const playerID=props.game.players[props.game.turn].id;
 			const organism={
 				id:v4(),
+				playerID:playerID,
 				leaves:0,
 				roots:0,
 				species:props.game.players[props.game.turn].species,
 			}
-			props.dispatch(addOrganism(playerID,location,organism));
+			props.dispatch(addOrganism(location,organism));
 			props.dispatch(modifySeed(-1,playerID));
 		}
 	}

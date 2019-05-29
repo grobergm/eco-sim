@@ -3,7 +3,6 @@ const popControl = (state={},action)=>{
 		case 'ADD_ORGANISM':
 			return Object.assign({},state,{
 				[action.location]:{
-					player:action.player,
 					organism:action.organism,
 				}
 			});

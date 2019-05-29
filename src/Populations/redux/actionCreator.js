@@ -1,7 +1,6 @@
-export const addOrganism=(playerID,location,organism)=>{
+export const addOrganism=(location,organism)=>{
 	return {
 		type:'ADD_ORGANISM',
-		player:playerID,
 		location:location,
 		organism:organism
 	}
