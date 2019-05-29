@@ -29,7 +29,11 @@ function Plant(props){
 		top:'30%',
 		left:'50%',
 		transform:'translate(-50%,-50%)',
-		zIndex:'1'
+		zIndex:'1',
+		backgroundColor:props.onHighlight(props.plant)? 
+			'yellow':'transparent',
+		borderRadius:'50%',
+		padding:'1rem'
 	}
 	const roots={
 		position:'absolute',
@@ -41,6 +45,7 @@ function Plant(props){
 		width:`${props.plant.roots*2}vw`,
 		height:`${props.plant.roots*2}vw`
 	}
+
 	return (
 		<div onClick={()=>props.onSelect(props.plant)}>
 			<img style={leaves} src={image} />

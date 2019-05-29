@@ -16,7 +16,7 @@ function Environment(props){
 	let playerTurn=props.game.players[props.game.turn];
 	function handlePlantSeed(location,substrate){
 		if (substrate==='soil'
-			&& props.game.players[props.game.turn].seed>0
+			&& playerTurn.seed>0
 			&& !props.populations[location]){
 			const organism={
 				id:v4(),
@@ -36,8 +36,10 @@ function Environment(props){
 		}
 	}
 
-	function handleHighlight(location,playerID){
-
+	function handleHighlight(plant){
+		if(plant.playerID===playerTurn.id){
+			return true
+		} else return false
 	}
 
 	const grid={
@@ -64,7 +66,8 @@ function Environment(props){
 								props.populations[location] ? 
 								<Plant 
 									plant={props.populations[location]}
-									onSelect={handleSelect} />
+									onSelect={handleSelect} 
+									onHighlight={handleHighlight}/>
 								:
 								null
 							}
