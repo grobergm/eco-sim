@@ -58,7 +58,7 @@ function Setup({dispatch}){
 				id:v4(),
 				name:_nameInput.value,
 				species:selectedSpecies,
-				seeds:addSeed(selectedSpecies)
+				seed:addSeed(selectedSpecies)
 			}
 			dispatch(addPlayer(newPlayer));
 			selectedSpecies=null;

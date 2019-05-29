@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 
+import { modifySeed } from '../../GameControl/redux/actionCreator';
+
 import Habitat from './Habitat'
 import { makeGrid } from '../redux/actionCreator';
 
@@ -12,7 +14,8 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 function Environment(props){
 	function plantSeed(location,substrate){
-		if (substrate==='soil'&&props.game.players[props.game.turn].seeds>0){
+		console.log(substrate,props.game.players[props.game.turn].seed)
+		if (substrate==='soil'&&props.game.players[props.game.turn].seed>0){
 			const playerID=props.game.players[props.game.turn].id;
 			const organism={
 				id:v4(),
@@ -21,7 +24,7 @@ function Environment(props){
 				species:props.game.players[props.game.turn].species,
 			}
 			props.dispatch(addOrganism(playerID,location,organism));
-			
+			props.dispatch(modifySeed(-1,playerID));
 		}
 	}
 	const grid={

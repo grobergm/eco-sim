@@ -3,7 +3,8 @@ import {
 	addPlayer,
  	setGameLength,
  	setMapSize,
- 	changeTurn } from './actionCreator';
+ 	changeTurn,
+ 	modifySeed } from './actionCreator';
 
 describe("Setting up initial game stats",()=>{
 	const initialState={
@@ -18,12 +19,12 @@ describe("Setting up initial game stats",()=>{
 	});
 
 	test('adds a player',()=>{
-		const newPlayer={name:'Matt',species:'forb',population:[]};
+		const newPlayer={id:'12345', name:'Matt',species:'forb',seed:5};
 		const action=addPlayer(newPlayer)
 		const nextState={
 			day:0,
 			turn:0,
-			players:[{name:'Matt',species:'forb',population:[]}],
+			players:[{id:'12345', name:'Matt',species:'forb',seed:5}],
 		}
 		expect(gameControl(initialState,action)).toEqual(nextState)
 	})
@@ -86,4 +87,21 @@ describe('Turn Changing',()=>{
 		}
 		expect(gameControl(initialState,action)).toEqual(nextState)
 	});
+})
+
+describe('Modifying Player Stats',()=>{
+	test('modifies seeds in given player',()=>{
+		const initialState={
+			day:0,
+			turn:0,
+			players:[{id:'12345', name:'Matt',species:'forb',seed:5}],
+		}
+		const action=modifySeed(-2,'12345');
+		const nextState={
+			day:0,
+			turn:0,
+			players:[{id:'12345', name:'Matt',species:'forb',seed:3}],
+		}
+		expect(gameControl(initialState,action)).toEqual(nextState);
+	})
 })

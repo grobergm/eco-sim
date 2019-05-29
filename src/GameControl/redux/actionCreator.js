@@ -33,3 +33,11 @@ export const changeTurn=turnCondition=>{
 			return {type:'CHANGE_TURN'}
 	}
 }
+
+export const modifySeed=(amount,playerID)=>{
+	return{
+		type:'MODIFY_SEED',
+		playerID:playerID,
+		amount:amount
+	}
+}
