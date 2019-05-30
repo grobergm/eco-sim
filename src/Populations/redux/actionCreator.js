@@ -1,7 +1,7 @@
-export const addOrganism=(location,organism)=>{
+export const addOrganism=(id,organism)=>{
 	return {
 		type:'ADD_ORGANISM',
-		location:location,
+		id:id,
 		organism:organism
 	}
 }

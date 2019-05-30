@@ -7,8 +7,8 @@ describe('Population Control',()=>{
 	})
 
 	test('add an organism to Populations',()=>{
-		const action=addOrganism('X2Y1',
-			{id:'22s2',
+		const action=addOrganism('22s2',
+			{location:'X2Y1',
 			playerID:'12345',
 			leaves:1,
 			roots:1,
@@ -16,8 +16,8 @@ describe('Population Control',()=>{
 			sugar:1,
 			species:'forb'})
 		const nextState={
-			['X2Y1']:{
-					id:'22s2',
+			['22s2']:{
+					location:'X2Y1',
 					playerID:'12345',
 					leaves:1,
 					roots:1,

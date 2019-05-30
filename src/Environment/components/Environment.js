@@ -18,14 +18,18 @@ function Environment(props){
 		if (substrate==='soil'
 			&& playerTurn.seed>0
 			&& !props.populations[location]){
+			const id=v4();
 			const organism={
-				id:v4(),
+				id:id,
+				location:location,
 				playerID:playerTurn.id,
-				leaves:0,
-				roots:0,
+				leaves:1,
+				roots:1,
+				water:1,
+				sugar:1,
 				species:playerTurn.species,
 			}
-			props.dispatch(addOrganism(location,organism));
+			props.dispatch(addOrganism(id,organism));
 			props.dispatch(modifySeed(-1,playerTurn.id));
 		}
 	}
@@ -51,6 +55,16 @@ function Environment(props){
 		width:'100%',
 		height:'100%'
 	}
+
+	function handleDisplayPlant(location){
+		Object.keys(props.populations).map(id=>{
+			console.log(id,props.populations[id].location,location)
+			if(props.populations[id].location === location){
+				console.log('match');
+				return props.populations[id]
+			}
+		})
+	}
 	return (
 		<div style={grid}>
 			{
@@ -63,9 +77,9 @@ function Environment(props){
 							onPlantSeed={handlePlantSeed}
 							/>
 							{
-								props.populations[location] ? 
+								handleDisplayPlant(location) ? 
 								<Plant 
-									plant={props.populations[location]}
+									plant={handleDisplayPlant(location)}
 									onSelect={handleSelect} 
 									onHighlight={handleHighlight}/>
 								:
