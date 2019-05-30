@@ -47,7 +47,7 @@ function Plant({plant, onSelect, onHighlight}){
 	}
 	return (
 
-		<div onClick={()=>{onSelect(plant.location)}}>
+		<div onClick={()=>{onSelect(plant.locID)}}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>

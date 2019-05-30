@@ -14,16 +14,16 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 function Environment(props){
 	let playerTurn=props.game.players[props.game.turn];
-	function handlePlantSeed(location,substrate){
+	function handlePlantSeed(locID,x,y,substrate){
 		if (substrate==='soil'
 			&& playerTurn.seed>0
-			&& !props.populations[location]){
+			&& !props.populations[locID]){
 			const id=v4();
 			const organism={
 				id:id,
-				location:location,
-				x:parseInt(location[1]),
-				y:parseInt(location[3]),
+				locID:locID,
+				x:x,
+				y:y,
 				playerID:playerTurn.id,
 				leaves:1,
 				roots:1,
@@ -31,7 +31,7 @@ function Environment(props){
 				sugar:1,
 				species:playerTurn.species,
 			}
-			props.dispatch(addOrganism(location,organism));
+			props.dispatch(addOrganism(locID,organism));
 			props.dispatch(modifySeed(-1,playerTurn.id));
 		}
 	}
@@ -59,30 +59,23 @@ function Environment(props){
 		height:'100%'
 	}
 
-	// function handleDisplayPlant(location){
-	// 	Object.keys(props.populations).map(id=>{
-	// 		console.log(id,props.populations[id].location,location)
-	// 		if(props.populations[id].location === location){
-	// 			console.log('match');
-	// 			return props.populations[id]
-	// 		}
-	// 	})
-	// }
 	return (
 		<div style={grid}>
 			{
-				Object.keys(props.environment).map(location=>{
+				Object.keys(props.environment).map(locID=>{
 					return (
-					<div key={location} style={habitat}>
+					<div key={locID} style={habitat}>
 						<Habitat 
-							habitat={props.environment[location]}
-							location={location}
+							habitat={props.environment[locID]}
+							x={props.environment[locID].x}
+							y={props.environment[locID].y}
+							locID={locID}
 							onPlantSeed={handlePlantSeed}
 							/>
 							{
-								props.populations[location] ? 
+								props.populations[locID] ? 
 								<Plant 
-									plant={props.populations[location]}
+									plant={props.populations[locID]}
 									onSelect={handleSelect} 
 									onHighlight={handleHighlight}/>
 								:

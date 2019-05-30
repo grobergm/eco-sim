@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Habitat(props){
+	console.log(props.x,props.y,props.locID)
 	function bkgColor(){
 		switch (props.habitat.substrate){
 			case 'rock':
@@ -18,7 +19,11 @@ function Habitat(props){
 		
 	}
 	return (
-		<div onClick={()=>{props.onPlantSeed(props.location,props.habitat.substrate)}} style={background}>
+		<div onClick={()=>{props.onPlantSeed(
+			props.locID,
+			props.x,
+			props.y,
+			props.habitat.substrate)}} style={background}>
 			
 		</div>
 	)

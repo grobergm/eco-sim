@@ -16,6 +16,8 @@ const envControl = (state={},action)=>{
 				for (var row=0;row<action.mapSize;row++){
 					newGrid[`X${row}Y${col}`]={
 						substrate: substrateGen(),
+						x:row,
+						y:col
 					};
 				}
 			}
