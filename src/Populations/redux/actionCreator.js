@@ -28,3 +28,10 @@ export const growLeaf=(id)=>{
 		id:id,
 	}
 }
+
+export const growRoot=(id)=>{
+	return{
+		type:'GROW_ROOT',
+		id:id,
+	}
+}

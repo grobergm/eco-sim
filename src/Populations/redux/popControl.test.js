@@ -1,4 +1,4 @@
-import { addOrganism , addWater, addSugar, growLeaf } from './actionCreator';
+import { addOrganism , addWater, addSugar, growLeaf, growRoot } from './actionCreator';
 import popControl from './popControl';
 
 describe('Population Control',()=>{
@@ -86,7 +86,6 @@ describe('Population Control',()=>{
 	})
 
 		test('grow leaf',()=>{
-
 		const initialState={
 			['22s2']:{
 					location:'X2Y1',
@@ -105,6 +104,33 @@ describe('Population Control',()=>{
 					playerID:'12345',
 					leaves:2,
 					roots:1,
+					sugar:2,
+					water:1,
+					species:'forb'
+				}
+		}
+		expect(popControl(initialState,action)).toEqual(nextState);
+	})
+
+	test('grow roots',()=>{
+		const initialState={
+			['22s2']:{
+					location:'X2Y1',
+					playerID:'12345',
+					leaves:1,
+					roots:1,
+					sugar:4,
+					water:1,
+					species:'forb'
+				}
+		}
+		const action=growRoot('22s2')
+		const nextState={
+			['22s2']:{
+					location:'X2Y1',
+					playerID:'12345',
+					leaves:1,
+					roots:2,
 					sugar:2,
 					water:1,
 					species:'forb'

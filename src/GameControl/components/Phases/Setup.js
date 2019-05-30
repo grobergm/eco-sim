@@ -110,7 +110,7 @@ function Setup({dispatch}){
 				<button onClick={addInputPlayer}>Add Player</button>
 			</div>
 			<div>
-			<label for='gameLength'>Game Length:</label>
+			<label htmlFor='gameLength'>Game Length:</label>
 				<input
 				type="number"
 				id="gameLength"
@@ -120,7 +120,7 @@ function Setup({dispatch}){
 				step="5"
 				ref={(input)=>{_gameLength=input}}
 				/>
-			<label for='mapSize'>Map Size</label>
+			<label htmlFor='mapSize'>Map Size</label>
 				<input
 				type="number"
 				id="mapSize"
@@ -130,7 +130,7 @@ function Setup({dispatch}){
 				step="5"
 				ref={(input)=>{_mapSize=input}}
 				/>
-			<label for='water'>Water Level:</label>
+			<label htmlFor='water'>Water Level:</label>
 				<input
 				type="number"
 				id="water"
@@ -140,7 +140,7 @@ function Setup({dispatch}){
 				step="0.1"
 				ref={(input)=>{_water=input}}
 				/>
-			<label for='rock'>Rock Level:</label>
+			<label htmlFor='rock'>Rock Level:</label>
 				<input
 				type="number"
 				id="rock"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addWater , addSugar, growLeaf } from '../../../Populations/redux/actionCreator';
+import { addWater , addSugar, growLeaf, growRoot } from '../../../Populations/redux/actionCreator';
 
 function PlantDetail({
 	locID,
@@ -56,6 +56,12 @@ const checkForWater=(x,y)=>{
 		}
 	}
 
+	const growNewRoot=()=>{
+		if (plant.sugar>=plant.roots*2){
+			dispatch(growRoot(locID))
+		}
+	}
+
 	const grid={
 		display:'grid',
 		gridTemplateColumns:'50% 50%'
@@ -73,7 +79,7 @@ const checkForWater=(x,y)=>{
 					<h2>Roots</h2>
 					<p>Stage: {plant.roots}</p>
 					<p onClick={()=>{absorbWater(plant.x,plant.y)}}>Water Uptake</p>
-					<p>Grow Roots</p>
+					<p onClick={growNewRoot} >Grow Roots</p>
 				</div>
 				<p>Water: {plant.water}</p>
 				<p>Sugar: {plant.sugar}</p>
