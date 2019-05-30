@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addWater } from '../redux/actionCreator';
+import { addWater , addSugar } from '../redux/actionCreator';
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
@@ -38,7 +38,7 @@ function Plant(
 	}
 
 	function absorbWater(x,y){
-		let water=0
+		let water=0;
 		for(var i = 1;i<=plant.roots;i++){
 			water+=checkForWater(x+i,y);
 			water+=checkForWater(x-i,y);
@@ -52,6 +52,19 @@ function Plant(
 		return water;
 	}
 	
+	function photosynthesis(){
+		let sugarChange=0;
+		let waterChange=0;
+		if(plant.water>=(plant.leaves*2)){
+			sugarChange+=plant.leaves;
+			waterChange-=(plant.leaves*2);
+		}
+		return {
+			sugarChange,
+			waterChange,
+		}
+	}
+
 	function returnImage(){
 		switch(plant.species){
 			case "forb":
@@ -89,7 +102,9 @@ function Plant(
 		<div onClick={
 			()=>{
 			onSelect(plant);
-			dispatch(addWater(`X${plant.x}Y${plant.y}`,absorbWater(plant.x,plant.y)))
+			dispatch(addWater(`X${plant.x}Y${plant.y}`,absorbWater(plant.x,plant.y)));
+			dispatch(addSugar(`X${plant.x}Y${plant.y}`,photosynthesis().sugarChange))
+			dispatch(addWater(`X${plant.x}Y${plant.y}`,photosynthesis().waterChange))
 			}
 		}>
 			<img style={leaves} src={image} />
