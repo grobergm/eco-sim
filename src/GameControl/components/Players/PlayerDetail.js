@@ -1,5 +1,6 @@
 import React from 'react';
-import Summary from './Summary';
+import Plant from '../../../Populations/components/Plant';
+
 import { connect } from 'react-redux';
 import { changeTurn , selectOrganism } from '../../redux/actionCreator';
 
@@ -7,29 +8,42 @@ function PlayerDetail(props){
 
 	const turnChanger=()=>{
 		props.dispatch(selectOrganism(null))
-		if (props.day===props.gameLength){
+		if (props.game.day===props.game.gameLength){
 			props.dispatch(changeTurn('lastTurn'))
-		} else if(props.turn===props.players.length-1){
+		} else if(props.game.turn===props.game.players.length-1){
 			props.dispatch(changeTurn('lastPlayer'));
 		} else {
 			props.dispatch(changeTurn('changeTurn'));
 		}
 	}
+
+	const grid={
+		display:'grid',
+		gridTemplateColumns:'50% 50%'
+	}
 	return (
-		<div>
-			<p>{props.players[props.turn].name}</p>
-			<p>Seed:{props.players[props.turn].seed}</p>
-			<button onClick={turnChanger}>Change Turn</button>
+		<div style={grid}>
+			<div>
+				<p>{props.game.players[props.game.turn].name}</p>
+				<p>Seed:{props.game.players[props.game.turn].seed}</p>
+				<button onClick={turnChanger}>Change Turn</button>
+			</div>
+			{
+				props.game.selectOrg ? 
+			<div style={grid}>
+				<p>Leaves: {props.game.selectOrg.leaves}</p>
+				<p>Roots: {props.game.selectOrg.roots}</p>
+				<p>Water: {props.game.selectOrg.water}</p>
+				<p>Sugar: {props.game.selectOrg.sugar}</p>
+			</div> : null
+			}
 		</div>
 	)
 }
 
 const mapStateToProps=state=>{
 	return{
-		players:state.game.players,
-		turn:state.game.turn,
-		day:state.game.day,
-		gameLength:state.game.length,
+		game:state.game
 	}
 }
 
