@@ -24,7 +24,7 @@ function Plant(
 
 	function checkForWater(x,y){
 		if(populations[`X${x}Y${y}`]){
-			console.log('plant',-populations[`X${x}Y${y}`].roots)
+				// this needs to be scaled by distance
 				return -populations[`X${x}Y${y}`].roots
 		} else if(environment[`X${x}Y${y}`]){
 			if (environment[`X${x}Y${y}`].substrate==='water'){
@@ -33,7 +33,6 @@ function Plant(
 				return 0
 			}
 		} else {
-
 			return 0
 		}
 	}

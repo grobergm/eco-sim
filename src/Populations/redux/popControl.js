@@ -14,7 +14,15 @@ const popControl = (state={},action)=>{
 					}
 				}
 			)
-
+		case 'ADD_SUGAR':
+		return Object.assign({},state,
+				{
+					[action.id]:{
+						...state[action.id],
+						sugar:state[action.id].sugar+action.sugar
+					}
+				}
+			)
 		default:
 			return state;		
 	}

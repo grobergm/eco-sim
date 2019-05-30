@@ -13,3 +13,11 @@ export const addWater=(id,water)=>{
 		water:water
 	}
 }
+
+export const addSugar=(id,sugar)=>{
+	return{
+		type:'ADD_SUGAR',
+		id:id,
+		sugar:sugar
+	}
+}
