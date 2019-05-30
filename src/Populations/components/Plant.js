@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { addWater } from '../redux/actionCreator';
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
@@ -12,13 +13,52 @@ import forb3 from '../img/forb/forb3.png';
 const shrubLeaves=[shrub1,shrub2,shrub3,shrub4,shrub5];
 const forbLeaves=[forb1,forb2,forb3];
 
-function Plant(props){
+function Plant(
+{plant,
+ environment,
+ game,
+ populations,
+ dispatch,
+ onSelect,
+ onHighlight}){
+
+	function checkForWater(x,y){
+		if(populations[`X${x}Y${y}`]){
+			console.log('plant',-populations[`X${x}Y${y}`].roots)
+				return -populations[`X${x}Y${y}`].roots
+		} else if(environment[`X${x}Y${y}`]){
+			if (environment[`X${x}Y${y}`].substrate==='water'){
+				return 1
+			} else {
+				return 0
+			}
+		} else {
+
+			return 0
+		}
+	}
+
+	function absorbWater(x,y){
+		let water=0
+		for(var i = 1;i<=plant.roots;i++){
+			water+=checkForWater(x+i,y);
+			water+=checkForWater(x-i,y);
+			water+=checkForWater(x,y+i);
+			water+=checkForWater(x,y-i);
+			water+=checkForWater(x+i,y+i);
+			water+=checkForWater(x-i,y-i);
+			water+=checkForWater(x-i,y+i);
+			water+=checkForWater(x+i,y-i);
+		}
+		return water;
+	}
+	
 	function returnImage(){
-		switch(props.plant.species){
+		switch(plant.species){
 			case "forb":
-				return forbLeaves[props.plant.leaves-1] 
+				return forbLeaves[plant.leaves-1] 
 			case "shrub":
-				return shrubLeaves[props.plant.leaves-1] 
+				return shrubLeaves[plant.leaves-1] 
 		}
 	}
 
@@ -30,7 +70,7 @@ function Plant(props){
 		left:'50%',
 		transform:'translate(-50%,-50%)',
 		zIndex:'1',
-		backgroundColor:props.onHighlight(props.plant)? 
+		backgroundColor:onHighlight(plant)? 
 			'yellow':'transparent',
 		borderRadius:'50%',
 		padding:'1rem'
@@ -42,16 +82,27 @@ function Plant(props){
 		transform:'translate(-50%,-50%)',
 		backgroundColor:'rgba(0,0,0,0.5)',
 		borderRadius:'50%',
-		width:`${props.plant.roots*2}vw`,
-		height:`${props.plant.roots*2}vw`
+		width:`${plant.roots*2}vw`,
+		height:`${plant.roots*2}vw`
 	}
-
 	return (
-		<div onClick={()=>props.onSelect(props.plant)}>
+
+		<div onClick={
+			()=>{
+			onSelect(plant);
+			dispatch(addWater(`X${plant.x}Y${plant.y}`,absorbWater(plant.x,plant.y)))
+			}
+		}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>
 	)
 }
 
-export default Plant
+const mapStateToProps=state=>{
+	return{
+		...state
+	}
+}
+
+export default connect(mapStateToProps)(Plant)
