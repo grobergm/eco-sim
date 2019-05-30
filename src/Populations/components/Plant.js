@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addWater , addSugar, growLeaf } from '../redux/actionCreator';
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
@@ -13,57 +11,7 @@ import forb3 from '../img/forb/forb3.png';
 const shrubLeaves=[shrub1,shrub2,shrub3,shrub4,shrub5];
 const forbLeaves=[forb1,forb2,forb3];
 
-function Plant(
-{plant,
- environment,
- game,
- populations,
- dispatch,
- onSelect,
- onHighlight}){
-
-	function checkForWater(x,y){
-		if(populations[`X${x}Y${y}`]){
-				// this needs to be scaled by distance
-				return -populations[`X${x}Y${y}`].roots
-		} else if(environment[`X${x}Y${y}`]){
-			if (environment[`X${x}Y${y}`].substrate==='water'){
-				return 1
-			} else {
-				return 0
-			}
-		} else {
-			return 0
-		}
-	}
-
-	function absorbWater(x,y){
-		let water=0;
-		for(var i = 1;i<=plant.roots;i++){
-			water+=checkForWater(x+i,y);
-			water+=checkForWater(x-i,y);
-			water+=checkForWater(x,y+i);
-			water+=checkForWater(x,y-i);
-			water+=checkForWater(x+i,y+i);
-			water+=checkForWater(x-i,y-i);
-			water+=checkForWater(x-i,y+i);
-			water+=checkForWater(x+i,y-i);
-		}
-		return water;
-	}
-	
-	function photosynthesis(){
-		let sugarChange=0;
-		let waterChange=0;
-		if(plant.water>=(plant.leaves*2)){
-			sugarChange+=plant.leaves;
-			waterChange-=(plant.leaves*2);
-		}
-		return {
-			sugarChange,
-			waterChange,
-		}
-	}
+function Plant({plant, onSelect, onHighlight}){
 
 	function returnImage(){
 		switch(plant.species){
@@ -99,27 +47,11 @@ function Plant(
 	}
 	return (
 
-		<div onClick={
-			()=>{
-			onSelect(plant);
-			dispatch(addWater(`X${plant.x}Y${plant.y}`,absorbWater(plant.x,plant.y)));
-			dispatch(addSugar(`X${plant.x}Y${plant.y}`,photosynthesis().sugarChange))
-			dispatch(addWater(`X${plant.x}Y${plant.y}`,photosynthesis().waterChange));
-				if (plant.sugar>=plant.leaves*2){
-				dispatch((growLeaf(plant.location)))
-			}
-			}
-		}>
+		<div onClick={()=>{onSelect(plant.location)}}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>
 		</div>
 	)
 }
 
-const mapStateToProps=state=>{
-	return{
-		...state
-	}
-}
-
-export default connect(mapStateToProps)(Plant)
+export default Plant

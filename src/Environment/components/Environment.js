@@ -36,9 +36,10 @@ function Environment(props){
 		}
 	}
 
-	function handleSelect(organism){
-		if(playerTurn.id=== organism.playerID){
-			props.dispatch(selectOrganism(organism))
+	function handleSelect(locID){
+		console.log(locID);
+		if(playerTurn.id=== props.populations[locID].playerID){
+			props.dispatch(selectOrganism(locID))
 		}
 	}
 
