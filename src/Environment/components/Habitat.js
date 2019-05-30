@@ -5,11 +5,11 @@ function Habitat(props){
 	function bkgColor(){
 		switch (props.habitat.substrate){
 			case 'rock':
-				return 'gray';
+				return 'var(--rock)';
 			case 'water':
-				return 'blue';
+				return 'var(--water)';
 			default:
-				return 'brown';
+				return 'var(--soil)';
 		}
 	}
 		const background={

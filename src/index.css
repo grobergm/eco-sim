@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC|Josefin+Sans&display=swap');
+
+html{
+	--soil:#6E2C00;
+	--water:#3498D8;
+	--rock:#ABB2B9;
+	--headerFontColor:#28B463;
+	--headerFont:'Amatic SC', cursive;
+	--bodyFont:'Josefin Sans', sans-serif;
+}
+
+
+body {
+	margin:0;
+	font-family:var(--bodyFont);
+}
+
+h1 , h2 {
+	font-family:var(--headerFont);
+	color:var(--headerFontColor);
+}
+
+h1 {
+	font-size:4rem;
+}
+
+h2{
+	font-size:2rem;
+}
+
