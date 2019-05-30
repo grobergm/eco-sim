@@ -21,3 +21,10 @@ export const addSugar=(id,sugar)=>{
 		sugar:sugar
 	}
 }
+
+export const growLeaf=(id)=>{
+	return{
+		type:'GROW_LEAF',
+		id:id,
+	}
+}

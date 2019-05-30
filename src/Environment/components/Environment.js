@@ -21,6 +21,7 @@ function Environment(props){
 			const id=v4();
 			const organism={
 				id:id,
+				location:location,
 				x:parseInt(location[1]),
 				y:parseInt(location[3]),
 				playerID:playerTurn.id,

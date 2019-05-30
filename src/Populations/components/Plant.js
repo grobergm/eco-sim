@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addWater , addSugar } from '../redux/actionCreator';
+import { addWater , addSugar, growLeaf } from '../redux/actionCreator';
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
@@ -104,7 +104,10 @@ function Plant(
 			onSelect(plant);
 			dispatch(addWater(`X${plant.x}Y${plant.y}`,absorbWater(plant.x,plant.y)));
 			dispatch(addSugar(`X${plant.x}Y${plant.y}`,photosynthesis().sugarChange))
-			dispatch(addWater(`X${plant.x}Y${plant.y}`,photosynthesis().waterChange))
+			dispatch(addWater(`X${plant.x}Y${plant.y}`,photosynthesis().waterChange));
+				if (plant.sugar>=plant.leaves*2){
+				dispatch((growLeaf(plant.location)))
+			}
 			}
 		}>
 			<img style={leaves} src={image} />
