@@ -29,7 +29,7 @@ function Environment(props){
 				sugar:1,
 				species:playerTurn.species,
 			}
-			props.dispatch(addOrganism(id,organism));
+			props.dispatch(addOrganism(location,organism));
 			props.dispatch(modifySeed(-1,playerTurn.id));
 		}
 	}
@@ -56,15 +56,15 @@ function Environment(props){
 		height:'100%'
 	}
 
-	function handleDisplayPlant(location){
-		Object.keys(props.populations).map(id=>{
-			console.log(id,props.populations[id].location,location)
-			if(props.populations[id].location === location){
-				console.log('match');
-				return props.populations[id]
-			}
-		})
-	}
+	// function handleDisplayPlant(location){
+	// 	Object.keys(props.populations).map(id=>{
+	// 		console.log(id,props.populations[id].location,location)
+	// 		if(props.populations[id].location === location){
+	// 			console.log('match');
+	// 			return props.populations[id]
+	// 		}
+	// 	})
+	// }
 	return (
 		<div style={grid}>
 			{
@@ -77,9 +77,9 @@ function Environment(props){
 							onPlantSeed={handlePlantSeed}
 							/>
 							{
-								handleDisplayPlant(location) ? 
+								props.populations[location] ? 
 								<Plant 
-									plant={handleDisplayPlant(location)}
+									plant={props.populations[location]}
 									onSelect={handleSelect} 
 									onHighlight={handleHighlight}/>
 								:
