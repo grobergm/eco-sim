@@ -74,12 +74,13 @@ function PlayerDetail({game,dispatch,environment,populations}){
 
 	const grid={
 		position:'fixed',
+		bottom:'0',
+		left:'0',
+		zIndex:'2',
 		backgroundColor:'white',
 		borderRadius:'1rem',
 		padding:'1rem',
 		margin:'1rem',
-		bottom:'0',
-		left:'0',
 		width:'50%',
 		display:'grid',
 		gridTemplateColumns:'50% 50%'
@@ -94,7 +95,14 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			</div>
 			{
 				game.selectOrg ? 
-				<PlantDetail locID={game.selectOrg} />: null
+				<PlantDetail locID={game.selectOrg} />: 
+				<div>
+					<h2>Nothing Selected</h2>
+					<p>Click soil to plant seed</p>
+					<p>Plants compete for water, so find a good spot</p>
+					<p>Click plants to select them</p>
+					<p>Spend sugar to grow</p>
+				</div>
 			}
 		</div>
 	)

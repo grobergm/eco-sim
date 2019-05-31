@@ -11,7 +11,7 @@ function PlantDetail({
 const plant=populations[locID];
 
 	const growOrgan=(organ,limit,cost)=>{
-		if(plant.sugar>cost&&plant[organ]<limit){
+		if(plant.sugar>=cost&&plant[organ]<limit){
 			dispatch(updateOrganism(locID,'sugar',plant.sugar-cost))
 			dispatch(updateOrganism(locID,organ,plant[organ]+1))
 		}
@@ -51,19 +51,19 @@ const plant=populations[locID];
 					{
 						(plant.species.name==='forb'&& plant.leaves<3) ||
 						(plant.species.name==='shrub'&& plant.leaves<5) ?
-						<p onClick={growLeaf}>
+						<button onClick={growLeaf}>
 							Grow Leaf ({plant.leaves*2} sugar)
-						</p> :
-						<p onClick={growFlower}>
-							Grow Flower (6 sugar)</p>
+						</button> :
+						<button onClick={growFlower}>
+							Grow Flower (cost 6 sugar)</button>
 					}
 				</div>
 				<div>
 					<h2>Roots</h2>
 					<p>Stage: {plant.roots}</p>
 					<p>Water: {plant.water}</p>
-					<p onClick={growRoot}>
-						Grow Roots (cost {plant.roots*2} sugar)</p>
+					<button onClick={growRoot}>
+						Grow Roots (cost {plant.roots*2} sugar)</button>
 				</div>
 				
 				

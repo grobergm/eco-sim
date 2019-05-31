@@ -13,7 +13,7 @@ import forbFlower from '../img/forb/forbFlower.png';
 const shrubLeaves=[shrub1,shrub2,shrub3,shrub4,shrub5];
 const forbLeaves=[forb1,forb2,forb3];
 
-function Plant({plant, onSelect, onHighlight}){
+function Plant({plant, onSelect, onHighlight, selected}){
 
 	function returnImage(){
 		switch(plant.species.name){
@@ -40,7 +40,9 @@ function Plant({plant, onSelect, onHighlight}){
 		left:'50%',
 		transform:'translate(-50%,-50%)',
 		zIndex:'1',
-		backgroundColor:onHighlight(plant)? 
+		border:onHighlight(plant)? 
+			'2px solid yellow':'none',
+		backgroundColor: selected === plant.locID ? 
 			'yellow':'transparent',
 		borderRadius:'50%',
 		padding:'1rem'

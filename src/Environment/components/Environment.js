@@ -77,7 +77,8 @@ function Environment(props){
 								props.populations[locID] && props.populations[locID].leaves>0 ? 
 								<Plant 
 									plant={props.populations[locID]}
-									onSelect={handleSelect} 
+									onSelect={handleSelect}
+									selected={props.game.selectOrg} 
 									onHighlight={handleHighlight}/>
 								:
 								null
