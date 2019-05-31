@@ -51,8 +51,12 @@ const checkForWater=(x,y)=>{
 	}
 
 	const growNewLeaf=()=>{
-		if (plant.sugar>=plant.leaves*2){
-			dispatch(growLeaf(locID))
+		if (plant.sugar>=plant.leaves*2){	
+			if(plant.species==='forb'&&plant.leaves<3){
+				dispatch(growLeaf(locID))
+			} else if (plant.species==='shrub'&&plant.leaves<5){
+				dispatch(growLeaf(locID))
+			}
 		}
 	}
 
