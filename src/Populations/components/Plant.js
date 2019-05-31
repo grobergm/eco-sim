@@ -4,9 +4,11 @@ import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
 import shrub4 from '../img/shrub/shrub4.png';
 import shrub5 from '../img/shrub/shrub5.png';
+import shrubFlower from '../img/shrub/shrubFlower.png';
 import forb1 from '../img/forb/forb1.png';
 import forb2 from '../img/forb/forb2.png';
 import forb3 from '../img/forb/forb3.png';
+import forbFlower from '../img/forb/forbFlower.png';
 
 const shrubLeaves=[shrub1,shrub2,shrub3,shrub4,shrub5];
 const forbLeaves=[forb1,forb2,forb3];
@@ -16,9 +18,17 @@ function Plant({plant, onSelect, onHighlight}){
 	function returnImage(){
 		switch(plant.species){
 			case "forb":
-				return forbLeaves[plant.leaves-1] 
+				if(plant.flowering){
+					return forbFlower
+				} else{
+					return forbLeaves[plant.leaves-1] 
+				}
 			case "shrub":
-				return shrubLeaves[plant.leaves-1] 
+				if(plant.flowering){
+					return shrubFlower
+				} else{
+					return shrubLeaves[plant.leaves-1] 
+				}
 		}
 	}
 

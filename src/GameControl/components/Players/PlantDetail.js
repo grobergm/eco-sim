@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addWater , addSugar, growLeaf, growRoot } from '../../../Populations/redux/actionCreator';
+import { addWater , addSugar, growLeaf, growRoot, growFlower } from '../../../Populations/redux/actionCreator';
 
 function PlantDetail({
 	locID,
@@ -52,11 +52,11 @@ const checkForWater=(x,y)=>{
 
 	const growNewLeaf=()=>{
 		if (plant.sugar>=plant.leaves*2){	
-			if(plant.species==='forb'&&plant.leaves<3){
+			if(plant.species==='forb'&&plant.leaves<3 || 
+				plant.species==='shrub'&&plant.leaves<5)
+			{
 				dispatch(growLeaf(locID))
-			} else if (plant.species==='shrub'&&plant.leaves<5){
-				dispatch(growLeaf(locID))
-			}
+			} 
 		}
 	}
 
@@ -65,6 +65,13 @@ const checkForWater=(x,y)=>{
 			dispatch(growRoot(locID))
 		}
 	}
+
+	const growNewFlower=()=>{
+		if (plant.sugar>=6){
+			dispatch(growFlower(locID))
+		}
+	}
+
 
 	const grid={
 		display:'grid',
@@ -77,7 +84,12 @@ const checkForWater=(x,y)=>{
 					<h2>Leaves</h2>
 					<p>Stage: {plant.leaves}</p>
 					<p onClick={photosynthesis}>Photosynthesis</p>
-					<p onClick={growNewLeaf}>Grow Leaf</p>
+					{
+						(plant.species==='forb'&& plant.leaves<3) ||
+						(plant.species==='shrub'&& plant.leaves<5) ?
+						<p onClick={growNewLeaf}>Grow Leaf</p> :
+						<p onClick={growNewFlower}>Grow Flower</p>
+					}
 				</div>
 				<div>
 					<h2>Roots</h2>

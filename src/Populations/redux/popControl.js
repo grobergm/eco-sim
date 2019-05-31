@@ -33,13 +33,23 @@ const popControl = (state={},action)=>{
 						}
 					}
 				)
-			case 'GROW_ROOT':
+		case 'GROW_ROOT':
 			return Object.assign({},state,
 					{
 						[action.id]:{
 							...state[action.id],
 							roots:state[action.id].roots+1,
 							sugar:state[action.id].sugar-(state[action.id].roots*2)
+						}
+					}
+				)
+		case 'GROW_FLOWER':
+			return Object.assign({},state,
+					{
+						[action.id]:{
+							...state[action.id],
+							roots:state[action.id].flowering=true,
+							sugar:state[action.id].sugar-6
 						}
 					}
 				)

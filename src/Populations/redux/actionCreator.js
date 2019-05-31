@@ -35,3 +35,10 @@ export const growRoot=(id)=>{
 		id:id,
 	}
 }
+
+export const growFlower=(id)=>{
+	return{
+		type:'GROW_FLOWER',
+		id:id,
+	}
+}

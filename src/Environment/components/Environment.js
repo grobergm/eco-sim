@@ -27,8 +27,9 @@ function Environment(props){
 				playerID:playerTurn.id,
 				leaves:1,
 				roots:1,
-				water:1,
-				sugar:1,
+				water:0,
+				sugar:0,
+				flowering:false,
 				species:playerTurn.species,
 			}
 			props.dispatch(addOrganism(locID,organism));
