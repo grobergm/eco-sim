@@ -14,6 +14,7 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 function Environment(props){
 	let playerTurn=props.game.players[props.game.turn];
+
 	function handlePlantSeed(locID,x,y,substrate){
 		if (substrate==='soil'
 			&& playerTurn.seed>0
@@ -27,8 +28,8 @@ function Environment(props){
 				playerID:playerTurn.id,
 				leaves:1,
 				roots:1,
-				water:0,
-				sugar:0,
+				water:2,
+				sugar:2,
 				flowers:0,
 				species:playerTurn.species,
 			}
@@ -38,7 +39,6 @@ function Environment(props){
 	}
 
 	function handleSelect(locID){
-		console.log(locID);
 		if(playerTurn.id=== props.populations[locID].playerID){
 			props.dispatch(selectOrganism(locID))
 		}
@@ -74,7 +74,7 @@ function Environment(props){
 							onPlantSeed={handlePlantSeed}
 							/>
 							{
-								props.populations[locID] ? 
+								props.populations[locID] && props.populations[locID].leaves>0 ? 
 								<Plant 
 									plant={props.populations[locID]}
 									onSelect={handleSelect} 

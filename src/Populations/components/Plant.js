@@ -56,7 +56,6 @@ function Plant({plant, onSelect, onHighlight}){
 		height:`${plant.roots*2}vw`
 	}
 	return (
-
 		<div onClick={()=>{onSelect(plant.locID)}}>
 			<img style={leaves} src={image} />
 			<span style={roots}></span>

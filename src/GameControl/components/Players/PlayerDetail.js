@@ -2,11 +2,12 @@ import React from 'react';
 import Plant from '../../../Populations/components/Plant';
 import PlantDetail from './PlantDetail';
 import { connect } from 'react-redux';
+import { updateOrganism } from '../../../Populations/redux/actionCreator';
 import { changeTurn , selectOrganism } from '../../redux/actionCreator';
 
 
 
-function PlayerDetail({game,dispatch}){
+function PlayerDetail({game,dispatch,environment,populations}){
 
 	const turnChanger=()=>{
 		dispatch(selectOrganism(null))
@@ -14,10 +15,62 @@ function PlayerDetail({game,dispatch}){
 			dispatch(changeTurn('lastTurn'))
 		} else if(game.turn===game.players.length-1){
 			dispatch(changeTurn('lastPlayer'));
+			newDayUpdates()
 		} else {
 			dispatch(changeTurn('changeTurn'));
 		}
 	}
+
+	const checkForWater=(x,y)=>{
+		if(populations[`X${x}Y${y}`]){
+				// this needs to be scaled by distance
+				return -populations[`X${x}Y${y}`].roots
+		} else if(environment[`X${x}Y${y}`]){
+			if (environment[`X${x}Y${y}`].substrate==='water'){
+				return 1
+			} else {
+				return 0
+			}
+		} else {
+			return 0
+		}
+	}
+
+	const absorbWater=(x,y,plant)=>{
+		let water=0;
+		for(var i = 1;i<=plant.roots;i++){
+			water+=checkForWater(x+i,y);
+			water+=checkForWater(x-i,y);
+			water+=checkForWater(x,y+i);
+			water+=checkForWater(x,y-i);
+			water+=checkForWater(x+i,y+i);
+			water+=checkForWater(x-i,y-i);
+			water+=checkForWater(x-i,y+i);
+			water+=checkForWater(x+i,y-i);
+		}
+		dispatch(updateOrganism(plant.locID,'water',plant.water+water))
+	}
+	
+	const photosynthesis=(plant)=>{
+		let sugarChange=0;
+		let waterChange=0;
+		if(plant.water>=(plant.leaves*2)){
+			sugarChange+=plant.leaves;
+			waterChange+=(plant.leaves*2);
+		}
+		dispatch(updateOrganism(plant.locID,'sugar',plant.sugar+sugarChange));
+		dispatch(updateOrganism(plant.locID,'water',plant.water-waterChange));
+	}
+
+	const newDayUpdates=()=>{
+		for (const locID in populations){
+			let plant=populations[locID];
+	 		photosynthesis(plant);
+			absorbWater(plant.x,plant.y,plant)
+		}
+	}
+
+
 
 	const grid={
 		position:'fixed',
@@ -49,7 +102,7 @@ function PlayerDetail({game,dispatch}){
 
 const mapStateToProps=state=>{
 	return{
-		game:state.game
+		...state
 	}
 }
 
