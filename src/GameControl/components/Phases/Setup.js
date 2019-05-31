@@ -1,6 +1,7 @@
 import React from 'react';
-import collonization from '../../../Populations/img/forb/forb2.png';
-import competition from '../../../Populations/img/shrub/shrub4.png';
+import collonization from '../../../Populations/img/forb/forb4.svg';
+import competition from '../../../Populations/img/shrub/shrub6.svg';
+
 import Players from '../Players/Players';
 import { v4 } from 'uuid';
 import { connect } from 'react-redux';
@@ -14,149 +15,199 @@ import {
  import { makeGrid } from '../../../Environment/redux/actionCreator'
 
 
-function Setup({dispatch}){
+function Setup({dispatch, game}){
 	const choiceGrid={
 		display:'grid',
 		gridTemplateColumns:'50% 50%',
-		textAlign:'center'
+		gridTemplateRows:'25% 50% 25%',
+		textAlign:'center',
+		backgroundColor:'#e6ff99',
+		width:'100%',
 	}
 	const fullRow={
-		gridColumn:'span 2',
+		gridColumn:'span 2'
 	}
 	const choices={
-		display:'flex',
-		justifyContent:'space-around'
+		display:'flex'
 	}
-
-	const newPlayer={
-		display:'flex',
-		justifyContent:'center'
+	const inputStyle={
+		padding:'0.5rem',
+		width:'60%'
 	}
-
-	let selectedSpecies;
+	const buttonStyle={
+		width:'30%',
+		padding:'0.5rem'
+	}
+	const gameSetup={
+		display:'grid',
+		justifyContent:'center',
+		gridGap:'1rem',
+		gridTemplateRows:'repeat(5,1fr)',
+		padding:'2rem'
+	}
+	const gameSetupInput={
+		textAlign:'center',
+		border:'none',
+		padding:'0.5rem',
+		margin:'0.5rem'
+	}
 // refs
-	let _nameInput;
+	let _forbNameInput;
+	let _shrubNameInput;
 	let _gameLength;
 	let _mapSize;
+	let _difficulty;
 	let _rock;
-	let _water
-	const speciesSelect=(species)=>{
-		selectedSpecies=species;
-	}
+	let _water;
 
-	const addInputPlayer=()=>{
-		function addSeed(species){
-			switch(species){
-				case 'forb':
-					return 5
-				case 'shrub':
-					return 2
-			}
-		}
-		if(_nameInput.value&&selectedSpecies){
+	const addForb=()=>{
+		if(_forbNameInput.value){
 			let newPlayer={
 				id:v4(),
-				name:_nameInput.value,
-				species:selectedSpecies,
-				seed:addSeed(selectedSpecies)
+				name:_forbNameInput.value,
+				species:'forb',
+				seed:4
 			}
 			dispatch(addPlayer(newPlayer));
-			selectedSpecies=null;
-			_nameInput.value='';
-		} else {
-			console.log('no',selectedSpecies)
+			_forbNameInput.value='';
 		}
+	}
+	const addShrub=()=>{
+		if(_shrubNameInput.value){
+			let newPlayer={
+				id:v4(),
+				name:_shrubNameInput.value,
+				species:'shrub',
+				seed:2
+			}
+			dispatch(addPlayer(newPlayer));
+			_shrubNameInput.value='';
+		}
+	}
+
+	const distributeResources=()=>{
+		console.log(_difficulty.value)
+		let rock;
+		let water;
+		switch(_difficulty.value){
+			case 'easy':
+				console.log('easy selected')
+				rock=0.1;
+				water=0.4;
+				break;
+			case 'medium':
+				rock=0.3;
+				water=0.3;
+				break;
+			case 'hard':
+			console.log('hard selected')
+				rock=0.4;
+				water=0.2;
+				break;
+		}
+		dispatch(makeGrid(parseInt(_mapSize.value),water,rock))
 	}
 
 	const setGameStats=()=>{
+		if(game.players.length){
 		dispatch(setMapSize(parseInt(_mapSize.value)));
-		dispatch(makeGrid(parseInt(_mapSize.value),_water.value,_rock.value))
+		distributeResources();
 		dispatch(setGameLength(parseInt(_gameLength.value)));
 		dispatch(changeView('start'));
+		}
 	}
 	return (
 		<div>
 			<div>
 				<div style={choices}>
 					<div style={choiceGrid}>
-						<h1 style={fullRow}>Collonization Strategy</h1>
+						<h1 style={fullRow}>Forb</h1>
 						<div>
-							<p>Lorem Ipsum</p>
-							<p>Dolar Sit amet</p>
-							<p>Something something</p>
+							<p>Scatter your seeds</p>
+							<p>Be the first to arrive</p>
+							<p>Although you are small</p>
+							<p>Your numbers are endless</p>
 						</div>
 						<img style={{width:'100%'}} src={collonization} />
-						<button onClick={()=>{speciesSelect('forb')}} style={fullRow}>Select</button>
+						<div style={fullRow}>
+							<input
+							style={inputStyle}
+							type="text"
+							id="playerName"
+							placeholder="Name"
+							ref={(input)=>{_forbNameInput=input}}
+							/>
+							<button style={buttonStyle} onClick={addForb}>Add</button>
+						</div>						
 					</div>
 					<div style={choiceGrid}>
-						<h1 style={fullRow}>Competition Strategy</h1>
+						<h1 style={fullRow}>Shrub</h1>
 						<div>
-							<p>Lorem Ipsum</p>
+							<p></p>
 							<p>Dolar Sit amet</p>
 							<p>Something something</p>
 						</div>
 						<img style={{width:'100%'}} src={competition} />
-						<button onClick={()=>{speciesSelect('shrub')}} style={fullRow}>Select</button>
+						<div style={fullRow}>
+							<input
+							style={inputStyle}
+							type="text"
+							id="playerName"
+							placeholder="Name"
+							ref={(input)=>{_shrubNameInput=input}}
+							/>
+							<button style={buttonStyle} onClick={addShrub}>Add</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div style={newPlayer}>
-				<input
-				type="text"
-				id="playerName"
-				placeholder="Name"
-				ref={(input)=>{_nameInput=input}}
-				/>
-				<button onClick={addInputPlayer}>Add Player</button>
-			</div>
-			<div>
-			<label htmlFor='gameLength'>Game Length:</label>
-				<input
-				type="number"
-				id="gameLength"
-				defaultValue="10"
-				min="5"
-				max="25"
-				step="5"
-				ref={(input)=>{_gameLength=input}}
-				/>
-			<label htmlFor='mapSize'>Map Size</label>
-				<input
-				type="number"
-				id="mapSize"
-				defaultValue="10"
-				min="5"
-				max="25"
-				step="5"
-				ref={(input)=>{_mapSize=input}}
-				/>
-			<label htmlFor='water'>Water Level:</label>
-				<input
-				type="number"
-				id="water"
-				defaultValue="0.3"
-				min="0.1"
-				max="0.8"
-				step="0.1"
-				ref={(input)=>{_water=input}}
-				/>
-			<label htmlFor='rock'>Rock Level:</label>
-				<input
-				type="number"
-				id="rock"
-				defaultValue="0.2"
-				min="0.1"
-				max="0.5"
-				step="0.1"
-				ref={(input)=>{_rock=input}}
-				/>
-				
-			</div>
-			<button onClick={setGameStats}> Start Game </button>
 			<Players />
+			<div style={gameSetup} >
+				<div>
+					<label htmlFor='gameLength'>Game Length:</label>
+					<input
+					style={gameSetupInput}
+					type="number"
+					id="gameLength"
+					defaultValue="10"
+					min="5"
+					max="25"
+					step="5"
+					ref={(input)=>{_gameLength=input}}
+					/>
+				</div>
+				<div>
+					<label htmlFor='mapSize'>Map Size</label>
+					<input
+					style={gameSetupInput}
+					type="number"
+					id="mapSize"
+					defaultValue="10"
+					min="5"
+					max="25"
+					step="5"
+					ref={(input)=>{_mapSize=input}}
+					/>
+				</div>
+				<div>
+					<label htmlFor='difficulty'>Water Level:</label>
+					<select style={gameSetupInput} 
+					ref={(input)=>{_difficulty=input}}>
+						<option value="easy">easy</option>
+						<option value="medium">medium</option>
+						<option value="hard">hard</option>
+					</select>
+				</div>
+				<button onClick={setGameStats}> Start Game </button>
+			</div>
 		</div>
 	)
 }
 
+const mapStateToProps=state=>{
+	return{
+		game:state.game
+	}
+}
 
-export default connect()(Setup);
+export default connect(mapStateToProps)(Setup);
