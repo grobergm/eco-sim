@@ -97,7 +97,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 				game.selectOrg ? 
 				<PlantDetail locID={game.selectOrg} />: 
 				<div>
-					<h2>Nothing Selected</h2>
+					<h2>How To Play</h2>
 					<p>Click soil to plant seed</p>
 					<p>Plants compete for water, so find a good spot</p>
 					<p>Click plants to select them</p>
