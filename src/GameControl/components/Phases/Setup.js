@@ -125,8 +125,8 @@ function Setup({dispatch, game}){
 						<div>
 							<p>Scatter your seeds</p>
 							<p>Be the first to arrive</p>
-							<p>Although you are small</p>
-							<p>Your numbers are endless</p>
+							<p>You won't live long</p>
+							<p>But your children will thrive</p>
 						</div>
 						<img style={{width:'100%'}} src={collonization} />
 						<div style={fullRow}>
@@ -143,9 +143,10 @@ function Setup({dispatch, game}){
 					<div style={choiceGrid}>
 						<h1 style={fullRow}>Shrub</h1>
 						<div>
-							<p></p>
-							<p>Dolar Sit amet</p>
-							<p>Something something</p>
+							<p>Find the right spot</p>
+							<p>Take your time to grow</p>
+							<p>Live a long life</p>
+							<p>Many seeds you will sow</p>
 						</div>
 						<img style={{width:'100%'}} src={competition} />
 						<div style={fullRow}>

@@ -14,7 +14,9 @@ function Intro({setup}){
 	return (
 	<div style={panel}>
 		<h1>EcoSim</h1>
-		<button onClick={setup}>Start Game >></button>
+		<button onClick={setup}>Start Game</button>
+		<h2>Find your Niche</h2>
+		<p>Grow, Compete, Evolve</p>
 	</div>
 	)
 }
