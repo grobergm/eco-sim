@@ -1,4 +1,4 @@
-import { addOrganism , addWater, addSugar, growLeaf, growRoot } from './actionCreator';
+import { addOrganism , updateOrganism, addWater, addSugar, growLeaf, growRoot } from './actionCreator';
 import popControl from './popControl';
 
 describe('Population Control',()=>{
@@ -8,133 +8,54 @@ describe('Population Control',()=>{
 
 	test('add an organism to Populations',()=>{
 		const action=addOrganism('22s2',
-			{location:'X2Y1',
-			playerID:'12345',
-			leaves:1,
-			roots:1,
-			water:1,
-			sugar:1,
-			species:'forb'})
+			{location:'X2Y1'})
 		const nextState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					water:1,
-					sugar:1,
-					species:'forb'
-				}
+			['22s2']:{location:'X2Y1'}
 		}
 		expect(popControl({},action)).toEqual(nextState);
 	});
 
+
 	test('add water to organism',()=>{
-
 		const initialState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					water:1,
-					sugar:1,
-					species:'forb'
-				}
+			['22s2']:{water:1}
 		}
-		const action=addWater('22s2',1)
+		const action=updateOrganism('22s2','water',2)
 		const nextState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					water:2,
-					sugar:1,
-					species:'forb'
-				}
+			['22s2']:{water:2}
 		}
 		expect(popControl(initialState,action)).toEqual(nextState);
 	})
 
-		test('add sugar to organism',()=>{
-
+	test('add sugar to organism',()=>{
 		const initialState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					sugar:1,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{sugar:1}
 		}
-		const action=addSugar('22s2',1)
+		const action=updateOrganism('22s2','sugar',4)
 		const nextState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					sugar:2,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{sugar:4}
 		}
 		expect(popControl(initialState,action)).toEqual(nextState);
 	})
 
-		test('grow leaf',()=>{
+	test('grow leaf',()=>{
 		const initialState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					sugar:4,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{leaves:1}
 		}
-		const action=growLeaf('22s2')
+		const action=updateOrganism('22s2','leaves',2)
 		const nextState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:2,
-					roots:1,
-					sugar:2,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{leaves:2}
 		}
 		expect(popControl(initialState,action)).toEqual(nextState);
 	})
 
 	test('grow roots',()=>{
 		const initialState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:1,
-					sugar:4,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{roots:1}
 		}
-		const action=growRoot('22s2')
+		const action=updateOrganism('22s2','roots',2)
 		const nextState={
-			['22s2']:{
-					location:'X2Y1',
-					playerID:'12345',
-					leaves:1,
-					roots:2,
-					sugar:2,
-					water:1,
-					species:'forb'
-				}
+			['22s2']:{roots:2}
 		}
 		expect(popControl(initialState,action)).toEqual(nextState);
 	})

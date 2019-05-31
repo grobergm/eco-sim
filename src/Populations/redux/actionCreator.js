@@ -6,6 +6,15 @@ export const addOrganism=(id,organism)=>{
 	}
 }
 
+export const updateOrganism=(id,key,value)=>{
+	return{
+		type:'UPDATE_ORGANISM',
+		id:id,
+		key:key,
+		value:value
+	}
+}
+
 export const addWater=(id,water)=>{
 	return{
 		type:'WATER_UPTAKE',

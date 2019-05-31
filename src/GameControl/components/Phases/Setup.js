@@ -65,8 +65,13 @@ function Setup({dispatch, game}){
 			let newPlayer={
 				id:v4(),
 				name:_forbNameInput.value,
-				species:'forb',
-				seed:4
+				seed:3,
+				species:{
+					name:'forb',
+					leafLimit:3,
+					rootLimit:3,
+					seedProduction:3,
+				}
 			}
 			dispatch(addPlayer(newPlayer));
 			_forbNameInput.value='';
@@ -77,8 +82,13 @@ function Setup({dispatch, game}){
 			let newPlayer={
 				id:v4(),
 				name:_shrubNameInput.value,
-				species:'shrub',
-				seed:2
+				seed:2,
+				species:{
+					name:'shrub',
+					leafLimit:5,
+					rootLimit:5,
+					seedProduction:2,
+				}
 			}
 			dispatch(addPlayer(newPlayer));
 			_shrubNameInput.value='';

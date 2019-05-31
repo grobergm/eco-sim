@@ -8,7 +8,7 @@ function Player(props){
 	return(
 		<div style={pStyle}>
 			<p>{props.player.name}</p>
-			<p>{props.player.species}</p>
+			<p>{props.player.species.name}</p>
 		</div>
 	)
 }

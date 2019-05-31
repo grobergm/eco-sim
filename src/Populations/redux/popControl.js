@@ -5,54 +5,14 @@ const popControl = (state={},action)=>{
 			return Object.assign({},state,{
 				[action.id]:action.organism
 			});
-		case 'WATER_UPTAKE':
-			return Object.assign({},state,
-				{
-					[action.id]:{
-						...state[action.id],
-						water:state[action.id].water+action.water
-					}
+		case 'UPDATE_ORGANISM':
+			return {
+				...state,
+				[action.id]:{
+					...state[action.id],
+					[action.key]:action.value
 				}
-			)
-		case 'ADD_SUGAR':
-		return Object.assign({},state,
-				{
-					[action.id]:{
-						...state[action.id],
-						sugar:state[action.id].sugar+action.sugar
-					}
-				}
-			)
-		case 'GROW_LEAF':
-			return Object.assign({},state,
-					{
-						[action.id]:{
-							...state[action.id],
-							leaves:state[action.id].leaves+1,
-							sugar:state[action.id].sugar-(state[action.id].leaves*2)
-						}
-					}
-				)
-		case 'GROW_ROOT':
-			return Object.assign({},state,
-					{
-						[action.id]:{
-							...state[action.id],
-							roots:state[action.id].roots+1,
-							sugar:state[action.id].sugar-(state[action.id].roots*2)
-						}
-					}
-				)
-		case 'GROW_FLOWER':
-			return Object.assign({},state,
-					{
-						[action.id]:{
-							...state[action.id],
-							roots:state[action.id].flowering=true,
-							sugar:state[action.id].sugar-6
-						}
-					}
-				)
+			}
 		default:
 			return state;		
 	}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addWater , addSugar, growLeaf, growRoot, growFlower } from '../../../Populations/redux/actionCreator';
+import { updateOrganism } from '../../../Populations/redux/actionCreator';
 
 function PlantDetail({
 	locID,
@@ -9,6 +9,7 @@ function PlantDetail({
 	dispatch
 }){
 const plant=populations[locID];
+// Below could be refactored to be more generic (for other competition).
 const checkForWater=(x,y)=>{
 		if(populations[`X${x}Y${y}`]){
 				// this needs to be scaled by distance
@@ -36,7 +37,7 @@ const checkForWater=(x,y)=>{
 			water+=checkForWater(x-i,y+i);
 			water+=checkForWater(x+i,y-i);
 		}
-		dispatch(addWater(locID,water))
+		dispatch(updateOrganism(locID,'water',plant.water+water))
 	}
 	
 	const photosynthesis=()=>{
@@ -44,34 +45,38 @@ const checkForWater=(x,y)=>{
 		let waterChange=0;
 		if(plant.water>=(plant.leaves*2)){
 			sugarChange+=plant.leaves;
-			waterChange-=(plant.leaves*2);
+			waterChange+=(plant.leaves*2);
 		}
-		dispatch(addSugar(locID,sugarChange));
-		dispatch(addWater(locID,waterChange));
+		dispatch(updateOrganism(locID,'sugar',plant.sugar+sugarChange));
+		dispatch(updateOrganism(locID,'water',plant.water-waterChange));
 	}
 
-	const growNewLeaf=()=>{
-		if (plant.sugar>=plant.leaves*2){	
-			if(plant.species==='forb'&&plant.leaves<3 || 
-				plant.species==='shrub'&&plant.leaves<5)
-			{
-				dispatch(growLeaf(locID))
-			} 
+	const growOrgan=(organ,limit,cost)=>{
+		if(plant.sugar>cost&&plant[organ]<limit){
+			dispatch(updateOrganism(locID,'sugar',plant.sugar-cost))
+			dispatch(updateOrganism(locID,organ,plant[organ]+1))
 		}
 	}
 
-	const growNewRoot=()=>{
-		if (plant.sugar>=plant.roots*2){
-			dispatch(growRoot(locID))
-		}
+	const growLeaf=()=>{
+		growOrgan(
+			'leaves',
+			plant.species.leafLimit,
+			plant.leaves*2,
+		)
 	}
 
-	const growNewFlower=()=>{
-		if (plant.sugar>=6){
-			dispatch(growFlower(locID))
-		}
+	const growRoot=()=>{
+		growOrgan(
+			'roots',
+			plant.species.rootLimit,
+			plant.roots*2,
+		)
 	}
 
+	const growFlower=()=>{
+		growOrgan('flowers',1,6)
+	}
 
 	const grid={
 		display:'grid',
@@ -85,17 +90,17 @@ const checkForWater=(x,y)=>{
 					<p>Stage: {plant.leaves}</p>
 					<p onClick={photosynthesis}>Photosynthesis</p>
 					{
-						(plant.species==='forb'&& plant.leaves<3) ||
-						(plant.species==='shrub'&& plant.leaves<5) ?
-						<p onClick={growNewLeaf}>Grow Leaf</p> :
-						<p onClick={growNewFlower}>Grow Flower</p>
+						(plant.species.name==='forb'&& plant.leaves<3) ||
+						(plant.species.name==='shrub'&& plant.leaves<5) ?
+						<p onClick={growLeaf}>Grow Leaf</p> :
+						<p onClick={growFlower}>Grow Flower</p>
 					}
 				</div>
 				<div>
 					<h2>Roots</h2>
 					<p>Stage: {plant.roots}</p>
 					<p onClick={()=>{absorbWater(plant.x,plant.y)}}>Water Uptake</p>
-					<p onClick={growNewRoot} >Grow Roots</p>
+					<p onClick={growRoot} >Grow Roots</p>
 				</div>
 				<p>Water: {plant.water}</p>
 				<p>Sugar: {plant.sugar}</p>
