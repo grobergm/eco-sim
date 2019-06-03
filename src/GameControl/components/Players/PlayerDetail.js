@@ -60,21 +60,24 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		}
 	}
 
-	const checkForPlayerScore=()=>{
-		game.players.forEach(player=>{
-			let playerScore=player.seed;
+	const checkPlayerScore=(id)=>{
+		let playerIndex=game.players.findIndex(player=>{
+			return id===player.id
+		})
+
+		let playerScore=game.players[playerIndex].seed;
+
 			for (const locID in populations){
-				if (populations[locID].playerID===player.id){
+				if (populations[locID].playerID===id){
 					playerScore+=populations[locID].leaves
 				}
 			}
 			if(playerScore===0){
 				console.log('player removed')
-				dispatch(removePlayer(player.id))
+				dispatch(removePlayer(playerIndex))
 			} else {
 				console.log('score',playerScore)
 			}
-		})
 	}
 
 	const newDayUpdates=()=>{

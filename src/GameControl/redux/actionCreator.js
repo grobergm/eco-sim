@@ -15,10 +15,20 @@ export const addPlayer=player=>{
 	return {type:'ADD_PLAYER',player}
 }
 
-export const removePlayer=id=>{
-	return {type:'REMOVE_PLAYER',id}
+export const removePlayer=index=>{
+	return {type:'REMOVE_PLAYER',index}
 }
 
+export const updatePlayer=(index,player,key,value)=>{
+	return {
+		type:'UPDATE_PLAYER',
+		index,
+		player:{
+			...player,
+			[key]:value
+		}
+	}
+}
 export const setGameLength=days=>{
 	return {type:'SET_GAME_LENGTH',days}
 }

@@ -2,6 +2,7 @@ import gameControl from './gameControl';
 import {
 	addPlayer,
 	removePlayer,
+	updatePlayer,
  	setGameLength,
  	setMapSize,
  	changeTurn,
@@ -20,27 +21,6 @@ describe("Setting up initial game stats",()=>{
 		expect(gameControl(initialState,action)).toEqual(initialState)
 	});
 
-	test('adds a player',()=>{
-		const newPlayer={id:'12345', name:'Matt',species:'forb',seed:5};
-		const action=addPlayer(newPlayer)
-		const nextState={
-			day:0,
-			turn:0,
-			players:[{id:'12345', name:'Matt',species:'forb',seed:5}],
-		}
-		expect(gameControl(initialState,action)).toEqual(nextState)
-	})
-
-	test('removes a player',()=>{;
-		const initialState={
-			players:[{id:'1211221'},{id:'12345'},{id:'55555'}],
-		}
-		const action=removePlayer('12345');
-		const nextState={
-			players:[{id:'1211221'},{id:'55555'}],
-		}
-		expect(gameControl(initialState,action)).toEqual(nextState)
-	})
 
 	test('sets game length',()=>{
 		const action=setGameLength(10);
@@ -113,17 +93,30 @@ describe('Turn Changing',()=>{
 })
 
 describe('Modifying Player Stats',()=>{
-	test('modifies seeds in given player',()=>{
-		const initialState={
-			day:0,
-			turn:0,
-			players:[{id:'12345', name:'Matt',species:'forb',seed:5}],
+	const initialState={
+			players:[{id:'1211221',seed:3},{id:'12345',seed:3},{id:'55555',seed:3}]
 		}
-		const action=modifySeed(-2,'12345');
+	test('adds a player',()=>{
+		const newPlayer={id:'aaa12345',seed:3};
+		const action=addPlayer(newPlayer)
 		const nextState={
-			day:0,
-			turn:0,
-			players:[{id:'12345', name:'Matt',species:'forb',seed:3}],
+			players:[{id:'1211221',seed:3},{id:'12345',seed:3},{id:'55555',seed:3},{id:'aaa12345',seed:3}]
+		}
+		expect(gameControl(initialState,action)).toEqual(nextState)
+	})
+
+	test('removes a player',()=>{;
+		const action=removePlayer(1);
+		const nextState={
+			players:[{id:'1211221',seed:3},{id:'55555',seed:3}],
+		}
+		expect(gameControl(initialState,action)).toEqual(nextState)
+	})
+	test('modifies seeds in given player',()=>{
+
+		const action=updatePlayer(1,{id:'12345',seed:0},'seed',0);
+		const nextState={
+			players:[{id:'1211221',seed:3},{id:'12345',seed:0},{id:'55555',seed:3}]
 		}
 		expect(gameControl(initialState,action)).toEqual(nextState);
 	})

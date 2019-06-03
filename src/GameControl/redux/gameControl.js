@@ -9,16 +9,29 @@ const gameControl=(state=initialState,action)=>{
 			const newPlayers=state.players.concat(action.player);
 			return {
 				...state,
-				players:newPlayers
+				players: newPlayers
 			}
 		case 'REMOVE_PLAYER':
-			const removeIndex=state.players.findIndex(player=>{
-				return action.id===player.id
-			})
 			return {
 				...state,
-				players:state.players.filter((player,index)=> index!==removeIndex)
+				players:state.players.filter((player,index)=> index!==action.index)
 			}
+		case 'UPDATE_PLAYER':
+			return {
+				...state,
+				players:state.players.map((player,index)=>{
+					if (index !==action.index){
+						return player;
+					}
+					return {
+						...player,
+						...action.player
+					}
+				})
+			}
+			
+
+
 		case 'SET_GAME_LENGTH':
 			return {
 				...state,
@@ -58,7 +71,7 @@ const gameControl=(state=initialState,action)=>{
 
 const playerControl=(player,action)=>{
 	switch(action.type){
-		case 'MODIFY_SEED':
+		case 'UPDATE_PLAYER	':
 			if (player.id!==action.playerID){
 				return player
 			}
