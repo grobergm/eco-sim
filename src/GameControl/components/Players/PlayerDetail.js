@@ -3,7 +3,7 @@ import Plant from '../../../Populations/components/Plant';
 import PlantDetail from './PlantDetail';
 import { connect } from 'react-redux';
 import { updateOrganism } from '../../../Populations/redux/actionCreator';
-import { changeTurn , selectOrganism } from '../../redux/actionCreator';
+import { changeTurn , selectOrganism, modifySeed } from '../../redux/actionCreator';
 
 
 
@@ -67,6 +67,14 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			let plant=populations[locID];
 	 		photosynthesis(plant);
 			absorbWater(plant.x,plant.y,plant)
+			if(plant.flowers>0){
+				dispatch(modifySeed(plant.species.seedProduction,plant.playerID))
+				if(plant.species.name==='forb'){
+					dispatch(updateOrganism(locID,'leaves',0));
+				} else if (plant.species.name==='shrub'){
+					dispatch(updateOrganism(locID,'flowers',0));
+				}
+			}
 		}
 	}
 
