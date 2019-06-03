@@ -5,6 +5,11 @@ const popControl = (state={},action)=>{
 			return Object.assign({},state,{
 				[action.id]:action.organism
 			});
+		case 'REMOVE_ORGANISM':
+			return {
+				...state,
+				[action.id]:null
+			}		
 		case 'UPDATE_ORGANISM':
 			return {
 				...state,

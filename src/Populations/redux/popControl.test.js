@@ -1,4 +1,4 @@
-import { addOrganism , updateOrganism, addWater, addSugar, growLeaf, growRoot } from './actionCreator';
+import { addOrganism , removeOrganism , updateOrganism } from './actionCreator';
 import popControl from './popControl';
 
 describe('Population Control',()=>{
@@ -15,6 +15,16 @@ describe('Population Control',()=>{
 		expect(popControl({},action)).toEqual(nextState);
 	});
 
+	test('remove an orgaism by setting it to null',()=>{
+		const initialState={
+			['22s2']:{species:'forb'}
+		}
+		const action=removeOrganism('22s2');
+		const nextState={
+			['22s2']:null
+		}
+		expect(popControl(initialState,action)).toEqual(nextState);
+	})
 
 	test('add water to organism',()=>{
 		const initialState={
