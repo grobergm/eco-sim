@@ -3,21 +3,28 @@ import Plant from '../../../Populations/components/Plant';
 import PlantDetail from './PlantDetail';
 import { connect } from 'react-redux';
 import { updateOrganism , removeOrganism } from '../../../Populations/redux/actionCreator';
-import { changeTurn , selectOrganism, modifySeed, removePlayer} from '../../redux/actionCreator';
+import { changeTurn , selectOrganism, updatePlayer, removePlayer} from '../../redux/actionCreator';
 
 
 
 function PlayerDetail({game,dispatch,environment,populations}){
+	const currentPlayer=game.players[game.turn];
 
 	const turnChanger=()=>{
-		dispatch(selectOrganism(null))
+		updateStats(currentPlayer)
+		checkPlayerLoss(currentPlayer)
 		if (game.day===game.length){
 			dispatch(changeTurn('lastTurn'))
 		} else if(game.turn===game.players.length-1){
 			dispatch(changeTurn('lastPlayer'));
-			newDayUpdates()
 		} else {
 			dispatch(changeTurn('changeTurn'));
+		}
+	}
+
+	const checkPlayerLoss=(player)=>{
+		if (player.score<=0){
+			dispatch(removePlayer(game.turn))
 		}
 	}
 
@@ -57,49 +64,44 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			dispatch(updateOrganism(plant.locID,'water',plant.water-plant.leaves));
 		} else{
 			dispatch(updateOrganism(plant.locID,'leaves',plant.leaves-1));
+			if(plant.leaves<=0){
+				dispatch(removeOrganism(plant.locID));
+			}
 		}
 	}
 
-	const checkPlayerScore=(id)=>{
-		let playerIndex=game.players.findIndex(player=>{
-			return id===player.id
-		})
-
-		let playerScore=game.players[playerIndex].seed;
-
-			for (const locID in populations){
-				if (populations[locID].playerID===id){
-					playerScore+=populations[locID].leaves
-				}
-			}
-			if(playerScore===0){
-				console.log('player removed')
-				dispatch(removePlayer(playerIndex))
-			} else {
-				console.log('score',playerScore)
-			}
-	}
-
-	const newDayUpdates=()=>{
+	const updateStats=(player)=>{
+		dispatch(selectOrganism(null))
+		let plantScore=0;
 		for (const locID in populations){
 			let plant=populations[locID];
 			if(plant){
-				absorbWater(plant.x,plant.y,plant);
-				photosynthesis(plant);
-				if(plant.flowers>0){
-					dispatch(modifySeed(plant.species.seedProduction,plant.playerID))
-					if(plant.species.name==='forb'){
-						dispatch(removeOrganism(locID));
-					} else if (plant.species.name==='shrub'){
-						dispatch(updateOrganism(locID,'flowers',0));
+				if(plant.playerID===player.id){
+					absorbWater(plant.x,plant.y,plant);
+					photosynthesis(plant);
+					plantScore+=plant.leaves;
+					if(plant.flowers>0){
+						dispatch(updatePlayer(
+							game.turn,
+							player,
+							'seed',
+							player.seed+plant.species.seedProduction
+						))
+						if(plant.species.name==='forb'){
+							dispatch(removeOrganism(locID));
+						} else if (plant.species.name==='shrub'){
+							dispatch(updateOrganism(locID,'flowers',0));
+						}
 					}
-				}
-				if(plant.leaves<=0){
-					dispatch(removeOrganism(locID));
 				}
 			}
 		}
-		checkForPlayerScore();
+		dispatch(updatePlayer(
+			game.turn,
+			player,
+			'score',
+			player.seed+plantScore
+		))
 	}
 
 
@@ -121,8 +123,9 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		<div style={grid}>
 			<div>
 				<h2>Day:{game.day} of {game.length}</h2>
-				<p>{game.players[game.turn].name}</p>
-				<p>Seed:{game.players[game.turn].seed}</p>
+				<p>{currentPlayer.name}</p>
+				<p>Seed:{currentPlayer.seed}</p>
+				<p>Score:{currentPlayer.score}</p>
 				<button onClick={turnChanger}>Change Turn</button>
 			</div>
 			{

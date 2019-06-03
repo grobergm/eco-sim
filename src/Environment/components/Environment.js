@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 
-import { modifySeed , selectOrganism  } from '../../GameControl/redux/actionCreator';
+import { updatePlayer, selectOrganism  } from '../../GameControl/redux/actionCreator';
 
 import Habitat from './Habitat'
 import { makeGrid } from '../redux/actionCreator';
@@ -13,11 +13,11 @@ import { addOrganism } from '../../Populations/redux/actionCreator';
 
 
 function Environment(props){
-	let playerTurn=props.game.players[props.game.turn];
+	let currentPlayer=props.game.players[props.game.turn];
 
 	function handlePlantSeed(locID,x,y,substrate){
 		if (substrate==='soil'
-			&& playerTurn.seed>0
+			&& currentPlayer.seed>0
 			&& !props.populations[locID]){
 			const id=v4();
 			const organism={
@@ -25,27 +25,32 @@ function Environment(props){
 				locID:locID,
 				x:x,
 				y:y,
-				playerID:playerTurn.id,
+				playerID:currentPlayer.id,
 				leaves:1,
 				roots:1,
 				water:2,
 				sugar:2,
 				flowers:0,
-				species:playerTurn.species,
+				species:currentPlayer.species,
 			}
 			props.dispatch(addOrganism(locID,organism));
-			props.dispatch(modifySeed(-1,playerTurn.id));
+			props.dispatch(updatePlayer(
+				props.game.turn,
+				currentPlayer,
+				'seed',
+				currentPlayer.seed-1
+				));
 		}
 	}
 
 	function handleSelect(locID){
-		if(playerTurn.id=== props.populations[locID].playerID){
+		if(currentPlayer.id=== props.populations[locID].playerID){
 			props.dispatch(selectOrganism(locID))
 		}
 	}
 
 	function handleHighlight(plant){
-		if(plant.playerID===playerTurn.id){
+		if(plant.playerID===currentPlayer.id){
 			return true
 		} else return false
 	}

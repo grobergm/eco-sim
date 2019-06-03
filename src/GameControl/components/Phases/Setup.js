@@ -66,6 +66,7 @@ function Setup({dispatch, game}){
 				id:v4(),
 				name:_forbNameInput.value,
 				seed:3,
+				score:3,
 				species:{
 					name:'forb',
 					leafLimit:3,
@@ -82,6 +83,7 @@ function Setup({dispatch, game}){
 			let newPlayer={
 				id:v4(),
 				name:_shrubNameInput.value,
+				score:2,
 				seed:2,
 				species:{
 					name:'shrub',
@@ -96,12 +98,10 @@ function Setup({dispatch, game}){
 	}
 
 	const distributeResources=()=>{
-		console.log(_difficulty.value)
 		let rock;
 		let water;
 		switch(_difficulty.value){
 			case 'easy':
-				console.log('easy selected')
 				rock=0.1;
 				water=0.4;
 				break;
@@ -110,7 +110,6 @@ function Setup({dispatch, game}){
 				water=0.3;
 				break;
 			case 'hard':
-			console.log('hard selected')
 				rock=0.4;
 				water=0.2;
 				break;
