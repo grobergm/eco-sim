@@ -11,6 +11,14 @@ const gameControl=(state=initialState,action)=>{
 				...state,
 				players:newPlayers
 			}
+		case 'REMOVE_PLAYER':
+			const removeIndex=state.players.findIndex(player=>{
+				return action.id===player.id
+			})
+			return {
+				...state,
+				players:state.players.filter((player,index)=> index!==removeIndex)
+			}
 		case 'SET_GAME_LENGTH':
 			return {
 				...state,

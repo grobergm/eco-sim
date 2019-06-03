@@ -3,7 +3,7 @@ import Plant from '../../../Populations/components/Plant';
 import PlantDetail from './PlantDetail';
 import { connect } from 'react-redux';
 import { updateOrganism , removeOrganism } from '../../../Populations/redux/actionCreator';
-import { changeTurn , selectOrganism, modifySeed } from '../../redux/actionCreator';
+import { changeTurn , selectOrganism, modifySeed, removePlayer} from '../../redux/actionCreator';
 
 
 
@@ -60,6 +60,23 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		}
 	}
 
+	const checkForPlayerScore=()=>{
+		game.players.forEach(player=>{
+			let playerScore=player.seed;
+			for (const locID in populations){
+				if (populations[locID].playerID===player.id){
+					playerScore+=populations[locID].leaves
+				}
+			}
+			if(playerScore===0){
+				console.log('player removed')
+				dispatch(removePlayer(player.id))
+			} else {
+				console.log('score',playerScore)
+			}
+		})
+	}
+
 	const newDayUpdates=()=>{
 		for (const locID in populations){
 			let plant=populations[locID];
@@ -78,8 +95,8 @@ function PlayerDetail({game,dispatch,environment,populations}){
 					dispatch(removeOrganism(locID));
 				}
 			}
-	 		
 		}
+		checkForPlayerScore();
 	}
 
 

@@ -1,6 +1,7 @@
 import gameControl from './gameControl';
 import {
 	addPlayer,
+	removePlayer,
  	setGameLength,
  	setMapSize,
  	changeTurn,
@@ -26,6 +27,17 @@ describe("Setting up initial game stats",()=>{
 			day:0,
 			turn:0,
 			players:[{id:'12345', name:'Matt',species:'forb',seed:5}],
+		}
+		expect(gameControl(initialState,action)).toEqual(nextState)
+	})
+
+	test('removes a player',()=>{;
+		const initialState={
+			players:[{id:'1211221'},{id:'12345'},{id:'55555'}],
+		}
+		const action=removePlayer('12345');
+		const nextState={
+			players:[{id:'1211221'},{id:'55555'}],
 		}
 		expect(gameControl(initialState,action)).toEqual(nextState)
 	})
