@@ -52,29 +52,33 @@ function PlayerDetail({game,dispatch,environment,populations}){
 	}
 	
 	const photosynthesis=(plant)=>{
-		let sugarChange=0;
-		let waterChange=0;
-		if(plant.water>=(plant.leaves*2)){
-			sugarChange+=plant.leaves;
-			waterChange+=(plant.leaves*2);
+		if(plant.water>=(plant.leaves)){
+			dispatch(updateOrganism(plant.locID,'sugar',plant.sugar+plant.leaves));
+			dispatch(updateOrganism(plant.locID,'water',plant.water-plant.leaves));
+		} else{
+			dispatch(updateOrganism(plant.locID,'leaves',plant.leaves-1));
 		}
-		dispatch(updateOrganism(plant.locID,'sugar',plant.sugar+sugarChange));
-		dispatch(updateOrganism(plant.locID,'water',plant.water-waterChange));
 	}
 
 	const newDayUpdates=()=>{
 		for (const locID in populations){
 			let plant=populations[locID];
-	 		photosynthesis(plant);
-			absorbWater(plant.x,plant.y,plant)
-			if(plant.flowers>0){
-				dispatch(modifySeed(plant.species.seedProduction,plant.playerID))
-				if(plant.species.name==='forb'){
+			if(plant){
+				absorbWater(plant.x,plant.y,plant);
+				photosynthesis(plant);
+				if(plant.flowers>0){
+					dispatch(modifySeed(plant.species.seedProduction,plant.playerID))
+					if(plant.species.name==='forb'){
+						dispatch(removeOrganism(locID));
+					} else if (plant.species.name==='shrub'){
+						dispatch(updateOrganism(locID,'flowers',0));
+					}
+				}
+				if(plant.leaves<=0){
 					dispatch(removeOrganism(locID));
-				} else if (plant.species.name==='shrub'){
-					dispatch(updateOrganism(locID,'flowers',0));
 				}
 			}
+	 		
 		}
 	}
 
