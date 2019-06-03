@@ -34,6 +34,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 				return -populations[`X${x}Y${y}`].roots
 		} else if(environment[`X${x}Y${y}`]){
 			if (environment[`X${x}Y${y}`].substrate==='water'){
+				console.log('found water',x,y);
 				return 1
 			} else {
 				return 0
@@ -55,18 +56,23 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			water+=checkForWater(x-i,y+i);
 			water+=checkForWater(x+i,y-i);
 		}
-		dispatch(updateOrganism(plant.locID,'water',plant.water+water))
+		return water;
 	}
 	
-	const photosynthesis=(plant)=>{
-		if(plant.water>=(plant.leaves)){
-			dispatch(updateOrganism(plant.locID,'sugar',plant.sugar+plant.leaves));
-			dispatch(updateOrganism(plant.locID,'water',plant.water-plant.leaves));
-		} else{
-			dispatch(updateOrganism(plant.locID,'leaves',plant.leaves-1));
-			if(plant.leaves<=0){
-				dispatch(removeOrganism(plant.locID));
-			}
+	const removeLeaf=plant=>{
+		dispatch(updateOrganism(plant.locID,'leaves',plant.leaves-1));
+		if(plant.leaves<=0){
+			dispatch(removeOrganism(plant.locID));
+		}
+	}
+
+	const plantRecUptake=plant=>{
+		let sugarChange=plant.sugar+plant.leaves;
+		let waterChange=absorbWater(plant.x,plant.y,plant)+plant.water-plant.leaves;
+		dispatch(updateOrganism(plant.locID,'sugar',sugarChange));
+		dispatch(updateOrganism(plant.locID,'water',waterChange));
+		if(plant.water<=plant.leaves){
+			removeLeaf(plant)
 		}
 	}
 
@@ -77,8 +83,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			let plant=populations[locID];
 			if(plant){
 				if(plant.playerID===player.id){
-					absorbWater(plant.x,plant.y,plant);
-					photosynthesis(plant);
+					plantRecUptake(plant);
 					plantScore+=plant.leaves;
 					if(plant.flowers>0){
 						dispatch(updatePlayer(
