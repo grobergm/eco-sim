@@ -6,32 +6,21 @@ const initialState={
 const gameControl=(state=initialState,action)=>{
 	switch(action.type){
 		case 'ADD_PLAYER':
-			const newPlayers=state.players.concat(action.player);
 			return {
 				...state,
-				players: newPlayers
+				players: playerControl(state.players,action)
 			}
 		case 'REMOVE_PLAYER':
 			return {
 				...state,
-				players:state.players.filter((player,index)=> index!==action.index)
+				players: playerControl(state.players,action)
 			}
 		case 'UPDATE_PLAYER':
 			return {
 				...state,
-				players:state.players.map((player,index)=>{
-					if (index !==action.index){
-						return player;
-					}
-					return {
-						...player,
-						...action.player
-					}
-				})
+				players: playerControl(state.players,action)
 			}
 			
-
-
 		case 'SET_GAME_LENGTH':
 			return {
 				...state,
@@ -47,14 +36,6 @@ const gameControl=(state=initialState,action)=>{
 				...state,
 				selectOrg:action.organism
 			}
-		case 'MODIFY_SEED':
-			const newPlayersSeed=state.players.map(player=>{
-				return playerControl(player,action)
-			})
-			return {
-				...state,
-				players:newPlayersSeed
-			}
 		case 'CHANGE_TURN':
 			return {
 				...state,
@@ -63,24 +44,29 @@ const gameControl=(state=initialState,action)=>{
 		case 'CHANGE_DAY':
 			return {
 				...state,
-				day:state.day+1,turn:0
+				day:state.day+1,
+				turn:0
 			}
 		default: return state
 	}
 }
 
-const playerControl=(player,action)=>{
+const playerControl=(players,action)=>{
 	switch(action.type){
-		case 'UPDATE_PLAYER	':
-			if (player.id!==action.playerID){
-				return player
-			}
-			return {
-				...player,
-				seed:player.seed+action.amount
-			}
-		default:
-			return player
+		case 'ADD_PLAYER':
+			return players.concat(action.player);
+		case 'REMOVE_PLAYER':
+			return players.filter((player,index)=> index!==action.index)
+		case 'UPDATE_PLAYER':
+			return players.map((player,index)=>{
+				if (index !==action.index){
+					return player;
+				}
+				return {
+					...player,
+					...action.player
+				}
+			})
 	}
 }
 
