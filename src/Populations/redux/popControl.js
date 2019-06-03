@@ -2,9 +2,10 @@ const popControl = (state={},action)=>{
 	const stateArray=Object.keys(state)
 	switch(action.type){
 		case 'ADD_ORGANISM':
-			return Object.assign({},state,{
+			return {
+				...state,
 				[action.id]:action.organism
-			});
+			}
 		case 'REMOVE_ORGANISM':
 			return {
 				...state,

@@ -7,27 +7,43 @@ const gameControl=(state=initialState,action)=>{
 	switch(action.type){
 		case 'ADD_PLAYER':
 			const newPlayers=state.players.concat(action.player);
-			return Object.assign({},state,{players:newPlayers});
+			return {
+				...state,
+				players:newPlayers
+			}
 		case 'SET_GAME_LENGTH':
-			return Object.assign({},state,{length:action.days});
+			return {
+				...state,
+				length:action.days
+			};
 		case 'SET_MAP_SIZE':
-			return Object.assign({},state,{mapSize:action.mapSize});
+			return {
+				...state,
+				mapSize:action.mapSize
+			};
 		case 'SELECT_ORGANISM':
-			return Object.assign({},state,{selectOrg:action.organism})
+			return {
+				...state,
+				selectOrg:action.organism
+			}
 		case 'MODIFY_SEED':
 			const newPlayersSeed=state.players.map(player=>{
 				return playerControl(player,action)
 			})
-			return Object.assign(
-				{},
-				state,
-				{players:newPlayersSeed}
-			)
-			// Turn Change Should be own reducer...
+			return {
+				...state,
+				players:newPlayersSeed
+			}
 		case 'CHANGE_TURN':
-			return Object.assign({},state,{turn:state.turn+1})
+			return {
+				...state,
+				turn:state.turn+1
+			}
 		case 'CHANGE_DAY':
-			return Object.assign({},state,{day:state.day+1,turn:0});
+			return {
+				...state,
+				day:state.day+1,turn:0
+			}
 		default: return state
 	}
 }
@@ -38,7 +54,10 @@ const playerControl=(player,action)=>{
 			if (player.id!==action.playerID){
 				return player
 			}
-			return Object.assign({},player,{seed:player.seed+action.amount})
+			return {
+				...player,
+				seed:player.seed+action.amount
+			}
 		default:
 			return player
 	}
