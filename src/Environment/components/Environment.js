@@ -10,7 +10,7 @@ import { makeGrid } from '../redux/actionCreator';
 import Plant from '../../Populations/components/Plant';
 import { addOrganism } from '../../Populations/redux/actionCreator';
 
-
+import Indicator from '../../Indicators/Indicator'
 
 function Environment(props){
 	let currentPlayer=props.game.players[props.game.turn];
@@ -65,10 +65,16 @@ function Environment(props){
 		height:'100%'
 	}
 
+	let indicateArr=['XOYO','X1Y1','X2Y2','X3Y3','X4Y4','X5Y5'];
+
 	return (
 		<div style={grid}>
 			{
 				Object.keys(props.environment).map(locID=>{
+					let badge={
+						color: props.environment[locID].substrate === 'water' ? 'var(--water)' : 'var(--red)',
+						icon: props.populations[locID] ? '-' : '+'
+					}
 					return (
 					<div key={locID} style={habitat}>
 						<Habitat 
@@ -78,8 +84,9 @@ function Environment(props){
 							locID={locID}
 							onPlantSeed={handlePlantSeed}
 							/>
+						<Indicator location={locID} badge={badge} indicateArr={indicateArr} />
 							{
-								props.populations[locID] && props.populations[locID].leaves>0 ? 
+								props.populations[locID] ? 
 								<Plant 
 									plant={props.populations[locID]}
 									onSelect={handleSelect}

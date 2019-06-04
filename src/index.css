@@ -4,8 +4,8 @@ html{
 	--soil:#6E2C00;
 	--water:#3498D8;
 	--rock:#ABB2B9;
-	--headerFontColor:#28B463;
-	--buttonColor:#E54534;
+	--green:#28B463;
+	--red:#E54534;
 	--headerFont:'Amatic SC', cursive;
 	--bodyFont:'Josefin Sans', sans-serif;
 }
@@ -18,7 +18,7 @@ body {
 
 h1 , h2 {
 	font-family:var(--headerFont);
-	color:var(--headerFontColor);
+	color:var(--green);
 }
 
 h1 {
@@ -32,7 +32,7 @@ h2{
 button{
 	border:none;
 	color:white;
-	background-color:var(--buttonColor);
+	background-color:var(--red);
 	padding:0.5rem;
 	border-radius:0.5rem;
 	font-family:var(--bodyFont);
