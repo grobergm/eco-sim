@@ -1,5 +1,6 @@
 .leaves svg{
 	position:absolute;
+	transition:transform 1s;
 }
 
 .leaves svg:nth-child(1) {

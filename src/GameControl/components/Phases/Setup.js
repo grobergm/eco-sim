@@ -4,6 +4,7 @@ import competition from '../../../Populations/img/shrub/shrub6.svg';
 
 import Players from '../Players/Players';
 import OptionButton from './OptionButton';
+import GeneSelection from './GeneSelection';
 import { v4 } from 'uuid';
 import { connect } from 'react-redux';
 import { 
@@ -20,56 +21,91 @@ class Setup extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			forbNameInput:'',
-			shrubNameInput:'',
+			playerName:'',
+			genetics:{
+				leaves:{
+					min:{
+						value:1,
+						selected:false
+					},
+					max:{
+						value:3,
+						selected:false
+					},
+					cost:{
+						value:2,
+						selected:false
+					},
+				},
+				roots:{
+					min:{
+						value:1,
+						selected:false
+					},
+					max:{
+						value:3,
+						selected:false
+					},
+					cost:{
+						value:2,
+						selected:false
+					},
+				},
+				flowers:{
+					min:{
+						value:1,
+						selected:false
+					},
+					max:{
+						value:3,
+						selected:false
+					},
+					cost:{
+						value:2,
+						selected:false
+					},
+				}
+			},
 			gameLength:20,
 			mapSize:10,
 			resourceLevel:'balanced'
 		}
 		this.handleSelect=this.handleSelect.bind(this);
 		this.handleInputChange=this.handleInputChange.bind(this);
-		this.addForb=this.addForb.bind(this)
-		this.addShrub=this.addShrub.bind(this)
-		this.setGameStats=this.setGameStats.bind(this)
+		this.handleGeneticsSelect=this.handleGeneticsSelect.bind(this);
+		this.addForb=this.addForb.bind(this);
+		this.addShrub=this.addShrub.bind(this);
+		this.setGameStats=this.setGameStats.bind(this);
 	}
 
 
-	addForb(){
+	addNewPlayer(){
 		if(this.state.forbNameInput){
 			let newPlayer={
 				id:v4(),
 				name:this.state.forbNameInput,
 				seed:3,
 				score:3,
-				species:{
-					name:'forb',
-					leafLimit:5,
-					rootLimit:3,
-					seedProduction:3,
-				}
+				genes:{this.state.genes}
 			}
 			this.props.dispatch(addPlayer(newPlayer));
 			this.setState({forbNameInput:''})
 		}
 	}
 
-	addShrub(){
-		if(this.state.shrubNameInput){
-			let newPlayer={
-				id:v4(),
-				name:this.state.shrubNameInput,
-				score:2,
-				seed:2,
-				species:{
-					name:'shrub',
-					leafLimit:5,
-					rootLimit:5,
-					seedProduction:2,
+	handleGeneticsSelect(organ,key,value){
+		const newGenetics={
+			...this.state,
+			genetics:{
+				...this.state.genetics,
+				[organ]:{
+					...this.state.genetics[organ],
+					[key]:value
 				}
 			}
-			this.props.dispatch(addPlayer(newPlayer));
-			this.setState({shrubNameInput:''})
 		}
+		console.log(this.newGenetics)
+		this.setState({genetics:newGenetics})
 	}
 
 	handleSelect(level){
@@ -150,8 +186,57 @@ class Setup extends Component{
 		padding:'0.5rem',
 		margin:'0.5rem'
 	}
+
+	const geneGrid={
+		display:'grid',
+		gridTemplateColumns:'repeat(4,minmax(50px,15%))'
+	}
+
 		return (
 		<div>
+			<div style={geneGrid}>
+				<div></div>
+				<h2>Leaves</h2>
+				<h2>Roots</h2>
+				<h2>Flowers</h2>
+				<h3>Maximum</h3>
+				<GeneSelection 
+					onSelect={handleGeneticsSelect} 
+					selectedId={} 
+					organ='leaves' 
+					attribute='max'
+					/>
+					
+				<div>
+					<p>{this.state.genetics.roots.max}</p>
+				</div>
+				<div>
+					<p>{this.state.genetics.flowers.max}</p>
+				</div>
+				<h3>Initial</h3>
+				<div>
+					<p>{this.state.genetics.leaves.min}</p>
+				</div>
+				<div>
+					<p>{this.state.genetics.roots.min}</p>
+				</div>
+				<div>
+					<p>{this.state.genetics.flowers.min}</p>
+				</div>
+				<h3>Cost</h3>
+				<div>
+					<p>{this.state.genetics.leaves.cost}</p>
+				</div>
+				<div>
+					<p>{this.state.genetics.roots.cost}</p>
+				</div>
+				<div>
+					<p>{this.state.genetics.flowers.cost}</p>
+				</div>
+			</div>
+
+
+
 			<div>
 				<div style={choices}>
 					<div style={choiceGrid}>
@@ -198,6 +283,8 @@ class Setup extends Component{
 					</div>
 				</div>
 			</div>
+
+
 			<Players />
 			<div style={gameSetup} >
 				<div>

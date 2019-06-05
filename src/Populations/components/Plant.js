@@ -2,7 +2,6 @@ import React from 'react';
 import Leaf from './Leaf';
 import './Plant.css';
 
-
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
