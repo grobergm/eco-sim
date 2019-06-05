@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import collonization from '../../../Populations/img/forb/forb4.svg';
 import competition from '../../../Populations/img/shrub/shrub6.svg';
 
 import Players from '../Players/Players';
+import OptionButton from './OptionButton';
 import { v4 } from 'uuid';
 import { connect } from 'react-redux';
 import { 
@@ -15,7 +16,105 @@ import {
  import { makeGrid } from '../../../Environment/redux/actionCreator'
 
 
-function Setup({dispatch, game}){
+class Setup extends Component{
+	constructor(props){
+		super(props);
+		this.state={
+			forbNameInput:'',
+			shrubNameInput:'',
+			gameLength:20,
+			mapSize:10,
+			resourceLevel:'balanced'
+		}
+		this.handleSelect=this.handleSelect.bind(this);
+		this.handleInputChange=this.handleInputChange.bind(this);
+		this.addForb=this.addForb.bind(this)
+		this.addShrub=this.addShrub.bind(this)
+		this.setGameStats=this.setGameStats.bind(this)
+	}
+
+
+	addForb(){
+		if(this.state.forbNameInput){
+			let newPlayer={
+				id:v4(),
+				name:this.state.forbNameInput,
+				seed:3,
+				score:3,
+				species:{
+					name:'forb',
+					leafLimit:3,
+					rootLimit:3,
+					seedProduction:3,
+				}
+			}
+			this.props.dispatch(addPlayer(newPlayer));
+			this.setState({forbNameInput:''})
+		}
+	}
+
+	addShrub(){
+		if(this.state.shrubNameInput){
+			let newPlayer={
+				id:v4(),
+				name:this.state.shrubNameInput,
+				score:2,
+				seed:2,
+				species:{
+					name:'shrub',
+					leafLimit:5,
+					rootLimit:5,
+					seedProduction:2,
+				}
+			}
+			this.props.dispatch(addPlayer(newPlayer));
+			this.setState({shrubNameInput:''})
+		}
+	}
+
+	handleSelect(level){
+		this.setState({resourceLevel:level})	
+	}
+
+	handleInputChange(event){
+		this.setState({[event.target.name]:event.target.value})
+	}
+
+	distributeResources(){
+		let rock;
+		let water;
+		switch(this.state.resourceLevel){
+			case 'abundant':
+				rock=0.1;
+				water=0.4;
+				break;
+			case 'balanced':
+				rock=0.3;
+				water=0.3;
+				break;
+			case 'scarce':
+				rock=0.4;
+				water=0.2;
+				break;
+			default :
+				rock=0.1;
+				water=0.4;
+		}
+		this.props.dispatch(makeGrid(parseInt(this.state.mapSize),water,rock))
+	}
+
+	setGameStats(){
+		if(this.props.game.players.length){
+		this.props.dispatch(setMapSize(parseInt(this.state.mapSize)));
+		this.distributeResources();
+		this.props.dispatch(setGameLength(parseInt(this.state.gameLength)));
+		this.props.dispatch(changeView('start'));
+		}
+	}
+
+
+	render(){
+
 	const choiceGrid={
 		display:'grid',
 		gridTemplateColumns:'50% 50%',
@@ -51,81 +150,7 @@ function Setup({dispatch, game}){
 		padding:'0.5rem',
 		margin:'0.5rem'
 	}
-// refs
-	let _forbNameInput;
-	let _shrubNameInput;
-	let _gameLength;
-	let _mapSize;
-	let _difficulty;
-	let _rock;
-	let _water;
-
-	const addForb=()=>{
-		if(_forbNameInput.value){
-			let newPlayer={
-				id:v4(),
-				name:_forbNameInput.value,
-				seed:3,
-				score:3,
-				species:{
-					name:'forb',
-					leafLimit:3,
-					rootLimit:3,
-					seedProduction:3,
-				}
-			}
-			dispatch(addPlayer(newPlayer));
-			_forbNameInput.value='';
-		}
-	}
-	const addShrub=()=>{
-		if(_shrubNameInput.value){
-			let newPlayer={
-				id:v4(),
-				name:_shrubNameInput.value,
-				score:2,
-				seed:2,
-				species:{
-					name:'shrub',
-					leafLimit:5,
-					rootLimit:5,
-					seedProduction:2,
-				}
-			}
-			dispatch(addPlayer(newPlayer));
-			_shrubNameInput.value='';
-		}
-	}
-
-	const distributeResources=()=>{
-		let rock;
-		let water;
-		switch(_difficulty.value){
-			case 'easy':
-				rock=0.1;
-				water=0.4;
-				break;
-			case 'medium':
-				rock=0.3;
-				water=0.3;
-				break;
-			case 'hard':
-				rock=0.4;
-				water=0.2;
-				break;
-		}
-		dispatch(makeGrid(parseInt(_mapSize.value),water,rock))
-	}
-
-	const setGameStats=()=>{
-		if(game.players.length){
-		dispatch(setMapSize(parseInt(_mapSize.value)));
-		distributeResources();
-		dispatch(setGameLength(parseInt(_gameLength.value)));
-		dispatch(changeView('start'));
-		}
-	}
-	return (
+		return (
 		<div>
 			<div>
 				<div style={choices}>
@@ -137,16 +162,17 @@ function Setup({dispatch, game}){
 							<p>You won't live long</p>
 							<p>But your children will thrive</p>
 						</div>
-						<img style={{width:'100%'}} src={collonization} />
+						<img style={{width:'100%'}} src={collonization} alt="forb" />
 						<div style={fullRow}>
 							<input
 							style={inputStyle}
 							type="text"
-							id="playerName"
+							name="forbNameInput"
 							placeholder="Name"
-							ref={(input)=>{_forbNameInput=input}}
+							value={this.state.forbNameInput}
+							onChange={this.handleInputChange}
 							/>
-							<button style={buttonStyle} onClick={addForb}>Add</button>
+							<button style={buttonStyle} onClick={this.addForb}>Add</button>
 						</div>						
 					</div>
 					<div style={choiceGrid}>
@@ -157,16 +183,17 @@ function Setup({dispatch, game}){
 							<p>Live a long life</p>
 							<p>Many seeds you will sow</p>
 						</div>
-						<img style={{width:'100%'}} src={competition} />
+						<img style={{width:'100%'}} src={competition} alt="shrub"/>
 						<div style={fullRow}>
 							<input
 							style={inputStyle}
 							type="text"
-							id="playerName"
+							name="shrubNameInput"
 							placeholder="Name"
-							ref={(input)=>{_shrubNameInput=input}}
+							value={this.state.shrubNameInput}
+							onChange={this.handleInputChange}
 							/>
-							<button style={buttonStyle} onClick={addShrub}>Add</button>
+							<button style={buttonStyle} onClick={this.addShrub}>Add</button>
 						</div>
 					</div>
 				</div>
@@ -179,11 +206,12 @@ function Setup({dispatch, game}){
 					style={gameSetupInput}
 					type="number"
 					id="gameLength"
-					defaultValue="10"
-					min="5"
-					max="25"
+					name="gameLength"
+					defaultValue="20"
+					min="10"
+					max="30"
 					step="5"
-					ref={(input)=>{_gameLength=input}}
+					onChange={this.handleInputChange}
 					/>
 				</div>
 				<div>
@@ -192,26 +220,26 @@ function Setup({dispatch, game}){
 					style={gameSetupInput}
 					type="number"
 					id="mapSize"
+					name="mapSize"
 					defaultValue="10"
 					min="5"
 					max="25"
 					step="5"
-					ref={(input)=>{_mapSize=input}}
+					onChange={this.handleInputChange}
 					/>
 				</div>
 				<div>
-					<label htmlFor='difficulty'>Water Level:</label>
-					<select style={gameSetupInput} 
-					ref={(input)=>{_difficulty=input}}>
-						<option value="easy">easy</option>
-						<option value="medium">medium</option>
-						<option value="hard">hard</option>
-					</select>
+					<label htmlFor='difficulty'>Resource Level:</label>
+					<OptionButton level='abundant' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
+					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
+					<OptionButton level='scarce' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 				</div>
-				<button onClick={setGameStats}> Start Game </button>
+				<button onClick={this.setGameStats}> Start Game </button>
 			</div>
 		</div>
 	)
+	}
+	
 }
 
 const mapStateToProps=state=>{
