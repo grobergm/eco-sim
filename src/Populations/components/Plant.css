@@ -1,19 +1,31 @@
+.leaves svg{
+	position:absolute;
+}
+
 .leaves svg:nth-child(1) {
 transform:rotate(0deg);
+left:10%;
+top:-10%;
 }
 
 .leaves svg:nth-child(2) {
 transform:rotate(72deg);
+left:50%;
+top:10%;
 }
 
 .leaves svg:nth-child(3) {
 transform:rotate(144deg);
+left:25%;
 }
 
 .leaves svg:nth-child(4) {
-transform:rotate(216deg);
+transform:rotate(240deg);
+left:-25%;
 }
 
 .leaves svg:nth-child(5) {
 transform:rotate(288deg);
+left:-25%;
+top:10%;
 }

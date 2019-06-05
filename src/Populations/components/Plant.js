@@ -62,14 +62,14 @@ function Plant({plant, onSelect, onHighlight, selected}){
 		height:`${plant.roots*2}vw`
 	}
 
+	const allLeaves=[];
+	for (var i=1;i<=plant.leaves;i++){
+		allLeaves.push(<Leaf key={i} />)
+	}
 	return (
 		<div onClick={()=>{onSelect(plant.locID)}}>
 			<div className='leaves' style={leaves}>
-			{
-				plant.leaves.map((leaf,index)=>{
-					<Leaf key={index} />
-				})
-			}
+			{allLeaves}
 			</div>
 			<span style={roots}></span>
 		</div>

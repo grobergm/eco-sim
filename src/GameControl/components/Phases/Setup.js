@@ -43,7 +43,7 @@ class Setup extends Component{
 				score:3,
 				species:{
 					name:'forb',
-					leafLimit:3,
+					leafLimit:5,
 					rootLimit:3,
 					seedProduction:3,
 				}

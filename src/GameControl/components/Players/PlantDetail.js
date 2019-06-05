@@ -49,7 +49,7 @@ const plant=populations[locID];
 					<p>Leaves: {plant.leaves}</p>
 					<p>Sugar: {plant.sugar}</p>
 					{
-						(plant.species.name==='forb'&& plant.leaves<3) ||
+						(plant.species.name==='forb'&& plant.leaves<5) ||
 						(plant.species.name==='shrub'&& plant.leaves<5) ?
 						<button onClick={growLeaf}>
 							Grow Leaf ({plant.leaves*2} sugar)
