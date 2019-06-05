@@ -1,0 +1,19 @@
+.leaves svg:nth-child(1) {
+transform:rotate(0deg);
+}
+
+.leaves svg:nth-child(2) {
+transform:rotate(72deg);
+}
+
+.leaves svg:nth-child(3) {
+transform:rotate(144deg);
+}
+
+.leaves svg:nth-child(4) {
+transform:rotate(216deg);
+}
+
+.leaves svg:nth-child(5) {
+transform:rotate(288deg);
+}

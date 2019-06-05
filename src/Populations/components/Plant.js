@@ -1,4 +1,8 @@
 import React from 'react';
+import Leaf from './Leaf';
+import './Plant.css';
+
+
 import shrub1 from '../img/shrub/shrub1.png';
 import shrub2 from '../img/shrub/shrub2.png';
 import shrub3 from '../img/shrub/shrub3.png';
@@ -57,9 +61,16 @@ function Plant({plant, onSelect, onHighlight, selected}){
 		width:`${plant.roots*2}vw`,
 		height:`${plant.roots*2}vw`
 	}
+
 	return (
 		<div onClick={()=>{onSelect(plant.locID)}}>
-			<img style={leaves} src={image} />
+			<div className='leaves' style={leaves}>
+			{
+				plant.leaves.map((leaf,index)=>{
+					<Leaf key={index} />
+				})
+			}
+			</div>
 			<span style={roots}></span>
 		</div>
 	)
