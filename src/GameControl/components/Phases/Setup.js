@@ -80,7 +80,7 @@ class Setup extends Component{
 	}
 
 	handleAddPlayer(){
-		if(this.state.playerName){
+		if(this.state.playerName&&this.state.genetics.adaptations.length===3){
 			let newPlayer={
 				id:v4(),
 				name:this.state.playerName,
@@ -96,8 +96,8 @@ class Setup extends Component{
 	}
 
 	handleGeneticsSelect(organ,key,value){
-
-		const newGenetics={
+		if(this.state.genetics.adaptations.length<3){
+			const newGenetics={
 				...this.state.genetics,
 				adaptations:[...this.state.genetics.adaptations,organ+" "+key],
 				[organ]:{
@@ -109,10 +109,12 @@ class Setup extends Component{
 				}
 			}
 		this.setState({genetics:newGenetics})
+		}
 	}
 
 	handleGeneticsReset(){
 		let plantDefault={
+			adaptations:[],
 			leaves:{
 				min:{
 					value:1,
