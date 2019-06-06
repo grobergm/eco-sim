@@ -58,7 +58,7 @@ function Plant({plant, onSelect, onHighlight, selected}){
 	}
 	return (
 		<div onClick={()=>{onSelect(plant.locID)}}>
-			<span style={flowers} className='rosette'>
+			<span style={flowers} className='flowers'>
 			{allFlowers}
 			</span>
 			<span className='rosette' style={leaves}>

@@ -212,6 +212,8 @@ class Setup extends Component{
 	const gameSetup={
 		display:'grid',
 		justifyContent:'center',
+	}
+	const gameStats={
 		gridGap:'1rem',
 		gridTemplateRows:'repeat(5,1fr)',
 		padding:'2rem'
@@ -225,18 +227,17 @@ class Setup extends Component{
 
 	const geneGrid={
 		display:'grid',
-		gridTemplateColumns:'repeat(4,minmax(50px,15%))'
+		gridTemplateColumns:'repeat(3,1fr)',
+		textAlign:'center'
 	}
 
 		return (
-		<div>
+		<div style={gameSetup}>
 			<h1>Choose three adaptations</h1>
 			<div style={geneGrid}>
-				<div></div>
 				<h2>Leaves</h2>
 				<h2>Roots</h2>
 				<h2>Flowers</h2>
-				<h3>Maximum</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.max}
@@ -255,7 +256,6 @@ class Setup extends Component{
 					selectValue={2}
 					organ='flowers' 
 					attribute='seed' />
-				<h3>Initial</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.min}
@@ -274,7 +274,6 @@ class Setup extends Component{
 					selectValue={2}
 					organ='flowers' 
 					attribute='minLeaves' />
-				<h3>Cost</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.cost}
@@ -296,7 +295,6 @@ class Setup extends Component{
 			</div>
 			<div>
 				<input
-				style={inputStyle}
 				type="text"
 				name="playerName"
 				placeholder="Enter Your Name"
@@ -307,7 +305,7 @@ class Setup extends Component{
 			</div>
 
 			<Players />
-			<div style={gameSetup} >
+			<div style={gameStats} >
 				<div>
 					<label htmlFor='gameLength'>Game Length:</label>
 					<input

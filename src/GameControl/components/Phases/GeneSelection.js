@@ -1,6 +1,12 @@
 import React from 'react';
 
-function GeneSelection({onSelect,organ,attribute,selectValue,data}){
+function GeneSelection({
+	onSelect,
+	organ,
+	attribute,
+	selectValue,
+	data,
+	description}){
 	const highlight={
 		color:data.selected?'white':'var(--red)',
 		backgroundColor:data.selected?'var(--red)':'white',
@@ -9,7 +15,7 @@ function GeneSelection({onSelect,organ,attribute,selectValue,data}){
 	}
 	return(
 		<div style={highlight} onClick={()=>{onSelect(organ,attribute,selectValue)}}>
-			<p>{data.value}</p>
+			<h3>{attribute} {data.value}</h3>
 		</div>
 	)
 }
