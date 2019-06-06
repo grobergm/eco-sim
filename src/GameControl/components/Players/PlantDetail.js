@@ -20,54 +20,59 @@ const plant=populations[locID];
 	const growLeaf=()=>{
 		growOrgan(
 			'leaves',
-			plant.species.leafLimit,
-			plant.leaves*2,
+			plant.genetics.leaves.max.value,
+			plant.genetics.leaves.cost.value,
 		)
 	}
 
 	const growRoot=()=>{
 		growOrgan(
 			'roots',
-			plant.species.rootLimit,
-			plant.roots*2,
+			plant.genetics.roots.max.value,
+			plant.genetics.leaves.cost.value,
 		)
 	}
 
 	const growFlower=()=>{
-		growOrgan('flowers',1,6)
+		growOrgan(
+			'flowers',
+			plant.genetics.flowers.max.value,
+			plant.genetics.flowers.cost.value
+		)
 	}
 
 	const grid={
 		display:'grid',
-		gridTemplateColumns:'50% 50%'
+		gridTemplateColumns:'repeat(4,1fr)'
 	}
 
 	return(
 			<div style={grid}>
 				<div>
-					<h2>Shoots</h2>
-					<p>Leaves: {plant.leaves}</p>
-					<p>Sugar: {plant.sugar}</p>
-					{
-						(plant.species.name==='forb'&& plant.leaves<5) ||
-						(plant.species.name==='shrub'&& plant.leaves<5) ?
-						<button onClick={growLeaf}>
-							Grow Leaf ({plant.leaves*2} sugar)
-						</button> :
-						<button onClick={growFlower}>
-							Grow Flower (cost 6 sugar)</button>
-					}
+					<h3 style={{marginTop:'4rem'}}>Sugar</h3>
+					<p>{plant.sugar}</p>
+					<h3>Water</h3>
+					<p>{plant.water}</p>
+				</div>
+				<div>
+					<h2>Leaves</h2>
+					<p>{plant.leaves}</p>
+					<p>cost {plant.genetics.leaves.cost.value} sugar</p>
+					<button onClick={growLeaf}>Grow</button> 
 				</div>
 				<div>
 					<h2>Roots</h2>
-					<p>Stage: {plant.roots}</p>
-					<p>Water: {plant.water}</p>
-					<button onClick={growRoot}>
-						Grow Roots (cost {plant.roots*2} sugar)</button>
+					<p>{plant.roots}</p>
+					<p>cost {plant.genetics.roots.cost.value} sugar</p>
+					<button onClick={growRoot}>Grow</button>
 				</div>
-				
-				
-			</div> : null
+				<div>
+					<h2>Flowers</h2>
+					<p>{plant.flowers}</p>
+					<p>cost {plant.genetics.flowers.cost.value} sugar</p>
+					<button onClick={growFlower}>Grow</button>
+				</div>
+			</div>
 		)
 
 }

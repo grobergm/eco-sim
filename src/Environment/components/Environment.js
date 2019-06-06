@@ -32,6 +32,8 @@ function Environment(props){
 				genetics:currentPlayer.genetics,
 				leaves:setMinimum('leaves'),
 				roots:setMinimum('roots'),
+				sugar:2,
+				water:2,
 				flowers:0,
 			}
 			console.log(organism)

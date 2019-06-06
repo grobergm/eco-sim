@@ -56,7 +56,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 			water+=checkForWater(x-i,y+i);
 			water+=checkForWater(x+i,y-i);
 		}
-		return water;
+		return water
 	}
 	
 	const removeLeaf=plant=>{
@@ -71,7 +71,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		let waterChange=absorbWater(plant.x,plant.y,plant)+plant.water-plant.leaves;
 		dispatch(updateOrganism(plant.locID,'sugar',sugarChange));
 		dispatch(updateOrganism(plant.locID,'water',waterChange));
-		if(plant.water<=plant.leaves){
+		if(plant.water<plant.leaves){
 			removeLeaf(plant)
 		}
 	}
@@ -90,13 +90,9 @@ function PlayerDetail({game,dispatch,environment,populations}){
 							game.turn,
 							player,
 							'seed',
-							player.seed+plant.species.seedProduction
+							player.seed+2*plant.flowers
 						))
-						if(plant.species.name==='forb'){
-							dispatch(removeOrganism(locID));
-						} else if (plant.species.name==='shrub'){
-							dispatch(updateOrganism(locID,'flowers',0));
-						}
+						dispatch(updateOrganism(locID,'flowers',0));
 					}
 				}
 			}
@@ -122,7 +118,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		margin:'1rem',
 		width:'50%',
 		display:'grid',
-		gridTemplateColumns:'50% 50%'
+		gridTemplateColumns:'25% 75%'
 	}
 	return (
 		<div style={grid}>
