@@ -307,15 +307,15 @@ class Setup extends Component{
 			<Players />
 			<div style={gameStats} >
 				<div>
-					<label htmlFor='gameLength'>Game Length:</label>
+					<label htmlFor='gameLength'>Game Length</label>
 					<input
 					style={gameSetupInput}
 					type="number"
 					id="gameLength"
 					name="gameLength"
-					defaultValue="20"
-					min="10"
-					max="30"
+					defaultValue="10"
+					min="5"
+					max="25"
 					step="5"
 					onChange={this.handleInputChange}
 					/>
@@ -335,7 +335,7 @@ class Setup extends Component{
 					/>
 				</div>
 				<div>
-					<label htmlFor='difficulty'>Resource Level:</label>
+					<label htmlFor='difficulty'>Resource</label>
 					<OptionButton level='abundant' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='scarce' selected={this.state.resourceLevel} onSelect={this.handleSelect} />

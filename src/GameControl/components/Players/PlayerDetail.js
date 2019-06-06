@@ -70,25 +70,20 @@ function PlayerDetail({game,dispatch,environment,populations}){
 
 	const updateStats=(player)=>{
 		dispatch(selectOrganism(null))
-		let plantScore=0;
+		let newSeed=player.seed;
 		for (const locID in populations){
 			let plant=populations[locID];
 			if(plant){
 				if(plant.playerID===player.id){
 					plantRecUptake(plant);
-					plantScore+=plant.leaves;
 					if(plant.flowers>0){
-						dispatch(updatePlayer(
-							game.turn,
-							player,
-							'seed',
-							plant.flowers*plant.genetics.flowers.seed.value
-						))
+						newSeed+=plant.flowers*plant.genetics.flowers.seed.value
 						dispatch(updateOrganism(locID,'flowers',0));
 					}
 				}
 			}
 		}
+		dispatch(updatePlayer(game.turn,player,'seed',newSeed))
 	}
 
 
