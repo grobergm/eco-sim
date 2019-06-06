@@ -34,11 +34,13 @@ const plant=populations[locID];
 	}
 
 	const growFlower=()=>{
-		growOrgan(
-			'flowers',
-			plant.genetics.flowers.max.value,
-			plant.genetics.flowers.cost.value
-		)
+		if(plant.leaves>=plant.genetics.flowers.minLeaves.value){
+			growOrgan(
+				'flowers',
+				3,
+				plant.genetics.flowers.cost.value
+			)
+		}
 	}
 
 	const grid={

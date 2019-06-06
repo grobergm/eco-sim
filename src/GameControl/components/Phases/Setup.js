@@ -53,12 +53,12 @@ class Setup extends Component{
 				},
 			},
 			flowers:{
-				min:{
-					value:1,
+				minLeaves:{
+					value:3,
 					selected:false
 				},
-				max:{
-					value:3,
+				seed:{
+					value:1,
 					selected:false
 				},
 				cost:{
@@ -143,13 +143,13 @@ class Setup extends Component{
 					selected:false
 				},
 			},
-			flowers:{
-				min:{
-					value:1,
+				flowers:{
+				minLeaves:{
+					value:3,
 					selected:false
 				},
-				max:{
-					value:3,
+				seed:{
+					value:1,
 					selected:false
 				},
 				cost:{
@@ -251,10 +251,10 @@ class Setup extends Component{
 					attribute='max' />
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
-					data={this.state.genetics.flowers.max}
-					selectValue={3}
+					data={this.state.genetics.flowers.seed}
+					selectValue={2}
 					organ='flowers' 
-					attribute='max' />
+					attribute='seed' />
 				<h3>Initial</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
@@ -270,10 +270,10 @@ class Setup extends Component{
 					attribute='min' />
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
-					data={this.state.genetics.flowers.min}
+					data={this.state.genetics.flowers.minLeaves}
 					selectValue={2}
 					organ='flowers' 
-					attribute='min' />
+					attribute='minLeaves' />
 				<h3>Cost</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 

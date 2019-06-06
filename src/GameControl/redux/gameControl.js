@@ -16,6 +16,7 @@ const gameControl=(state=initialState,action)=>{
 				players: playerControl(state.players,action)
 			}
 		case 'UPDATE_PLAYER':
+		console.log(action)
 			return {
 				...state,
 				players: playerControl(state.players,action)

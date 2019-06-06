@@ -1,5 +1,6 @@
 import React from 'react';
 import Leaf from './Leaf';
+import Flower from './Flower';
 import './Plant.css';
 
 import shrub1 from '../img/shrub/shrub1.png';
@@ -20,7 +21,7 @@ function Plant({plant, onSelect, onHighlight, selected}){
 
 	const leaves={
 		position:'absolute',
-		top:'30%',
+		top:'40%',
 		left:'50%',
 		transform:'translate(-50%,-50%)',
 		zIndex:'1',
@@ -41,16 +42,28 @@ function Plant({plant, onSelect, onHighlight, selected}){
 		width:`${plant.roots*2}vw`,
 		height:`${plant.roots*2}vw`
 	}
-
+	const flowers={
+		position:'absolute',
+		top:'0',
+		left:'40%',
+		transform:'translate(-50%,-50%)',
+	}
 	const allLeaves=[];
+	const allFlowers=[];
 	for (var i=1;i<=plant.leaves;i++){
 		allLeaves.push(<Leaf key={i} />)
 	}
+	for (var i=1;i<=plant.flowers;i++){
+		allFlowers.push(<Flower key={i} />)
+	}
 	return (
 		<div onClick={()=>{onSelect(plant.locID)}}>
-			<div className='leaves' style={leaves}>
+			<span style={flowers} className='rosette'>
+			{allFlowers}
+			</span>
+			<span className='rosette' style={leaves}>
 			{allLeaves}
-			</div>
+			</span>
 			<span style={roots}></span>
 		</div>
 	)

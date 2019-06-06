@@ -12,7 +12,6 @@ function PlayerDetail({game,dispatch,environment,populations}){
 
 	const turnChanger=()=>{
 		updateStats(currentPlayer)
-		checkPlayerLoss(currentPlayer)
 		if (game.day===game.length){
 			dispatch(changeTurn('lastTurn'))
 		} else if(game.turn===game.players.length-1){
@@ -22,19 +21,12 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		}
 	}
 
-	const checkPlayerLoss=(player)=>{
-		if (player.score<=0){
-			dispatch(removePlayer(game.turn))
-		}
-	}
-
 	const checkForWater=(x,y)=>{
 		if(populations[`X${x}Y${y}`]){
 				// this needs to be scaled by distance
 				return -populations[`X${x}Y${y}`].roots
 		} else if(environment[`X${x}Y${y}`]){
 			if (environment[`X${x}Y${y}`].substrate==='water'){
-				console.log('found water',x,y);
 				return 1
 			} else {
 				return 0
@@ -90,20 +82,15 @@ function PlayerDetail({game,dispatch,environment,populations}){
 							game.turn,
 							player,
 							'seed',
-							player.seed+2*plant.flowers
+							plant.flowers*plant.genetics.flowers.seed.value
 						))
 						dispatch(updateOrganism(locID,'flowers',0));
 					}
 				}
 			}
 		}
-		dispatch(updatePlayer(
-			game.turn,
-			player,
-			'score',
-			player.seed+plantScore
-		))
 	}
+
 
 
 
