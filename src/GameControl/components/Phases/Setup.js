@@ -23,48 +23,49 @@ class Setup extends Component{
 		this.state={
 			playerName:'',
 			genetics:{
-				leaves:{
-					min:{
-						value:1,
-						selected:false
-					},
-					max:{
-						value:3,
-						selected:false
-					},
-					cost:{
-						value:2,
-						selected:false
-					},
+			adaptations:[],
+			leaves:{
+				min:{
+					value:1,
+					selected:false
 				},
-				roots:{
-					min:{
-						value:1,
-						selected:false
-					},
-					max:{
-						value:3,
-						selected:false
-					},
-					cost:{
-						value:2,
-						selected:false
-					},
+				max:{
+					value:3,
+					selected:false
 				},
-				flowers:{
-					min:{
-						value:1,
-						selected:false
-					},
-					max:{
-						value:3,
-						selected:false
-					},
-					cost:{
-						value:2,
-						selected:false
-					},
-				}
+				cost:{
+					value:2,
+					selected:false
+				},
+			},
+			roots:{
+				min:{
+					value:1,
+					selected:false
+				},
+				max:{
+					value:3,
+					selected:false
+				},
+				cost:{
+					value:2,
+					selected:false
+				},
+			},
+			flowers:{
+				min:{
+					value:1,
+					selected:false
+				},
+				max:{
+					value:3,
+					selected:false
+				},
+				cost:{
+					value:4,
+					selected:false
+				},
+			}
 			},
 			gameLength:20,
 			mapSize:10,
@@ -72,40 +73,90 @@ class Setup extends Component{
 		}
 		this.handleSelect=this.handleSelect.bind(this);
 		this.handleInputChange=this.handleInputChange.bind(this);
+		this.handleGeneticsReset=this.handleGeneticsReset.bind(this);
 		this.handleGeneticsSelect=this.handleGeneticsSelect.bind(this);
-		this.addForb=this.addForb.bind(this);
-		this.addShrub=this.addShrub.bind(this);
+		this.handleAddPlayer=this.handleAddPlayer.bind(this);
 		this.setGameStats=this.setGameStats.bind(this);
 	}
 
-
-	addNewPlayer(){
-		if(this.state.forbNameInput){
+	handleAddPlayer(){
+		if(this.state.playerName){
 			let newPlayer={
 				id:v4(),
-				name:this.state.forbNameInput,
+				name:this.state.playerName,
 				seed:3,
 				score:3,
-				genes:{this.state.genes}
+				genetics:this.state.genetics,
+				adaptations:this.state.adaptations
 			}
 			this.props.dispatch(addPlayer(newPlayer));
-			this.setState({forbNameInput:''})
+			this.setState({playerName:''})
+			this.handleGeneticsReset();
 		}
 	}
 
 	handleGeneticsSelect(organ,key,value){
+
 		const newGenetics={
-			...this.state,
-			genetics:{
 				...this.state.genetics,
+				adaptations:[...this.state.genetics.adaptations,organ+" "+key],
 				[organ]:{
 					...this.state.genetics[organ],
-					[key]:value
+					[key]:{
+						value:value,
+						selected:true
+					}
 				}
 			}
-		}
-		console.log(this.newGenetics)
 		this.setState({genetics:newGenetics})
+	}
+
+	handleGeneticsReset(){
+		let plantDefault={
+			leaves:{
+				min:{
+					value:1,
+					selected:false
+				},
+				max:{
+					value:3,
+					selected:false
+				},
+				cost:{
+					value:2,
+					selected:false
+				},
+			},
+			roots:{
+				min:{
+					value:1,
+					selected:false
+				},
+				max:{
+					value:3,
+					selected:false
+				},
+				cost:{
+					value:2,
+					selected:false
+				},
+			},
+			flowers:{
+				min:{
+					value:1,
+					selected:false
+				},
+				max:{
+					value:3,
+					selected:false
+				},
+				cost:{
+					value:4,
+					selected:false
+				},
+			}
+		}
+		this.setState({genetics:plantDefault});
 	}
 
 	handleSelect(level){
@@ -151,27 +202,10 @@ class Setup extends Component{
 
 	render(){
 
-	const choiceGrid={
-		display:'grid',
-		gridTemplateColumns:'50% 50%',
-		gridTemplateRows:'25% 50% 25%',
-		textAlign:'center',
-		backgroundColor:'#e6ff99',
-		width:'100%',
-	}
-	const fullRow={
-		gridColumn:'span 2'
-	}
-	const choices={
-		display:'flex'
-	}
+	
 	const inputStyle={
 		padding:'0.5rem',
 		width:'60%'
-	}
-	const buttonStyle={
-		width:'30%',
-		padding:'0.5rem'
 	}
 	const gameSetup={
 		display:'grid',
@@ -194,6 +228,7 @@ class Setup extends Component{
 
 		return (
 		<div>
+			<h1>Choose three adaptations</h1>
 			<div style={geneGrid}>
 				<div></div>
 				<h2>Leaves</h2>
@@ -201,89 +236,73 @@ class Setup extends Component{
 				<h2>Flowers</h2>
 				<h3>Maximum</h3>
 				<GeneSelection 
-					onSelect={handleGeneticsSelect} 
-					selectedId={} 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.leaves.max}
+					selectValue={5}
 					organ='leaves' 
-					attribute='max'
-					/>
-					
-				<div>
-					<p>{this.state.genetics.roots.max}</p>
-				</div>
-				<div>
-					<p>{this.state.genetics.flowers.max}</p>
-				</div>
+					attribute='max' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.roots.max}
+					selectValue={5}
+					organ='roots' 
+					attribute='max' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.flowers.max}
+					selectValue={3}
+					organ='flowers' 
+					attribute='max' />
 				<h3>Initial</h3>
-				<div>
-					<p>{this.state.genetics.leaves.min}</p>
-				</div>
-				<div>
-					<p>{this.state.genetics.roots.min}</p>
-				</div>
-				<div>
-					<p>{this.state.genetics.flowers.min}</p>
-				</div>
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.leaves.min}
+					selectValue={2}
+					organ='leaves' 
+					attribute='min' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.roots.min}
+					selectValue={2}
+					organ='roots' 
+					attribute='min' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.flowers.min}
+					selectValue={2}
+					organ='flowers' 
+					attribute='min' />
 				<h3>Cost</h3>
-				<div>
-					<p>{this.state.genetics.leaves.cost}</p>
-				</div>
-				<div>
-					<p>{this.state.genetics.roots.cost}</p>
-				</div>
-				<div>
-					<p>{this.state.genetics.flowers.cost}</p>
-				</div>
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.leaves.cost}
+					selectValue={1}
+					organ='leaves' 
+					attribute='cost' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.roots.cost}
+					selectValue={1}
+					organ='roots' 
+					attribute='cost' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.flowers.cost}
+					selectValue={2}
+					organ='flowers' 
+					attribute='cost' />
 			</div>
-
-
-
 			<div>
-				<div style={choices}>
-					<div style={choiceGrid}>
-						<h1 style={fullRow}>Forb</h1>
-						<div>
-							<p>Scatter your seeds</p>
-							<p>Be the first to arrive</p>
-							<p>You won't live long</p>
-							<p>But your children will thrive</p>
-						</div>
-						<img style={{width:'100%'}} src={collonization} alt="forb" />
-						<div style={fullRow}>
-							<input
-							style={inputStyle}
-							type="text"
-							name="forbNameInput"
-							placeholder="Name"
-							value={this.state.forbNameInput}
-							onChange={this.handleInputChange}
-							/>
-							<button style={buttonStyle} onClick={this.addForb}>Add</button>
-						</div>						
-					</div>
-					<div style={choiceGrid}>
-						<h1 style={fullRow}>Shrub</h1>
-						<div>
-							<p>Find the right spot</p>
-							<p>Take your time to grow</p>
-							<p>Live a long life</p>
-							<p>Many seeds you will sow</p>
-						</div>
-						<img style={{width:'100%'}} src={competition} alt="shrub"/>
-						<div style={fullRow}>
-							<input
-							style={inputStyle}
-							type="text"
-							name="shrubNameInput"
-							placeholder="Name"
-							value={this.state.shrubNameInput}
-							onChange={this.handleInputChange}
-							/>
-							<button style={buttonStyle} onClick={this.addShrub}>Add</button>
-						</div>
-					</div>
-				</div>
+				<input
+				style={inputStyle}
+				type="text"
+				name="playerName"
+				placeholder="Enter Your Name"
+				value={this.state.playerName}
+				onChange={this.handleInputChange}
+				/>
+				<button onClick={this.handleAddPlayer}>Add</button>
 			</div>
-
 
 			<Players />
 			<div style={gameSetup} >

@@ -7,7 +7,13 @@ function Player(props){
 	return(
 		<div style={pStyle}>
 			<p>{props.player.name}</p>
-			<p>{props.player.species.name}</p>
+			<ul>
+			{
+				props.player.genetics.adaptations.map((adaptation,i)=>{
+					return <li key={i}>{adaptation}</li>
+				})
+			}
+			</ul>
 		</div>
 	)
 }

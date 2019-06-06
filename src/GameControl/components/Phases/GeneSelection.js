@@ -1,9 +1,15 @@
 import React from 'react';
 
-function GeneSelection(props){
+function GeneSelection({onSelect,organ,attribute,selectValue,data}){
+	const highlight={
+		color:data.selected?'white':'var(--red)',
+		backgroundColor:data.selected?'var(--red)':'white',
+		textAlign:'center',
+		borderRadius:'1px'
+	}
 	return(
-		<div onClick={()=>{this.handleGeneticsSelect('leaves')}}>
-			<p>{this.state.genetics.leaves.max}</p>
+		<div style={highlight} onClick={()=>{onSelect(organ,attribute,selectValue)}}>
+			<p>{data.value}</p>
 		</div>
 	)
 }
