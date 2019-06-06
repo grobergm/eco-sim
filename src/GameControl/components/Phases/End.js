@@ -1,9 +1,11 @@
 import React from 'react';
+import Players from '../Players/Players';
 
 function End(){
 	return (
 		<div>
-			<h1>Game Over</h1>
+			<h1>Score Summary</h1>
+			<Players />
 		</div>
 		)
 }

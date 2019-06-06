@@ -85,7 +85,6 @@ class Setup extends Component{
 				id:v4(),
 				name:this.state.playerName,
 				seed:3,
-				score:3,
 				genetics:this.state.genetics,
 				adaptations:this.state.adaptations
 			}

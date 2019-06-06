@@ -108,7 +108,6 @@ function PlayerDetail({game,dispatch,environment,populations}){
 				<h2>Day:{game.day} of {game.length}</h2>
 				<p>{currentPlayer.name}</p>
 				<p>Seed:{currentPlayer.seed}</p>
-				<p>Score:{currentPlayer.score}</p>
 				<button onClick={turnChanger}>Change Turn</button>
 			</div>
 			{

@@ -6,8 +6,11 @@ function Player(props){
 	}
 	return(
 		<div style={pStyle}>
-			<p>{props.player.name}</p>
-			<ul>
+			<h3>{props.player.name}</h3>
+			{
+				props.view==='game-end' ? <p>Score: {props.onScore(props.player)}</p>:null
+			}
+			<ul style={{listStyle:'none'}}>
 			{
 				props.player.genetics.adaptations.map((adaptation,i)=>{
 					return <li key={i}>{adaptation}</li>
