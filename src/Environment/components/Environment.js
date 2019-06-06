@@ -16,6 +16,9 @@ function Environment(props){
 	let currentPlayer=props.game.players[props.game.turn];
 
 	function handlePlantSeed(locID,x,y,substrate){
+		function setMinimum(organ){
+			return currentPlayer.genetics[organ].min.value
+		}
 		if (substrate==='soil'
 			&& currentPlayer.seed>0
 			&& !props.populations[locID]){
@@ -26,13 +29,12 @@ function Environment(props){
 				x:x,
 				y:y,
 				playerID:currentPlayer.id,
-				leaves:1,
-				roots:1,
-				water:2,
-				sugar:2,
+				genetics:currentPlayer.genetics,
+				leaves:setMinimum('leaves'),
+				roots:setMinimum('roots'),
 				flowers:0,
-				species:currentPlayer.species,
 			}
+			console.log(organism)
 			props.dispatch(addOrganism(locID,organism));
 			props.dispatch(updatePlayer(
 				props.game.turn,

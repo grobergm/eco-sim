@@ -18,25 +18,6 @@ const forbLeaves=[forb1,forb2,forb3];
 
 function Plant({plant, onSelect, onHighlight, selected}){
 
-	function returnImage(){
-		switch(plant.species.name){
-			case "forb":
-				if(plant.flowers>0){
-					return forbFlower
-				} else{
-					return forbLeaves[plant.leaves-1] 
-				}
-			case "shrub":
-				if(plant.flowers>0){
-					return shrubFlower
-				} else{
-					return shrubLeaves[plant.leaves-1] 
-				}
-		}
-	}
-
-	let image=returnImage();
-
 	const leaves={
 		position:'absolute',
 		top:'30%',
