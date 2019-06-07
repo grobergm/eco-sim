@@ -66,6 +66,20 @@ class Setup extends Component{
 						value:4,
 						selected:false
 					},
+				},
+				environment:{
+					rocky:{
+						value:false,
+						selected:false,
+					},
+					wetland:{
+						value:false,
+						selected:false,
+					},
+					airMoisture:{
+						value:false,
+						selected:false,
+					}
 				}
 			},
 			gameLength:10,
@@ -159,7 +173,21 @@ class Setup extends Component{
 					value:4,
 					selected:false
 				},
-			}
+			},
+			environment:{
+					rocky:{
+						value:false,
+						selected:false,
+					},
+					wetland:{
+						value:false,
+						selected:false,
+					},
+					airMoisture:{
+						value:false,
+						selected:false,
+					}
+				}
 		}
 		this.setState({genetics:plantDefault});
 	}
@@ -238,7 +266,7 @@ class Setup extends Component{
 
 	const geneGrid={
 		display:'grid',
-		gridTemplateColumns:'repeat(3,1fr)',
+		gridTemplateColumns:'repeat(4,1fr)',
 		textAlign:'center'
 	}
 
@@ -265,6 +293,7 @@ class Setup extends Component{
 				<h2>Leaves</h2>
 				<h2>Roots</h2>
 				<h2>Flowers</h2>
+				<h2>Environment</h2>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.max}
@@ -285,6 +314,12 @@ class Setup extends Component{
 					attribute='seed' />
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.environment.rocky}
+					selectValue={true}
+					organ='environment' 
+					attribute='rocky' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.min}
 					selectValue={2}
 					organ='leaves' 
@@ -303,6 +338,12 @@ class Setup extends Component{
 					attribute='minLeaves' />
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.environment.wetland}
+					selectValue={true}
+					organ='environment' 
+					attribute='wetland' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.cost}
 					selectValue={1}
 					organ='leaves' 
@@ -319,6 +360,12 @@ class Setup extends Component{
 					selectValue={2}
 					organ='flowers' 
 					attribute='cost' />
+				<GeneSelection 
+					onSelect={this.handleGeneticsSelect} 
+					data={this.state.genetics.environment.airMoisture}
+					selectValue={true}
+					organ='environment' 
+					attribute='airMoisture' />
 			</div>
 			
 			<div style={gameStats} >
@@ -352,13 +399,13 @@ class Setup extends Component{
 				</div>
 				<div>
 					<label htmlFor='difficulty'>Resource</label>
-					<OptionButton level='abundant' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
-					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='scarce' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
+					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
+					<OptionButton level='abundant' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 				</div>
 				<button onClick={this.setGameStats}><h3>Start Game</h3></button>
 			<Players />
-				
+
 			</div>
 		</div>
 	)

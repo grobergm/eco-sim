@@ -45,6 +45,9 @@ function PlayerDetail({
 
 	const absorbWater=(x,y,plant)=>{
 		let water=0;
+		if (currentPlayer.genetics.environment.airMoisture){
+			water+=2;
+		}
 		for(var i = 1;i<=plant.roots;i++){
 			water+=checkForWater(x+i,y);
 			water+=checkForWater(x-i,y);

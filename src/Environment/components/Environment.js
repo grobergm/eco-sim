@@ -17,7 +17,10 @@ function Environment(props){
 		function setMinimum(organ){
 			return currentPlayer.genetics[organ].min.value
 		}
-		if (substrate==='soil'
+		if (
+			(substrate==='soil'||
+			currentPlayer.genetics.environment.rocky.value&&substrate==='rock'||
+			currentPlayer.genetics.environment.wetland.value&&substrate==='water')
 			&& currentPlayer.seed>0
 			&& !props.populations[locID]){
 			const id=v4();
