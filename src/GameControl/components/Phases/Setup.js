@@ -22,6 +22,7 @@ class Setup extends Component{
 		super(props);
 		this.state={
 			playerName:'',
+			playerColor:'#009933',
 			genetics:{
 			adaptations:[],
 			leaves:{
@@ -84,6 +85,7 @@ class Setup extends Component{
 			let newPlayer={
 				id:v4(),
 				name:this.state.playerName,
+				color:this.state.playerColor,
 				seed:3,
 				genetics:this.state.genetics,
 				adaptations:this.state.adaptations
@@ -293,6 +295,12 @@ class Setup extends Component{
 					attribute='cost' />
 			</div>
 			<div>
+				<input
+				type="color"
+				name="playerColor"
+				value={this.state.playerColor}
+				onChange={this.handleInputChange}
+				 />
 				<input
 				type="text"
 				name="playerName"

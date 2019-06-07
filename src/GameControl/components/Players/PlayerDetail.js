@@ -1,5 +1,5 @@
 import React from 'react';
-import Plant from '../../../Populations/components/Plant';
+import Player from './Player';
 import PlantDetail from './PlantDetail';
 import { connect } from 'react-redux';
 import { updateOrganism , removeOrganism } from '../../../Populations/redux/actionCreator';
@@ -106,7 +106,7 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		<div style={grid}>
 			<div>
 				<h2>Day:{game.day} of {game.length}</h2>
-				<p>{currentPlayer.name}</p>
+				<Player player={currentPlayer} />
 				<p>Seed:{currentPlayer.seed}</p>
 				<button onClick={turnChanger}>Change Turn</button>
 			</div>

@@ -27,6 +27,7 @@ function Environment(props){
 				x:x,
 				y:y,
 				playerID:currentPlayer.id,
+				color:currentPlayer.color,
 				genetics:currentPlayer.genetics,
 				leaves:setMinimum('leaves'),
 				roots:setMinimum('roots'),
@@ -49,12 +50,6 @@ function Environment(props){
 		if(currentPlayer.id=== props.populations[locID].playerID){
 			props.dispatch(selectOrganism(locID))
 		}
-	}
-
-	function handleHighlight(plant){
-		if(plant.playerID===currentPlayer.id){
-			return true
-		} else return false
 	}
 
 	const grid={
@@ -87,8 +82,7 @@ function Environment(props){
 								<Plant 
 									plant={props.populations[locID]}
 									onSelect={handleSelect}
-									selected={props.game.selectOrg} 
-									onHighlight={handleHighlight}/>
+									selected={props.game.selectOrg}/>
 								:
 								null
 							}
