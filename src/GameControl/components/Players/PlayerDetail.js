@@ -60,10 +60,14 @@ function PlayerDetail({game,dispatch,environment,populations}){
 	}
 
 	const plantRecUptake=plant=>{
-		let sugarChange=plant.sugar+plant.leaves;
-		let waterChange=absorbWater(plant.x,plant.y,plant)+plant.water-plant.leaves;
-		dispatch(updateOrganism(plant.locID,'sugar',sugarChange));
-		dispatch(updateOrganism(plant.locID,'water',waterChange));
+		if(plant.sugar<=plant.leaves+plant.roots){
+			let sugarChange=plant.sugar+plant.leaves;
+			dispatch(updateOrganism(plant.locID,'sugar',sugarChange));
+		}
+		if(plant.water<=plant.leaves+plant.roots){
+			let waterChange=absorbWater(plant.x,plant.y,plant)+plant.water-plant.leaves;
+			dispatch(updateOrganism(plant.locID,'water',waterChange));
+		}
 		if(plant.water<plant.leaves){
 			removeLeaf(plant);
 		}
