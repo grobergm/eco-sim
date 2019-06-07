@@ -15,7 +15,7 @@ function Player(props){
 		<div style={pStyle}>
 			<h3 style={name}>{props.player.name}</h3>
 			{
-				props.view==='game-end' ? <p>Score: {props.onScore(props.player)}</p>:null
+				props.view==='game-end' ? <h3>Score: {props.onScore(props.player)}</h3>:null
 			}
 			<ul style={{paddingLeft:'0.25rem'}}>
 			{

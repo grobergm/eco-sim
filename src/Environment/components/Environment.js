@@ -57,7 +57,7 @@ function Environment(props){
 	const grid={
 		display:'grid',
 		gridTemplateColumns:`repeat(${props.game.mapSize},1fr)`,
-		margin:'4rem auto',
+		margin:'0 auto',
 		maxWidth:props.game.mapSize*100+'px'
 	}
 	const habitat={

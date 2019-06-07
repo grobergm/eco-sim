@@ -45,34 +45,36 @@ const plant=populations[locID];
 
 	const grid={
 		display:'grid',
-		gridTemplateColumns:'repeat(4,1fr)'
+		gridTemplateColumns:'repeat(3,1fr)'
 	}
 
 	return(
 			<div style={grid}>
 				<div>
-					<h3 style={{marginTop:'4rem'}}>Sugar</h3>
-					<p>{plant.sugar}</p>
-					<h3>Water</h3>
-					<p>{plant.water}</p>
-				</div>
-				<div>
-					<h2>Leaves</h2>
-					<p>{plant.leaves}</p>
+					<h3>Leaves</h3>
+					<h3>{plant.leaves}</h3>
 					<p>cost {plant.genetics.leaves.cost.value} sugar</p>
 					<button onClick={growLeaf}>Grow</button> 
 				</div>
 				<div>
-					<h2>Roots</h2>
-					<p>{plant.roots}</p>
+					<h3>Roots</h3>
+					<h3>{plant.roots}</h3>
 					<p>cost {plant.genetics.roots.cost.value} sugar</p>
 					<button onClick={growRoot}>Grow</button>
 				</div>
 				<div>
-					<h2>Flowers</h2>
-					<p>{plant.flowers}</p>
+					<h3>Flowers</h3>
+					<h3>{plant.flowers}</h3>
 					<p>cost {plant.genetics.flowers.cost.value} sugar</p>
 					<button onClick={growFlower}>Grow</button>
+				</div>
+				<div>
+					<h3>Sugar</h3>
+					<h3>{plant.sugar}</h3>
+				</div>
+				<div>
+					<h3>Water</h3>
+					<h3>{plant.water}</h3>
 				</div>
 			</div>
 		)

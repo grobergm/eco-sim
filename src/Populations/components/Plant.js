@@ -28,8 +28,9 @@ function Plant({plant, onSelect, onHighlight, selected}){
 	}
 	const flowers={
 		position:'absolute',
-		top:'0',
-		left:'40%',
+		top:'-10%',
+		left:'30%',
+		zIndex:'2',
 		transform:'translate(-50%,-50%)',
 	}
 	const allLeaves=[];
@@ -38,7 +39,7 @@ function Plant({plant, onSelect, onHighlight, selected}){
 		allLeaves.push(<Leaf color={plant.color} key={i} />)
 	}
 	for (var i=1;i<=plant.flowers;i++){
-		allFlowers.push(<Flower key={i} />)
+		allFlowers.push(<Flower color={plant.color} key={i} />)
 	}
 	return (
 		<div onClick={()=>{onSelect(plant.locID)}}>

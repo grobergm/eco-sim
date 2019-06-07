@@ -1,5 +1,5 @@
 const initialState={
-	day:0,
+	day:1,
 	turn:0,
 	players:[],
 }

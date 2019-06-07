@@ -1,6 +1,7 @@
 import React from 'react';
 import Player from './Player';
 import PlantDetail from './PlantDetail';
+import './Players.css'
 import { connect } from 'react-redux';
 import { updateOrganism , removeOrganism } from '../../../Populations/redux/actionCreator';
 import { changeTurn , selectOrganism, updatePlayer, removePlayer} from '../../redux/actionCreator';
@@ -101,21 +102,18 @@ function PlayerDetail({
 		})
 	}
 
-
-
-
 	const openMenu={
 		position:'fixed',
-		top:'0',
+		bottom:'0',
 		left:'0',
 		zIndex:'2',
-		backgroundColor:'white',
+		backgroundColor:'rgba(0,0,0,0.9)',
+		color:'white',
 		borderRadius:'1rem',
 		padding:'1rem',
 		margin:'1rem',
-		width:'50%',
 		display:'grid',
-		gridTemplateColumns:'25% 75%'
+		gridTemplateColumns:'50% 50%'
 	}
 
 	const collapsedMenu={
@@ -129,21 +127,22 @@ function PlayerDetail({
 		padding:'1rem',
 		margin:'1rem'
 	}
+
 	if(open){
 		return (
-			<div style={openMenu}>
+			<div className='player-detail' style={openMenu}>
 				<div>
 					<h3 onClick={onToggleMenu}>Hide Menu</h3>
-					<h2>Day:{game.day} of {game.length}</h2>
+					<h3>Day: {game.day} of {game.length}</h3>
 					<Player player={currentPlayer} />
-					<p>Seed:{currentPlayer.seed}</p>
+					<h3>Seed:{currentPlayer.seed}</h3>
 					<button onClick={turnChanger}>Change Turn</button>
 				</div>
 				{
 					game.selectOrg ? 
 					<PlantDetail locID={game.selectOrg} />: 
 					<div>
-						<h2>How To Play</h2>
+						<h3>How To Play</h3>
 						<p>Click soil to plant seed</p>
 						<p>Plants compete for water, so find a good spot</p>
 						<p>Click plants to select them</p>

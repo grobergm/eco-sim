@@ -29,6 +29,11 @@ h2{
 	font-size:2rem;
 }
 
+h1 , h2 , h3 ,h4{
+	margin-top:2rem;
+	margin-bottom:0;
+}
+
 button{
 	border:none;
 	color:white;
@@ -41,4 +46,8 @@ button{
 input{
 	border:none;
 	border-radius:0.5rem;
+}
+
+ul{
+	list-style:none;
 }

@@ -11,11 +11,12 @@ function GeneSelection({
 		color:data.selected?'white':'var(--red)',
 		backgroundColor:data.selected?'var(--red)':'white',
 		textAlign:'center',
-		borderRadius:'1px'
+		borderRadius:'1px',
+		cursor:'pointer'
 	}
 	return(
 		<div style={highlight} onClick={()=>{onSelect(organ,attribute,selectValue)}}>
-			<h3>{attribute} {data.value}</h3>
+			<p>{attribute} {data.value}</p>
 		</div>
 	)
 }

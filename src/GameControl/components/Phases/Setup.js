@@ -254,8 +254,7 @@ class Setup extends Component{
 	}
 	const gameStats={
 		gridGap:'1rem',
-		gridTemplateRows:'repeat(5,1fr)',
-		padding:'2rem'
+		gridTemplateRows:'repeat(5,1fr)',		
 	}
 	const gameSetupInput={
 		textAlign:'center',
@@ -270,30 +269,43 @@ class Setup extends Component{
 		textAlign:'center'
 	}
 
+	const specialButtons={
+		filter:'invert(100%)',
+		padding:'1rem',
+		margin:'1rem'
+	}
+
 		return (
 		<div style={gameSetup}>
-			<h1>Choose three adaptations</h1>
+			<h1>Game Setup</h1>
+			<h2>Create A Plant Species</h2>
 			<div>
+				<label htmlFor='playerColor'><h3>Choose Unique Color</h3></label>
 				<input
 				type="color"
+				id="playerColor"
 				name="playerColor"
 				value={this.state.playerColor}
 				onChange={this.handleInputChange}
 				 />
-				<input
-				type="text"
-				name="playerName"
-				placeholder="Enter Your Name"
-				value={this.state.playerName}
-				onChange={this.handleInputChange}
-				/>
-				<button onClick={this.handleAddPlayer}>Add</button>
+				<div>
+					<label htmlFor='playerName'><h3>Name</h3></label>
+					<input
+					type="text"
+					name="playerName"
+					id="playerName"
+					placeholder="Enter Species Name"
+					value={this.state.playerName}
+					onChange={this.handleInputChange}
+					/>
+				</div>
 			</div>
+			<h3>Choose Three Adaptations</h3>
 			<div style={geneGrid}>
-				<h2>Leaves</h2>
-				<h2>Roots</h2>
-				<h2>Flowers</h2>
-				<h2>Environment</h2>
+				<h3>Leaves</h3>
+				<h3>Roots</h3>
+				<h3>Flowers</h3>
+				<h3>Environment</h3>
 				<GeneSelection 
 					onSelect={this.handleGeneticsSelect} 
 					data={this.state.genetics.leaves.max}
@@ -368,9 +380,13 @@ class Setup extends Component{
 					attribute='airMoisture' />
 			</div>
 			
+			<button style={specialButtons} onClick={this.handleAddPlayer}>Add Species</button>
+
+			<Players />
+			<h2>Set Game Attributes</h2>
 			<div style={gameStats} >
 				<div>
-					<label htmlFor='gameLength'>Game Length</label>
+					<label htmlFor='gameLength'><h3>Game Length</h3></label>
 					<input
 					style={gameSetupInput}
 					type="number"
@@ -384,7 +400,7 @@ class Setup extends Component{
 					/>
 				</div>
 				<div>
-					<label htmlFor='mapSize'>Map Size</label>
+					<label htmlFor='mapSize'><h3>Map Size</h3></label>
 					<input
 					style={gameSetupInput}
 					type="number"
@@ -398,15 +414,14 @@ class Setup extends Component{
 					/>
 				</div>
 				<div>
-					<label htmlFor='difficulty'>Resource</label>
+					<label htmlFor='difficulty'><h3>Resource</h3></label>
 					<OptionButton level='scarce' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='abundant' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 				</div>
-				<button onClick={this.setGameStats}><h3>Start Game</h3></button>
-			<Players />
-
 			</div>
+				<button style={specialButtons} onClick={this.setGameStats}>Start Game</button>
+
 		</div>
 	)
 	}

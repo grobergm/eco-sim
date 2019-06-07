@@ -28,7 +28,6 @@ function Players({populations, allPlayers , currentTurn, view}){
 
 	return (
 		<div style={layout}>
-		<h3>Players</h3>
 			{
 				allPlayers.map((player,index)=>{
 					return (
