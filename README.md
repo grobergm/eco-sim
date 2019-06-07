@@ -4,7 +4,7 @@
 
 ### Version 1.0
 
-<a href='/'>Play Game</a>
+<a href='https://ecosim-f5668.firebaseapp.com/'>Play Game</a>
 
 ### Description
 
