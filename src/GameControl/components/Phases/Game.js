@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Environment from '../../../Environment/components/Environment';
 import PlayerDetail from '../Players/PlayerDetail';
 
-function Game(props){
+class Game extends Component{
+	constructor(){
+		super();
+		this.state={
+			menuOpen:true
+		}
+		this.handleToggleMenu=this.handleToggleMenu.bind(this)
+	}
 
-	return (
+	handleToggleMenu(){
+		this.setState({menuOpen:!this.state.menuOpen})
+	}
+
+	render(){
+		return (
 		<div>
 			<Environment />
-			<PlayerDetail />
+			<PlayerDetail 
+			onToggleMenu={this.handleToggleMenu} 
+			open={this.state.menuOpen} />
 		</div>
-	)
+		)
+	}
+	
 }
 
 export default Game

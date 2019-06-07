@@ -7,7 +7,13 @@ import { changeTurn , selectOrganism, updatePlayer, removePlayer} from '../../re
 
 
 
-function PlayerDetail({game,dispatch,environment,populations}){
+function PlayerDetail({
+	game,
+	dispatch,
+	environment,
+	populations,
+	onToggleMenu,
+	open}){
 	const currentPlayer=game.players[game.turn];
 
 	const turnChanger=()=>{
@@ -95,9 +101,9 @@ function PlayerDetail({game,dispatch,environment,populations}){
 
 
 
-	const grid={
+	const openMenu={
 		position:'fixed',
-		bottom:'0',
+		top:'0',
 		left:'0',
 		zIndex:'2',
 		backgroundColor:'white',
@@ -108,27 +114,49 @@ function PlayerDetail({game,dispatch,environment,populations}){
 		display:'grid',
 		gridTemplateColumns:'25% 75%'
 	}
-	return (
-		<div style={grid}>
-			<div>
-				<h2>Day:{game.day} of {game.length}</h2>
-				<Player player={currentPlayer} />
-				<p>Seed:{currentPlayer.seed}</p>
-				<button onClick={turnChanger}>Change Turn</button>
-			</div>
-			{
-				game.selectOrg ? 
-				<PlantDetail locID={game.selectOrg} />: 
+
+	const collapsedMenu={
+		position:'fixed',
+		top:'0',
+		left:'0',
+		zIndex:'2',
+		backgroundColor:'var(--red)',
+		color:'white',
+		borderRadius:'1rem',
+		padding:'1rem',
+		margin:'1rem'
+	}
+	if(open){
+		return (
+			<div style={openMenu}>
 				<div>
-					<h2>How To Play</h2>
-					<p>Click soil to plant seed</p>
-					<p>Plants compete for water, so find a good spot</p>
-					<p>Click plants to select them</p>
-					<p>Spend sugar to grow</p>
+					<h3 onClick={onToggleMenu}>Hide Menu</h3>
+					<h2>Day:{game.day} of {game.length}</h2>
+					<Player player={currentPlayer} />
+					<p>Seed:{currentPlayer.seed}</p>
+					<button onClick={turnChanger}>Change Turn</button>
 				</div>
-			}
-		</div>
-	)
+				{
+					game.selectOrg ? 
+					<PlantDetail locID={game.selectOrg} />: 
+					<div>
+						<h2>How To Play</h2>
+						<p>Click soil to plant seed</p>
+						<p>Plants compete for water, so find a good spot</p>
+						<p>Click plants to select them</p>
+						<p>Spend sugar to grow</p>
+					</div>
+				}
+			</div>
+		)
+	} else{
+		return(
+			<div 
+			style={collapsedMenu}
+			onClick={onToggleMenu}>Open Menu</div>
+		)
+	}
+	
 }
 
 const mapStateToProps=state=>{
