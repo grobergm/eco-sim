@@ -1,90 +1,59 @@
-# Ecosystem Simulator
+# EcoSim 
 
-## By Matt Groberg
+## Developed by Matt Groberg
 
-## Planning
+### Version 1.0
 
-### Purpose: An interactive educational game about how biological communities are formed based on: 
-1. Environmental Conditions 
-2. Species Interactions
-3. Adaptations and Evolution
+<a href='/'>Play Game</a>
 
-### Goal: When the game ends points are awarded for:
-•	Each individual in your population (more points for larger plants)
-•	The number of seeds and flowers on existing plants
+### Description
 
-## Minimum Viable Product
-### Features
-1.	Landing Page that Describes Goal of Game
-<img src='src/img/sketches/landing.jpg'/>
-2.	Select Plant Species you will play as Menu:
-* Forb 
-	* Short life cycle (reaches maximum size sooner).
-	* Grows and reproduces quickly, using less resources
-	* After reproducing, will die and spread seeds.
-* Shrub 
-	* Long life cycle (can grow larger)
-	* Takes longer to grow, but captures more resources
-	* Can reproduce multiple times (only dying when out of resources).
-<img src='src/img/sketches/pre-game.jpg'/>
+_Grow, Compete, Evolve..._
+In this game you take on the role of a plants competing for space and water in a randomly generated environment. Each player starts by selecting several adaptations that their species will have. In the setup menu, you can choose resource levels (which will modify the probability of uninhabitable rcoky areas and water tiles), game length, and map size.
 
-3. Randomly Generated Environment Component
+During the game, players take turns placing their seeds in ideal locations. Plants will gather water from tiles around them (increasing their range with greater root size). However, plants will lose water if other plants are next to them, based on that plant's rootsize. Plants use water to make sugar through photosynthesis each turn, if they have enough water to support their leaves. If not, they will lose leaves. 
 
-4.	Each player places several starting plants in environment. 
+By selecting one of your plants, you can spend sugar on growing leaves, roots, or flowers (if you haven't reached the max for your species). 
+Flowers only last one turn, but will give you additional seed to place on the board. When the game ends, each player gets pointed for each leaf on their plants and each seed. 
 
-Creates a plant component with props based on state of Environmental Grid 
+### Future Versions:
 
-5.	Grow, Compete, and Reproduce
-<img src='src/img/sketches/game.jpg'/>
+**Animations:**
+* Growing and loosing leaves have scale transitions
+* Resources gathered have indicators
+* (Eventually) Animals are animated when moving
 
-* Each day these methods are triggered:
-* Water uptake: Removes water from Soil based on root size (up to total plant size). If other plants in habitat, they divide water based on root size.
-* Photosynthesis:Uses plant water level based on shoot size. Creates sugar based on shoot size. If plants are next to each other, the smaller plant produces less sugar (shading).
-* Flowers have chance of turning into seed: Randomly adds new plant nearby in grid.
-*	Players take turn sugar to increase the size/number of their: Shoots, Roots, or Flowers
-* Details about plants can be viewed when they are selected
-* Day Increments once each player is done with their turn.
-* Images for plants will change based on lifestage.
+**AI**
+* Can add a computer controlled plant population.
+* Can automate strategies (like growing leaves) to make it easy to have many plants
+* (Eventually) add computer controlled animal populations
 
-### Technologies used
-6.	React, JavaScript, Redux and Jest
-7.	WebPack, Babel, and ESLint (through create-react-app)
-8.	Sass and CSS
-9.	Figma (to draw graphics)
+**Animals**
+* Players can choose between plants or animals. 
+* Animals can remove plant leaves and drink water to get energy.
+* Animals use energy to move, fight other animals, and care for their offspring.
+* Plants can choose herbivore defense adaptations.
 
+**Environment**
+* More resources are added to the map (for example: in addition to sugar, plants need Nitrogen for leaves, and Phosphorous for seeds).
+* Water tiles are replaced with gradual elevation changes (more water in low areas). 
+* Resources can be depleated by plants
+* Resources are replenished periodically by rain or other organisms
 
-### Basic Component Tree
-<img src='src/img/sketches/component-tree.jpg'/>
+**More Plant Adaptations**
+* Plants can branch in different directions with woody growth adaptation, allowing them to compete for light.
+* Flowers need to be pollinated to produce seed
+* Seed is randomly dispursed, adapations to increase dispersal (like attaching to animals, or increasing range).
 
-## Stretch Goals
-### Features
-1. Option to select Animal Species in Menu
-* Animals eat plants and drink water to get energy.
-* Use energy to move to different part of map, fight with other animals, and reproduce.
-* Small Herbivore: Short lifecycle, Many offspring, Gets more sugars out of plants,
-*	Large Omnivore: Long lifecycle, Fewer offspring,	Can eat smaller animals, but gets less energy from plants, Can store sugars in fat tissue
-2.	User can select Map Size, Resource Levels, and Game Length.
-3.	Environment is more Complex:
-* Seasonal Events (Rain, Ice, Fire)
-* Habitats are more continuous, less patchy
-4.	Populations Evolve:
-* Choose adaptations when new offspring are born: Added to new organism object, and can accumulate if selected later.
-* Future offspring inherit adaptations
-*	Plants:
-Herbivore defenses (bitter compounds that make it harder to digest).
-Reduce cost of roots, shoots, or flowers.
-Attach seed to animal objects.
-* Animals:
-Movement speed increases
-Can eat more leaves per turn
-Increase fighting abilities
-5.	Online Multiplayer Games (If still time)
+### Tech Used
+* User Interface: React
+* State Management: Redux 
+* Testing: Jest   
+* Linting: ES-Lint
+* Styling: JSX style objects and CSS
+* Bundling and Standardization: WebPack and Babel with NodeJS
+* Deployment: Firebase
 
-### Technologies
-6.	Redux and Local Storage
-7.	Possibly SVG or Canvas for continuous habitats
-8.	Online multiplayer would require firebase or other database/server.
+### Legal Info
+MIT Licence Matt Groberg (copyright 2019)
 
-
-### Legal
-MIT Liscence Matt Grobers (copyright 2019)
