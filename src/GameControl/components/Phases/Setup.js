@@ -24,49 +24,49 @@ class Setup extends Component{
 			playerName:'',
 			playerColor:'#009933',
 			genetics:{
-			adaptations:[],
-			leaves:{
-				min:{
-					value:1,
-					selected:false
+				adaptations:[],
+				leaves:{
+					min:{
+						value:1,
+						selected:false
+					},
+					max:{
+						value:3,
+						selected:false
+					},
+					cost:{
+						value:2,
+						selected:false
+					},
 				},
-				max:{
-					value:3,
-					selected:false
+				roots:{
+					min:{
+						value:1,
+						selected:false
+					},
+					max:{
+						value:3,
+						selected:false
+					},
+					cost:{
+						value:2,
+						selected:false
+					},
 				},
-				cost:{
-					value:2,
-					selected:false
-				},
-			},
-			roots:{
-				min:{
-					value:1,
-					selected:false
-				},
-				max:{
-					value:3,
-					selected:false
-				},
-				cost:{
-					value:2,
-					selected:false
-				},
-			},
-			flowers:{
-				minLeaves:{
-					value:3,
-					selected:false
-				},
-				seed:{
-					value:1,
-					selected:false
-				},
-				cost:{
-					value:4,
-					selected:false
-				},
-			}
+				flowers:{
+					minLeaves:{
+						value:3,
+						selected:false
+					},
+					seed:{
+						value:1,
+						selected:false
+					},
+					cost:{
+						value:4,
+						selected:false
+					},
+				}
 			},
 			gameLength:20,
 			mapSize:10,
@@ -88,7 +88,7 @@ class Setup extends Component{
 				color:this.state.playerColor,
 				seed:3,
 				genetics:this.state.genetics,
-				adaptations:this.state.adaptations
+				adaptations:this.state.genetics.adaptations
 			}
 			this.props.dispatch(addPlayer(newPlayer));
 			this.setState({playerName:''})
@@ -97,17 +97,19 @@ class Setup extends Component{
 	}
 
 	handleGeneticsSelect(organ,key,value){
-		if(this.state.genetics.adaptations.length<3){
+
+		if(this.state.genetics.adaptations.length<3
+			&& !this.state.genetics[organ][key].selected){
 			const newGenetics={
 				...this.state.genetics,
-				adaptations:[...this.state.genetics.adaptations,organ+" "+key],
 				[organ]:{
 					...this.state.genetics[organ],
 					[key]:{
 						value:value,
 						selected:true
 					}
-				}
+				},
+				adaptations:[...this.state.genetics.adaptations,organ+" "+key]
 			}
 		this.setState({genetics:newGenetics})
 		}
