@@ -13,8 +13,8 @@ function Habitat(props){
 	}
 		const background={
 		backgroundColor: bkgColor(),
-		width:'100%',
-		height:'10vw',
+		width:'100px',
+		height:'100px',
 		
 	}
 	return (

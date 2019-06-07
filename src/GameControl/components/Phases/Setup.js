@@ -68,7 +68,7 @@ class Setup extends Component{
 					},
 				}
 			},
-			gameLength:20,
+			gameLength:10,
 			mapSize:10,
 			resourceLevel:'balanced'
 		}
@@ -172,7 +172,7 @@ class Setup extends Component{
 		this.setState({[event.target.name]:event.target.value})
 	}
 
-	distributeResources(){
+	distributeResources(size){
 		let rock;
 		let water;
 		switch(this.state.resourceLevel){
@@ -192,16 +192,24 @@ class Setup extends Component{
 				rock=0.1;
 				water=0.4;
 		}
-		this.props.dispatch(makeGrid(parseInt(this.state.mapSize),water,rock))
+		this.props.dispatch(makeGrid(size,water,rock))
 	}
 
 	setGameStats(){
+		let length=parseInt(this.state.gameLength);
+		let size=parseInt(this.state.mapSize);
 		if(this.props.game.players.length){
-		this.props.dispatch(setMapSize(parseInt(this.state.mapSize)));
-		this.distributeResources();
-		this.props.dispatch(setGameLength(parseInt(this.state.gameLength)));
-		this.props.dispatch(changeView('start'));
-		}
+			if(length>20||length<5){
+				length=10;
+			}
+			if(size>20||size<5){
+				size=10;
+			}
+			this.props.dispatch(setMapSize(size));
+			this.distributeResources(size);
+			this.props.dispatch(setGameLength(length));
+			this.props.dispatch(changeView('start'));
+			}
 	}
 
 
@@ -324,7 +332,7 @@ class Setup extends Component{
 					name="gameLength"
 					defaultValue="10"
 					min="5"
-					max="25"
+					max="20"
 					step="5"
 					onChange={this.handleInputChange}
 					/>
@@ -338,7 +346,7 @@ class Setup extends Component{
 					name="mapSize"
 					defaultValue="10"
 					min="5"
-					max="25"
+					max="20"
 					step="5"
 					onChange={this.handleInputChange}
 					/>

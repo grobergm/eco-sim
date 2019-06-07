@@ -35,7 +35,6 @@ function Environment(props){
 				water:2,
 				flowers:0,
 			}
-			console.log(organism)
 			props.dispatch(addOrganism(locID,organism));
 			props.dispatch(updatePlayer(
 				props.game.turn,
@@ -55,6 +54,8 @@ function Environment(props){
 	const grid={
 		display:'grid',
 		gridTemplateColumns:`repeat(${props.game.mapSize},1fr)`,
+		margin:'4rem auto',
+		maxWidth:props.game.mapSize*100+'px'
 	}
 	const habitat={
 		position:'relative',
