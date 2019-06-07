@@ -245,6 +245,22 @@ class Setup extends Component{
 		return (
 		<div style={gameSetup}>
 			<h1>Choose three adaptations</h1>
+			<div>
+				<input
+				type="color"
+				name="playerColor"
+				value={this.state.playerColor}
+				onChange={this.handleInputChange}
+				 />
+				<input
+				type="text"
+				name="playerName"
+				placeholder="Enter Your Name"
+				value={this.state.playerName}
+				onChange={this.handleInputChange}
+				/>
+				<button onClick={this.handleAddPlayer}>Add</button>
+			</div>
 			<div style={geneGrid}>
 				<h2>Leaves</h2>
 				<h2>Roots</h2>
@@ -304,24 +320,7 @@ class Setup extends Component{
 					organ='flowers' 
 					attribute='cost' />
 			</div>
-			<div>
-				<input
-				type="color"
-				name="playerColor"
-				value={this.state.playerColor}
-				onChange={this.handleInputChange}
-				 />
-				<input
-				type="text"
-				name="playerName"
-				placeholder="Enter Your Name"
-				value={this.state.playerName}
-				onChange={this.handleInputChange}
-				/>
-				<button onClick={this.handleAddPlayer}>Add</button>
-			</div>
-
-			<Players />
+			
 			<div style={gameStats} >
 				<div>
 					<label htmlFor='gameLength'>Game Length</label>
@@ -357,7 +356,9 @@ class Setup extends Component{
 					<OptionButton level='balanced' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 					<OptionButton level='scarce' selected={this.state.resourceLevel} onSelect={this.handleSelect} />
 				</div>
-				<button onClick={this.setGameStats}> Start Game </button>
+				<button onClick={this.setGameStats}><h3>Start Game</h3></button>
+			<Players />
+				
 			</div>
 		</div>
 	)
